@@ -1,0 +1,132 @@
+<stage id="intro" type="sprite_engine"
+       xmlns:xi="http://www.w3.org/2001/XInclude">
+  <sprite_types>
+ 
+    <sprite_type name="logo">
+      <graphics>
+	<graphic id="fond" type="graphic_from_drawing_script">
+	  <args>
+	    <val_int name="layer" value="-1"/>
+	    <val_string name="drawing_id" value="bg"/>
+	  </args>
+	    <script>
+	      function self.drawing_script()
+	      dr=self.create("box",{{r=0,g=0,b=0},{w=640,h=480}});
+	      return dr
+	      end
+	    </script>
+
+	  <script>
+	    <xi:include href="scripts/default_update.lua" parse="text"/>
+	  </script>
+	</graphic>
+
+	<graphic id="poc" type="graphic_from_drawing_script">
+	  <args>
+	    <val_int name="layer" value="4"/>
+	    <val_text name="drawing_script">
+	    <script>
+	      function self.drawing_script()
+	      dr=self.create("create_text",{{r=200,g=200,b=200},"P O C",120,"medias/DirtyEgo.ttf"});
+	      self.write(dr,0,"set_alpha",{{r=255,g=255,b=255}});
+	      ddr=self.copy(dr,0,"resize",{{w=100,h=50}});
+	      return ddr
+	    </val_text>
+	  </args>
+	  <script>
+	       self.move(-200,300);
+	       function self.on_update()
+	       end
+	  </script>
+	</graphic>
+<!--
+
+	<graphic id="poc" type="graphic_text">
+	  <args>
+	    <val_int name="layer" value="4"/>
+	    <val_string name="font_file" value="medias/DirtyEgo.ttf"/>
+	    <val_int name="font_size" value="120"/>
+	    <val_color name="font_color" r="200" g="200" b="200"/>
+	     </args>
+	     <script>
+	       self.set_text("P O C");
+	       self.move(-200,300);
+	       function self.on_update()
+	       end
+	     </script>
+	   </graphic>
+-->
+	<graphic id="main" type="graphic_from_drawing_script">
+	  <args>
+	    <val_int name="layer" value="0"/>
+	    <val_text name="drawing_script">
+	      dr=self.create("load",{"medias/logo_poc.png"});
+	      drr=self.copy(dr,0,"resize",{{w=50,h=50}})
+	      
+	      return drr
+	    </val_text>
+	  </args>
+	  <script>
+	    self.move(200,-300);
+	    function self.on_update()
+	    end
+	  </script>
+	</graphic>
+      </graphics>
+      <states>
+	<state id="normal">
+	  <action id="immobile" type="action_intime">
+	    <args>
+	  <val_time name="limit" h="0" m="10" s="0" f="0"/>
+	    </args>
+	    <script>
+	      function self.on_loop()
+	      obj=self.parent.parent.parent;
+	      stages=obj.parent.parent.parent;
+	      stages.load("menu")
+	      end
+	    </script>
+	  </action>
+
+	  <action id="bouge" type="action_lua">
+	    <script>
+	      function self.on_loop()
+	      local obj=self.parent.parent.parent;
+	      local txt=obj.graphics.poc;
+	      local px=txt.get_x();
+	      local py=txt.get_y();
+
+	      if px &lt; 210 then
+	      local speed=8;
+	      txt.move (px+speed,py);
+	      end
+
+
+	      local logo=obj.graphics.main;
+	      local px=logo.get_x();
+	      local py=logo.get_y();
+
+	      if py &lt; 60 then
+	      local speed=8;
+	      logo.move (px,py+speed);
+	      end
+
+	      end
+	    </script>
+	     </action> 
+	</state>
+
+
+      </states>
+      <args>
+	<val_size name="pixel_size" w="245" h="230"/>
+      </args>
+    </sprite_type>
+  </sprite_types>
+  <script>
+    function self.on_load()
+    self.sprites.add_sprite_named_from_type("logo","logo",0,0);
+    self.sprites.logo.states.set_state("normal",{immobile={{h=0,m=0,s=5,f=0}}})
+    end
+  </script>
+</stage>

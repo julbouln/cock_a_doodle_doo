@@ -1,0 +1,47 @@
+<sprite_type name="mort">
+  <graphics>
+    <graphic id="main" type="graphic_from_file">
+      <args>
+	<val_string name="filename" value="medias/icones/32x32/mort.png"/>
+	<val_size name="size" w="32" h="32"/>
+	<val_int name="layer" value="3"/>
+      </args>
+
+    </graphic>
+  </graphics>
+  <states>
+    <state id="effet">
+      <action id="translation" type="action_translation">
+      </action>
+      <action id="fx" type="action_livefx">
+	<args>
+	  <val_int name="refresh" value="5"/>
+	  <val_list name="frames">
+	    <val_int value="1"/>
+	    <val_int value="1"/>
+	    <val_int value="1"/>
+	    <val_int value="1"/>
+	    <val_int value="2"/>
+	    <val_int value="3"/>
+	    <val_int value="4"/>
+	    <val_int value="5"/>
+	    <val_int value="6"/>
+	    <val_int value="7"/>
+	  </val_list>
+	</args>
+	<script>
+	  function self.drawing_script(drf,fr)
+	  obj=self.parent.parent.parent;
+
+	  self.write(drf,0,"set_alpha",{28*(7-fr),{r=255,g=255,b=255}});
+	  
+	  if (fr==7) then
+	  obj.parent.delete_sprite(obj.get_id())
+	  end
+	  return drf
+	  end
+	</script>
+      </action>
+    </state>
+  </states>
+</sprite_type>

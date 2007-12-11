@@ -1,0 +1,996 @@
+
+<iface xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="iface_theme.xml"/>  
+<iface_objects>
+
+
+  <iface_object id="menubar" type="iface_menubar">
+    <args>
+    <val_position name="position" x="0" y="0"/>
+    <val_int name="layer" value="50"/>
+    <val_bool name="show" value="true"/>
+    </args>
+    <menubar id="menubar">
+      <menu id="fichier">
+	<menu_entry id="nouveau"/>
+	<menu_entry id="sauver"/>
+	<menu_entry id="charger"/>
+	<menu_entry id="quitter"/>
+      </menu>  
+      <menu id="tool_label">
+<!--	<menu_entry id="unite_label"/> -->
+	<menu_entry id="decor_label"/>
+<!--	<menu_entry id="flore_label"/>
+	<menu_entry id="faune_label"/> -->
+	<menu_entry id="objet_label"/>
+	<menu_entry id="terrains_label"/>
+	<menu_entry id="toolbox_label"/>
+	<menu_entry id="pinceaux_label"/>
+      </menu>  
+    </menubar>
+  </iface_object>
+  
+  <iface_object id="fichier" type="iface_label">
+    <args>
+      <val_string name="text" value="Fichier"/>
+    </args>
+  </iface_object>
+
+  <iface_object id="nouveau" type="iface_label">
+    <args>
+      <val_string name="text" value="Nouveau"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.new_window.show();
+      end
+    </script>
+  </iface_object>
+  
+  <iface_object id="sauver" type="iface_label">
+    <args>
+      <val_string name="text" value="Sauver"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.save_window.show();
+      end
+    </script>
+  </iface_object>
+  
+  <iface_object id="charger" type="iface_label">
+    <args>
+      <val_string name="text" value="Charger"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.load_window.show();
+      end
+    </script>
+  </iface_object>
+
+
+  <iface_object id="quitter" type="iface_label">
+    <args>
+      <val_string name="text" value="Quitter"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      exit(2)
+      end
+    </script>
+  </iface_object>
+
+
+  <iface_object id="wm" type="iface_window_manager">
+    <args>
+      <val_position name="position" x="0" y="0"/>
+      <val_int name="layer" value="2"/> 
+      <val_size name="size" w="800" h="600"/>
+    </args>
+    <container>
+      <iface_window id="faune_win"/>
+      <iface_window id="flore_win"/>
+      <iface_window id="decor_win"/>
+      <iface_window id="unite_win"/>
+      <iface_window id="objet_win"/>
+
+      <iface_window id="terrains_win"/>
+      <iface_window id="pinceaux_win"/>
+
+      <iface_window id="new_window"/>
+      <iface_window id="save_window"/>
+      <iface_window id="load_window"/>
+
+      <iface_window id="objedit_window"/>
+    </container>
+
+  </iface_object>
+
+
+<!-- nouveau,charger,sauver -->
+<!-- nouveau -->
+  <iface_object id="new_window" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="300" y="300"/>
+      <val_string name="text" value="Nouvelle carte"/>
+    </args>
+   <iface_object id="new_container"/>
+
+  </iface_object>
+
+<iface_object type="iface_vcontainer" id="new_container">
+  <args>
+  <val_int name="layer" value="1"/>
+  </args>
+  <container>
+
+   <iface_object id="new_w_container"/>
+   <iface_object id="new_h_container"/>
+   <iface_object id="new_button"/>
+  </container>
+</iface_object>
+
+<iface_object type="iface_hcontainer" id="new_w_container">
+  <properties>
+    <prop_align name="halign" align="left"/>
+  </properties>
+  <container>
+   <iface_object id="new_w_label"/>
+   <iface_object id="new_w_edit"/>
+  </container>
+</iface_object>
+
+<iface_object type="iface_label" id="new_w_label">
+  <args>
+    <val_string name="text" value="Largeur : "/>
+  </args>
+</iface_object>
+
+<iface_object type="iface_text_edit" id="new_w_edit">
+  <args>
+  <val_size name="size" w="128" h="0"/>
+  </args>
+  <script>
+   function self.on_click (x,y)
+   local iface=self.parent;
+   iface.set_focus ("new_w_edit")
+   end
+  </script>
+</iface_object>
+
+<iface_object type="iface_hcontainer" id="new_h_container">
+  <properties>
+    <prop_align name="halign" align="left"/>
+  </properties>
+  <container>
+   <iface_object id="new_h_label"/>
+   <iface_object id="new_h_edit"/>
+  </container>
+</iface_object>
+
+<iface_object type="iface_label" id="new_h_label">
+  <args>
+    <val_string name="text" value="Hauteur : "/>
+  </args>
+</iface_object>
+
+<iface_object type="iface_text_edit" id="new_h_edit">
+  <args>
+    <val_size name="size" w="128" h="0"/>
+  </args>
+  <script>
+   function self.on_click (x,y)
+      local iface=self.parent;
+     iface.set_focus ("new_h_edit")
+   end
+  </script>
+</iface_object>
+
+
+<iface_object type="iface_button_with_label" id="new_button">
+  <args>
+    <val_string name="text" value="Ok"/>
+  </args>
+  <script>
+   function self.on_release (x,y)
+    local iface=self.parent;
+    local engine=iface.parent.parent.engine;
+    w=int_of_string(iface.new_w_edit.get_data_text());
+    h=int_of_string(iface.new_h_edit.get_data_text());
+    engine.map.clear();
+    engine.map.resize(w,h);
+    engine.map.init_tile_layer("terrains",3);
+    iface.new_window.hide();
+   
+   end
+  </script>
+</iface_object>
+
+<!-- sauver -->
+  <iface_object id="save_window" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_string name="text" value="Sauver carte"/>
+      <val_position name="position" x="300" y="300"/>
+   </args>
+   <iface_object id="save_container"/>
+
+  </iface_object>
+
+<iface_object type="iface_vcontainer" id="save_container">
+  <container>
+   <iface_object id="save_hcontainer"/>
+   <iface_object id="save_button"/>
+
+  </container>
+</iface_object>
+
+<iface_object type="iface_hcontainer" id="save_hcontainer">
+  <properties>
+    <prop_align name="halign" align="left"/>
+  </properties>
+  <container>
+   <iface_object id="save_label"/>
+   <iface_object id="save_edit"/>
+
+  </container>
+</iface_object>
+
+<iface_object type="iface_label" id="save_label">
+  <args>
+  <val_string name="text" value="Fichier : "/>
+  </args>
+</iface_object>
+
+<iface_object type="iface_text_edit" id="save_edit">
+  <args>
+    <val_size name="size" w="128" h="0"/>
+  </args>
+  <script>
+   function self.on_click (x,y)
+    local iface=self.parent;
+     iface.set_focus ("save_edit")
+   end
+  </script>
+</iface_object>
+
+
+<iface_object type="iface_button_with_label" id="save_button">
+  <args>
+  <val_string name="text" value="Ok"/>
+  </args>
+  <script>
+   function self.on_release (x,y)
+    local iface=self.parent;
+    local engine=iface.parent.parent.engine;
+    f=(iface.save_edit.get_data_text());
+    engine.map.save_to_file(f);
+    iface.save_window.hide();
+   
+   end
+  </script>
+</iface_object>
+
+
+<!-- charger -->
+  <iface_object id="load_window" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="300" y="300"/>
+      <val_string name="text" value="Charger carte"/>
+    </args>
+   <iface_object id="load_container"/>
+
+  </iface_object>
+
+<iface_object type="iface_vcontainer" id="load_container">
+  <container>
+   <iface_object id="load_hcontainer"/>
+   <iface_object id="load_button"/>
+
+  </container>
+</iface_object>
+
+<iface_object type="iface_hcontainer" id="load_hcontainer">
+  <properties>
+    <prop_align name="halign" align="left"/>
+  </properties>
+  <container>
+   <iface_object id="load_label"/>
+   <iface_object id="load_edit"/>
+
+  </container>
+</iface_object>
+
+<iface_object type="iface_label" id="load_label">
+  <args>
+  <val_string name="text" value="Fichier : "/>
+  </args>
+</iface_object>
+
+<iface_object type="iface_text_edit" id="load_edit">
+  <args>
+  <val_size name="size" w="128" h="0"/>
+  </args>
+  <script>
+   function self.on_click (x,y)
+   local iface=self.parent;
+   iface.set_focus ("load_edit")
+   end
+  </script>
+</iface_object>
+
+
+<iface_object type="iface_button_with_label" id="load_button">
+  <args>
+  <val_string name="text" value="Ok"/>
+  </args>
+  <script>
+   function self.on_release (x,y)
+    local iface=self.parent;
+    local engine=iface.parent.parent.engine;
+    f=(iface.load_edit.get_data_text());
+    engine.map.load_from_file(f);
+    iface.load_window.hide();
+   
+   end
+  </script>
+</iface_object>
+
+<!-- Outils -->
+  <iface_object id="tool_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Outils"/>
+    </args>
+  </iface_object>
+
+
+<!-- boite a outils -->
+  <iface_object id="toolbox_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Boite a outils"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.toolbox_win.show();
+      end
+    </script>
+  </iface_object>
+  <iface_object id="toolbox_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Boite a outils"/>
+    </args>
+
+   <iface_object id="toolbox_container"/>
+  </iface_object>
+
+<iface_object id="toolbox_container" type="iface_hcontainer">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container>
+    <iface_object id="suppr_button"/>
+    <iface_object id="move_button"/>
+  </container>
+  <script>
+    function self.on_click(x,y)
+    self.parent.parent.reset_outils();
+    self.parent.parent.reset_objets();
+    end
+  </script>
+</iface_object>
+
+
+
+<iface_object type="iface_button_with_icon" id="suppr_button">
+  <args>
+    <val_int name="layer" value="1"/>
+    <val_position name="position" x="464" y="418"/>
+    <val_string name="icon_file" value="medias/interface/autre/icones/gomme.png"/>
+    <val_size name="icon_size" w="32" h="32"/>
+  </args>
+  <script>
+    self.set_push();
+   function self.on_click (x,y)
+    local iface=self.parent.parent;
+    iface.outil.type="supprime";
+   end
+  </script>
+</iface_object>
+
+<iface_object type="iface_button_with_icon" id="move_button">
+  <args>
+  <val_int name="layer" value="1"/>
+  <val_position name="position" x="464" y="418"/>
+  <val_string name="icon_file" value="medias/interface/autre/icones/deplacer.png"/>
+  <val_size name="icon_size" w="32" h="32"/>
+
+  </args>
+  <script>
+    self.set_push();
+   function self.on_click (x,y)
+    local iface=self.parent.parent;
+    iface.outil.type="deplace";
+   end
+  </script>
+</iface_object>
+
+
+<!-- pinceaux -->
+  <iface_object id="pinceaux_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Pinceaux"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.pinceaux_win.show();
+      end
+    </script>
+  </iface_object>
+  <iface_object id="pinceaux_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Pinceaux"/>
+    </args>
+
+   <iface_object id="pinceaux_container"/>
+  </iface_object>
+
+<iface_object id="pinceaux_container" type="iface_vcontainer">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container>
+    <iface_object id="1x1_button"/>
+    <iface_object id="3x3_button"/>
+    <iface_object id="5x5_button"/>
+  </container>
+  <script>
+    function self.on_click(x,y)
+      self.parent.parent.reset_pinceaux();
+    end
+  </script>
+</iface_object>
+
+
+
+<iface_object type="iface_button_with_icon" id="1x1_button">
+  <args>
+  <val_int name="layer" value="1"/>
+  <val_position name="position" x="464" y="418"/>
+  <val_string name="icon_file" value="medias/interface/autre/icones/pinceau1.png"/>
+  <val_size name="icon_size" w="32" h="32"/>
+  </args>
+  <script>
+    self.set_push();
+   function self.on_click (x,y)
+    local iface=self.parent.parent;
+    iface.outil.pinceau=3;
+
+   end
+   function self.on_release(x,y)
+
+   end
+
+  </script>
+</iface_object>
+
+<iface_object type="iface_button_with_icon" id="3x3_button">
+  <args>
+  <val_int name="layer" value="1"/>
+  <val_position name="position" x="464" y="418"/>
+  <val_string name="icon_file" value="medias/interface/autre/icones/pinceau3.png"/>
+  <val_size name="icon_size" w="32" h="32"/>
+  </args>
+  <script>
+    self.set_push();
+   function self.on_click (x,y)
+    local iface=self.parent.parent;
+    iface.outil.pinceau=5;
+
+   end
+  </script>
+</iface_object>
+
+<iface_object type="iface_button_with_icon" id="5x5_button">
+  <args>
+  <val_int name="layer" value="1"/>
+  <val_position name="position" x="464" y="418"/>
+  <val_string name="icon_file" value="medias/interface/autre/icones/pinceau5.png"/>
+  <val_size name="icon_size" w="32" h="32"/>
+  </args>
+  <script>
+    self.set_push();
+   function self.on_click (x,y)
+    local iface=self.parent.parent;
+    iface.outil.pinceau=7;
+
+   end
+  </script>
+</iface_object>
+
+
+
+<!-- Faune -->
+  <iface_object id="faune_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Faune"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.faune_win.show();
+      end
+    </script>
+  </iface_object>
+
+  <iface_object id="faune_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Faune"/>
+    </args>
+
+   <iface_object id="faune_container"/>
+  </iface_object>
+
+<iface_object id="faune_container" type="iface_vscrollbar">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container/>
+  <script>
+    function self.on_click(x,y)
+    local iface=self.parent.parent;
+    iface.outil.valeur.map="faune";
+    end
+
+  </script>
+</iface_object>
+
+<!-- Flore -->
+  <iface_object id="flore_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Flore"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.flore_win.show();
+      end
+    </script>
+  </iface_object>
+
+  <iface_object id="flore_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Flore"/>
+    </args>
+
+   <iface_object id="flore_container"/>
+  </iface_object>
+
+<iface_object id="flore_container" type="iface_vscrollbar">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container/>
+  <script>
+    function self.on_click(x,y)
+    local iface=self.parent.parent;
+    iface.outil.valeur.map="flore";
+    end
+  </script>
+</iface_object>
+
+<!-- Unité -->
+
+  <iface_object id="unite_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Unité"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.unite_win.show();
+      end
+    </script>
+  </iface_object>
+
+  <iface_object id="unite_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Unité"/>
+    </args>
+
+   <iface_object id="unite_container"/>
+  </iface_object>
+
+<iface_object id="unite_container" type="iface_vscrollbar">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container/>
+  <script>
+    function self.on_click(x,y)
+    local iface=self.parent.parent;
+    iface.outil.valeur.map="unite";
+    end
+  </script>
+</iface_object>
+
+
+<!-- Decor -->
+
+  <iface_object id="decor_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Decor"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.decor_win.show();
+      end
+    </script>
+  </iface_object>
+
+  <iface_object id="decor_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Decor"/>
+    </args>
+
+   <iface_object id="decor_container"/>
+  </iface_object>
+
+<iface_object id="decor_container" type="iface_vscrollbar">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container/>
+  <script>
+    function self.on_click(x,y)
+    local iface=self.parent.parent;
+    iface.outil.valeur.map="decor";
+    end
+  </script>
+</iface_object>
+
+
+<!-- Objet -->
+
+  <iface_object id="objet_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Objet"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.objet_win.show();
+      end
+    </script>
+  </iface_object>
+
+  <iface_object id="objet_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Objet"/>
+    </args>
+
+   <iface_object id="objet_container"/>
+  </iface_object>
+
+<iface_object id="objet_container" type="iface_vscrollbar">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container/>
+  <script>
+    function self.on_click(x,y)
+    local iface=self.parent.parent;
+    iface.outil.valeur.map="objet";
+    end
+  </script>
+</iface_object>
+
+<!-- Terrains -->
+
+  <iface_object id="terrains_label" type="iface_label">
+    <args>
+      <val_string name="text" value="Terrains"/>
+    </args>
+    <script>
+      function self.on_click(x,y)
+      local iface=self.parent;
+      iface.terrains_win.show();
+      end
+    </script>
+  </iface_object>
+
+  <iface_object id="terrains_win" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="600" y="200"/>
+      <val_string name="text" value="Terrains"/>
+    </args>
+
+   <iface_object id="terrains_container"/>
+  </iface_object>
+
+<iface_object id="terrains_container" type="iface_vscrollbar">
+  <args>
+    <val_int name="layer" value="2"/>
+  </args>
+  <container/>
+  <script>
+    function self.on_click(x,y)
+    local iface=self.parent.parent;
+
+    end
+  </script>
+</iface_object>
+
+<!-- Editeur d'objets -->
+  <iface_object id="objedit_window" type="iface_window">
+    <args>
+      <val_int name="layer" value="1"/>
+      <val_position name="position" x="300" y="300"/>
+      <val_string name="text" value="Editeur d'objet"/>
+<!--      <val_bool name="show" value="true"/> -->
+    </args>
+   <iface_object id="objedit_container"/>
+
+  </iface_object>
+
+<iface_object type="iface_vscrollbar" id="objedit_container">
+  <container/>
+
+</iface_object>
+
+
+</iface_objects>
+<iface_object_types>
+  
+  <iface_object_type id="properties_edit_container" type="iface_hcontainer">
+      <script>
+      function self.init(l,v)
+         iface=self.parent;
+	 lid=(format("prop_%s_label",l));
+      	 eid=(format("prop_%s_edit",l));
+	 iface.add_object_from_type_to(lid,"properties_label",self.get_id());
+	 iface.add_object_from_type_to(eid,"properties_edit",self.get_id());
+	 iface[lid].set_data_text(l);
+	 iface[eid].set_data_text(v);
+      end
+      </script>
+      <container/>
+  </iface_object_type> 
+  
+
+  <iface_object_type id="properties_edit" type="iface_text_edit">
+  <args>
+      <val_size name="size" w="128" h="0"/>
+  </args>
+  </iface_object_type>
+
+  <iface_object_type id="properties_label" type="iface_text_edit">
+  <args>
+    <val_size name="size" w="128" h="0"/>
+  </args>
+  </iface_object_type>
+
+
+
+  <iface_object_type id="case_editeur" type="iface_sprite">
+    <sprite>
+      <graphics>
+	<graphic id="case_normal" type="graphic_pattern">
+	  <args>
+	    
+	    <val_string name="file" value="medias/interface/autre/motifs/motif_bouton0.png"/>
+	    <val_size name="size" w="200" h="32"/>
+	    <val_int name="layer" value="11"/>
+	    <val_bool name="show" value="true"/>
+	  </args>
+	  <script>
+	    function self.on_update()
+	    obj=self.parent.parent;
+	    self.move(obj.get_x(),obj.get_y())
+	    
+	    end
+	  </script>
+	</graphic>
+
+	<graphic id="case_selection" type="graphic_pattern">
+	  <args>
+	    
+	    <val_string name="file" value="medias/interface/autre/motifs/motif_bouton1.png"/>
+	    <val_size name="size" w="200" h="32"/>
+	    <val_int name="layer" value="10"/>
+	    <val_bool name="show" value="true"/>
+	  </args>
+	  <script>
+	    function self.on_update()
+	    obj=self.parent.parent;
+	    self.move(obj.get_x(),obj.get_y())
+	    
+	    end
+	  </script>
+	</graphic>
+
+<graphic id="nom_editeur" type="graphic_text">
+  <args>
+    <val_int name="layer" value="22"/>
+    <val_string name="font_file" value="medias/fonts/Vera.ttf"/>
+    <val_int name="font_size" value="12"/>
+    <val_color name="font_color" r="0" g="0" b="0"/>
+  </args>
+  <script>
+    function self.on_update()
+    obj=self.parent.parent;
+    self.move(obj.get_x()+32,obj.get_y()+4)
+    end
+  </script>
+</graphic>
+<!--
+<graphic id="selection" type="graphic_from_drawing_script">
+   <args>
+      <val_int name="layer" value="23"/>
+      <val_text name="drawing_script">
+	dr=self.create("rect",{{r=255,g=0,b=0},{w=128,h=32}});
+	self.write(dr,0,"set_alpha",{{r=255,g=255,b=255}});
+	return dr
+      </val_text>
+    </args>
+    <script>
+      self.hide();
+      function self.on_update()
+      obj=self.parent.parent;
+      self.move(obj.get_x(),obj.get_y())
+      end
+    </script>
+ </graphic>
+-->	
+      </graphics>
+      <args>
+	<val_size name="pixel_size" w="200" h="32"/>
+      </args>
+    </sprite>
+
+    <script>
+
+    function self.set_clicked()
+      self.sprite.graphics.case_normal.set_layer(10);
+      self.sprite.graphics.case_selection.set_layer(11);
+
+    end
+    function self.set_released()
+      self.sprite.graphics.case_normal.set_layer(11);
+      self.sprite.graphics.case_selection.set_layer(10);
+
+    end
+
+      function self.on_click(x,y)
+      local iface=self.parent.parent;
+      local engine=self.parent.parent.parent.engine;
+      local mt=engine.map[iface.outil.valeur.map];
+      local t=self.get_id();
+    iface.outil.type="objet";
+      iface.reset_outils();
+      
+
+      
+--      if engine.interactions.main.place_obj~=nil then
+--      mt.delete_object(engine.interactions.main.place_obj);
+--      end
+
+      n=mt.add_object_from_type(t,15,15);
+      iface.outil.valeur.id=n;
+    self.set_clicked();
+
+      end
+    </script>
+
+  </iface_object_type>
+
+
+  <iface_object_type id="case_terrain" type="iface_sprite">
+    <sprite>
+      <graphics>
+	<graphic id="case_normal" type="graphic_pattern">
+	  <args>
+	    
+	    <val_string name="file" value="medias/interface/autre/motifs/motif_bouton0.png"/>
+	    <val_size name="size" w="40" h="40"/>
+	    <val_int name="layer" value="11"/>
+	    <val_bool name="show" value="true"/>
+	  </args>
+	  <script>
+	    function self.on_update()
+	    obj=self.parent.parent;
+	    self.move(obj.get_x(),obj.get_y())
+	    
+	    end
+	  </script>
+	</graphic>
+
+	<graphic id="case_selection" type="graphic_pattern">
+	  <args>
+	    
+	    <val_string name="file" value="medias/interface/autre/motifs/motif_bouton1.png"/>
+	    <val_size name="size" w="40" h="40"/>
+	    <val_int name="layer" value="10"/>
+	    <val_bool name="show" value="true"/>
+	  </args>
+	  <script>
+	    function self.on_update()
+	    obj=self.parent.parent;
+	    self.move(obj.get_x(),obj.get_y())
+	    
+	    end
+	  </script>
+	</graphic>
+
+	<graphic id="case_terrain" type="graphic_from_file">
+	  <args>
+	    
+	    <val_string name="filename" value="medias/textures/terrains.png"/>
+	    <val_size name="size" w="32" h="32"/>
+	    <val_int name="layer" value="12"/>
+	    <val_bool name="show" value="true"/>
+	  </args>
+	  <script>
+	    function self.on_update()
+	    obj=self.parent.parent;
+	    self.move(obj.get_x()+4,obj.get_y()+4)
+	    
+	    end
+	  </script>
+	</graphic>
+
+      </graphics>
+      <args>
+	<val_size name="pixel_size" w="40" h="40"/>
+      </args>
+    </sprite>
+
+    <script>
+
+    function self.set_clicked()
+      self.sprite.graphics.case_normal.set_layer(10);
+      self.sprite.graphics.case_selection.set_layer(11);
+
+    end
+    function self.set_released()
+      self.sprite.graphics.case_normal.set_layer(11);
+      self.sprite.graphics.case_selection.set_layer(10);
+
+    end
+
+
+      function self.on_click(x,y)
+      self.set_clicked();
+      local iface=self.parent.parent;
+    iface.outil.type="terrain";
+      iface.outil.valeur.num=self.sprite.graphics.case_terrain.get_cur_drawing();
+
+      end
+    </script>
+
+  </iface_object_type>
+</iface_object_types>
+</iface>

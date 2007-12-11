@@ -1,0 +1,62 @@
+<game_object_type name="oeuf" xmlns:xi="http://www.w3.org/2001/XInclude">    
+  <graphics>
+    <graphic id="main" type="graphic_from_file">
+      <args>
+	<val_string name="filename" value="medias/creatures/oeuf.png"/>
+	<val_size name="size" w="7" h="6"/>
+      </args>
+      <script>
+	function self.on_update()
+	obj=self.parent.parent;
+	self.move(obj.get_pixel_x()-4,obj.get_pixel_y()-4)
+	end
+      </script>
+    </graphic>
+
+    <graphic id="main_border" type="graphic_from_drawing_fun">
+      <args>
+	<val_string value="with_alpha"/>	   
+	<val_color r="255" g="255" b="255"/>
+	<val_string value="with_border"/>
+	<val_color r="200" g="200" b="200"/>
+	<val_string value="load_simple"/>
+	<val_string value="medias/creatures/oeuf.png"/>
+	<val_size w="7" h="6"/>
+      </args>
+      <script>
+	self.hide()
+	function self.on_update()
+	obj=self.parent.parent;
+	self.move(obj.get_pixel_x()-4,obj.get_pixel_y()-4)
+	end
+      </script>
+    </graphic>
+
+  </graphics>
+  <args>
+    <val_size name="case_size" w="1" h="1"/>
+  </args>
+  <variables>
+    <val_string name="nom" value="Oeuf"/>
+    
+    <val_float name="masse" value="0.1"/>
+    
+    <val_int name="bonheur" value="0"/>
+    <val_int name="sante" value="0"/>
+    <val_int name="pelage" value="0"/>
+    <val_int name="fertilite" value="0"/>
+    
+    <val_int name="intelligence" value="0"/>
+    <val_string name="sexe" value="female"/>
+
+    <val_int name="age" value="0"/>		    
+
+    <val_int name="qty" value="1"/>
+  </variables>
+  <script>
+    function self.vieillir()
+    self.properties.age=self.properties.age+1
+    end
+  </script>
+
+</game_object_type>

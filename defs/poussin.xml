@@ -1,0 +1,153 @@
+<game_object_type name="poussin"
+		  xmlns:xi="http://www.w3.org/2001/XInclude">
+  
+  <graphics>
+    <graphic id="main_border" type="graphic_from_drawing_fun">
+      <args>
+	<val_string value="with_alpha"/>	   
+	<val_color r="255" g="255" b="255"/>
+	<val_string value="with_border"/>
+	<val_color r="200" g="200" b="200"/>
+	<val_string value="with_mirror3"/>
+	<val_string value="load_multiple"/>
+	<val_string value="medias/creatures/poussin.png"/>
+	<val_size w="10" h="14"/>
+      </args>
+      
+      <script>
+	self.hide();
+	<xi:include href="graphic_update.lua" parse="text"/>	
+      </script>
+    </graphic>
+    
+    <graphic id="main" type="graphic_from_drawing_fun">
+      <args>
+	<val_string value="with_alpha"/>	   
+	<val_color r="255" g="255" b="255"/>
+	<val_string value="with_mirror3"/>
+	<val_string value="load_multiple"/>
+	<val_string value="medias/creatures/poussin.png"/>
+	<val_size w="10" h="14"/>
+      </args>
+      <script>
+	  <xi:include href="graphic_update.lua" parse="text"/>	
+      </script>      
+    </graphic>
+    
+    
+    <xi:include href="ombre2.xml"/>
+    <xi:include href="thumb.xml"/>
+  </graphics>
+  
+  <states>    
+    <state id="immobile">
+      <action id="anim" type="action_anim">
+	<args>
+	  <val_int name="refresh" value="4"/>
+	  <val_list name="frames">
+	    <val_int value="0"/>
+	  </val_list>
+	</args>
+	<script>
+	  <xi:include href="poule_anim_loop.lua" parse="text"/>	
+	</script>
+      </action>
+      <action id="attendre" type="action_timed"
+	      xmlns:xi="http://www.w3.org/2001/XInclude">
+	<args>
+	  <val_time name="limit" h="0" m="10" s="0" f="0"/>
+	</args>
+	<script>
+	  <xi:include href="poule_attendre_loop.lua" parse="text"/>
+	</script>
+      </action>
+      
+    </state>
+
+    <state id="manger">
+      <action id="anim" type="action_anim">
+	<args>
+	  <val_int name="refresh" value="4"/>
+	  <val_list name="frames">
+	    <val_int value="0"/>
+	  </val_list>
+	</args>
+	<script>
+	  <xi:include href="poule_anim_loop.lua" parse="text"/>	
+	</script>
+      </action>
+      <action id="mange" type="action_timed">
+	<args>
+	  <val_time name="limit" h="0" m="10" s="0" f="0"/>
+	</args>
+	<script>
+	  <xi:include href="poule_manger_script.lua" parse="text"/>
+	</script>
+      </action>
+    </state>
+		    
+    <state id="marcher">
+      <action id="bouge" type="action_timed">
+	<args>
+	  <val_time name="limit" h="0" m="10" s="0" f="0"/>
+	</args>
+	<script>
+	  function self.on_loop()
+	  obj=self.parent.parent.parent;
+	  if obj.properties.bonheur &lt; 100 then
+	  obj.properties.bonheur=obj.properties.bonheur+1
+	  end
+	  end
+	</script>
+      </action>
+      <action id="deplacement" type="action_movement">
+	<script>
+	  <xi:include href="poule_deplacer_loop.lua" parse="text"/>
+	</script>
+      </action> 
+      <action id="anim" type="action_anim">
+	<args>
+	  <val_int name="refresh" value="3"/>
+	  <val_list name="frames">
+	    <val_int value="0"/>
+	    <val_int value="1"/>
+	  </val_list>
+	</args>
+	<script>
+	  <xi:include href="poule_anim_loop.lua" parse="text"/>	
+	</script>
+      </action>
+      
+    </state>
+    
+  </states>
+  <args>
+    <val_size name="case_size" w="1" h="1"/>
+    <val_size name="pixel_size" w="10" h="14"/>
+  </args>
+  <variables>
+    <val_int name="speed" value="1"/>
+    <val_int name="vie" value="5"/>
+    
+    <val_string name="nom" value="Chick"/>
+    
+    <val_float name="masse" value="0.1"/>
+    
+    <val_int name="bonheur" value="50"/>
+    <val_int name="sante" value="50"/>
+    <val_int name="pelage" value="50"/>
+    <val_int name="fertilite" value="0"/>
+    
+    <val_int name="intelligence" value="0"/>
+    <val_string name="sexe" value="female"/>
+		    
+    <val_int name="age" value="20"/>		    		    
+
+    <val_string name="metatype" value="poussin"/>
+  </variables> 
+  <script>
+    <xi:include href="volaille.lua" parse="text"/>
+    <xi:include href="poussin.lua" parse="text"/>
+    <xi:include href="pathfinding.lua" parse="text"/>    
+  </script>
+</game_object_type>   

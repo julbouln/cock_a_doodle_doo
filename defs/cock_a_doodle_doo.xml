@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xpoc xmlns:xi="http://www.w3.org/2001/XInclude">
+ <infos>
+  <val_string name="cmd" value="cadd"/>
+  <val_string name="name" value="Cock-a-doodle-doo!"/>
+  <val_string name="version" value="0.1"/>
+ </infos>
+ <args>
+
+  <val_size name="video_size" w="320" h="240"/>
+  <val_size name="video_default_size" w="320" h="240"/>
+
+  <val_string name="stage_start" value="engine"/>
+ </args>
+
+<stages xmlns:xi="http://www.w3.org/2001/XInclude">
+  <stage id="engine" type="multi_stage">
+    <args>
+      <val_string name="cursor_file" value="medias/divers/main.png"/>
+      <val_size name="cursor_size" w="21" h="20"/>
+    </args>
+    <stages>
+      <stage id="game" type="game_engine">
+    <args>
+      <val_string name="cursor_file" value="medias/divers/main.png"/>
+      <val_size name="cursor_size" w="21" h="20"/>
+    </args>
+	<xi:include href="map_type.xml"/>	  
+	<interactions>
+
+        <interaction id="scroll" type="interaction_mouse_scroll">
+          <args>
+            <val_int name="scroll" value="8"/>
+            <val_int name="border" value="4"/>
+          </args>
+        </interaction>
+
+	<interaction id="main" type="interaction_lua">
+	    <script>
+	      <xi:include href="engine_interaction.lua" parse="text"/>
+	    </script>
+	  </interaction>
+	</interactions>
+	<script>
+	  <xi:include href="engine.lua" parse="text"/>		
+	</script>
+      </stage>
+      <stage id="ui" type="sprite_engine">
+    <args>
+      <val_string name="cursor_file" value="medias/divers/main.png"/>
+      <val_size name="cursor_size" w="21" h="20"/>
+    </args>
+	<sprite_types>
+<!--	  <xi:include href="nuit.xml" /> -->
+	  <xi:include href="bulle.xml" />
+
+	  <xi:include href="mort.xml" />
+	  
+	  <!-- main -->
+	  <sprite_type name="main">
+	    <graphics>
+	      <graphic id="main" type="graphic_from_file">
+		<args>
+		  <val_string name="filename" value="medias/divers/main.png"/>
+		  <val_size name="size" w="21" h="20"/>
+		  <val_int name="layer" value="3"/>
+		</args>
+	      </graphic>
+	    </graphics>
+	  </sprite_type>
+
+      <!-- info-window -->
+
+      <sprite_type name="win_info_pattern">
+	<graphics>
+	  <graphic id="main" type="graphic_pattern">
+	    <args>
+	      <val_string name="file" value="medias/ui/win.png"/>
+	      <val_size name="size" w="140" h="224"/>
+	      <val_int name="layer" value="4"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <xi:include href="vente_info.xml" />
+      <xi:include href="achat_info.xml" />
+
+      <!-- icons -->
+      <sprite_type name="vente_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/32x32/vente.png"/>
+	      <val_size name="size" w="32" h="32"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <sprite_type name="achat_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/32x32/achat.png"/>
+	      <val_size name="size" w="32" h="32"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <sprite_type name="argent">
+	<graphics>
+	  <graphic id="main" type="graphic_text">
+	    <args>
+	      <val_string name="font_file" value="medias/fonts/Vera.ttf"/>
+	      <val_int name="font_size" value="12"/>
+	      <val_color name="font_color" r="0" g="0" b="0"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+	<variables>
+	  <val_int name="total" value="50"/>
+	</variables>
+      </sprite_type>
+
+      <sprite_type name="menu_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/16x16/menu.png"/>
+	      <val_size name="size" w="16" h="16"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <sprite_type name="build_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/16x16/batiment.png"/>
+	      <val_size name="size" w="16" h="16"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+
+
+      <sprite_type name="feed_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/16x16/nourriture.png"/>
+	      <val_size name="size" w="16" h="16"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <!-- menu-window -->
+      <sprite_type name="win_menu">
+	<graphics>
+	  <graphic id="main" type="graphic_pattern">
+	    <args>
+	      <val_string name="file" value="medias/ui/win.png"/>
+	      <val_size name="size" w="650" h="36"/>
+	      <val_int name="layer" value="4"/>
+	    </args>
+	  </graphic>
+	</graphics>
+	
+	<states>    
+	  <state id="statique">
+	  </state>
+	  <state id="bouge">
+	    <action id="translation" type="action_translation">
+	    </action>
+	  </state>
+	  
+	  <state id="fadin">
+	    <action id="fx" type="action_livefx">
+	      <args>
+		<val_int name="refresh" value="1"/>
+		<val_list name="frames">
+		  <val_int value="1"/>
+		  <val_int value="2"/>
+		  <val_int value="3"/>
+		  <val_int value="4"/>
+		  <val_int value="5"/>
+		  <val_int value="6"/>
+		  <val_int value="7"/>
+		  <val_int value="8"/>
+		  <val_int value="9"/>
+		  <val_int value="10"/>
+		  <val_int value="11"/>
+		  <val_int value="12"/>
+		  <val_int value="13"/>
+		  <val_int value="14"/>
+		  <val_int value="15"/>
+		</val_list>
+	      </args>
+	      <script>
+		function self.drawing_script(drf,fr)
+
+		self.write(drf,0,"set_alpha",{10*fr,{r=255,g=255,b=255}});
+		
+		if (fr==15) then
+		self.parent.parent.set_state("statique",{})
+		end
+		return drf		
+		end
+
+	      </script>
+	    </action>
+	  </state>
+	</states>
+      </sprite_type>
+
+      </sprite_types>
+	
+	<interactions>
+	  <interaction id="menu_vente" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="vente_icon"/>
+	    </args>
+	    <script>
+		<xi:include href="interaction_vente_script.lua" parse="text" />
+	    </script>
+	  </interaction>
+
+	  <interaction id="menu_achat" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="achat_icon"/>
+	    </args>
+	    <script>
+		<xi:include href="interaction_achat_script.lua" parse="text" />
+	    </script>
+	  </interaction>
+
+	  <interaction id="menu" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="menu_icon"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.parent.load("start")
+
+	      end
+	    </script>
+	  </interaction>
+	  <interaction id="menu_build" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="build_icon"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      local sprites=self.parent.parent.sprites
+	      local stages=self.parent.parent.parent.parent
+	      local game=stages.engine.game
+	      sprites.achat_info.states.set_state ("fadin",{});
+	      sprites.achat_info.graphics.main.show();
+
+	      sprites.vente_info.graphics.main.hide();
+	      game.current_buy=2
+	      end
+	    </script>
+	  </interaction>
+	  <interaction id="menu_feed" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="feed_icon"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      local sprites=self.parent.parent.sprites
+	      local stages=self.parent.parent.parent.parent
+	      local game=stages.engine.game
+	      sprites.achat_info.states.set_state ("fadin",{});
+	      sprites.achat_info.graphics.main.show();
+
+	      sprites.vente_info.graphics.main.hide();
+	      game.current_buy=1
+	      end
+	    </script>
+	  </interaction>
+	</interactions>
+
+	<script>
+	  function self.on_load()
+	  local sprites=self.sprites;
+	  local scr=screen_size()
+
+	  sprites.add_sprite_named_from_type("main_cursor","main",16,12);
+	  sprites.main_cursor.graphics.main.hide();
+	  
+	  
+	  sprites.add_sprite_named_from_type("menu_icon","menu_icon",10,4);
+	  sprites.add_sprite_named_from_type("build_icon","build_icon",34,4);
+	  sprites.add_sprite_named_from_type("feed_icon","feed_icon",58,4);
+	  
+	  sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
+	  sprites.argent.graphics.main.set_text("$ 50")
+	  
+	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-78,196);
+	  sprites.vente_icon.graphics.main.hide()
+	  
+	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-78,196);
+	  sprites.achat_icon.graphics.main.hide()
+
+	  sprites.add_sprite_named_from_type("bulle","bulle",0,0);
+--          sprites.bulle.states.set_state ("fadin",{});
+
+	  sprites.bulle.graphics.main.hide()
+
+	   sprites.add_sprite_named_from_type("menu","win_menu",-4,-4);
+--           sprites.menu.states.set_state ("fadin",{});
+
+
+	   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-128,24);
+	   sprites.vente_info.graphics.main.hide();
+
+	   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-128,24);
+	   sprites.achat_info.graphics.main.hide();
+
+
+--	   sprites.add_sprite_named_from_type("nuit","nuit",0,0);
+--	   sprites.nuit.graphics.main.show();
+	  end
+	</script>
+      </stage>
+    </stages>
+  </stage>
+  <!-- MENU -->
+  <stage id="start" type="sprite_engine">
+    <sprite_types>
+
+      <!-- background -->
+      <sprite_type name="bg">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/ui/bg.png"/>
+	      <val_size name="size" w="320" h="240"/>
+	      <val_int name="layer" value="-1"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+      
+      <!-- mini-window pattern -->
+      <sprite_type name="win_pattern">
+	<graphics>
+	  <graphic id="main" type="graphic_pattern">
+	    <args>
+	      <val_string name="file" value="medias/ui/win.png"/>
+	      <val_size name="size" w="64" h="64"/>
+	      <val_int name="layer" value="1"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <!-- mini-window -->
+      <sprite_type name="win">
+	<graphics>
+	  <graphic id="main" type="graphic_from_drawing_script">
+	    <args>
+	      <val_int name="layer" value="1"/>
+	      <val_string name="drawing_id" value="fwin"/>
+	    </args>
+	    <script>
+		<xi:include href="win.lua" parse="text"/>		
+	    </script>
+	  </graphic>
+	</graphics>
+	
+	<states>    
+	  <state id="statique">
+	  </state>
+	  <state id="bouge">
+	    <action id="translation" type="action_translation">
+	    </action>
+	  </state>
+	  
+	  <state id="fadin">
+	    <action id="fx" type="action_livefx">
+	      <args>
+		<val_int name="refresh" value="1"/>
+		<val_list name="frames">
+		  <val_int value="1"/>
+		  <val_int value="2"/>
+		  <val_int value="3"/>
+		  <val_int value="4"/>
+		  <val_int value="5"/>
+		  <val_int value="6"/>
+		  <val_int value="7"/>
+		</val_list>
+	      </args>
+	      <script>
+
+		function self.drawing_script(drf,fr)
+		local n=self.parent.parent.parent.n
+
+		if(n==1) then
+		ico=self.create("load",{"medias/icones/new.png"})
+		end
+		if(n==2) then
+		ico=self.create("load",{"medias/icones/open.png"})
+		end
+		if(n==3) then
+		ico=self.create("load",{"medias/icones/save.png"})
+		end
+		if(n==4) then
+		ico=self.create("load",{"medias/icones/options.png"})
+		end
+		if(n==5) then
+		ico=self.create("load",{"medias/icones/credits.png"})
+		end
+		if(n==6) then
+		ico=self.create("load",{"medias/icones/quit.png"})
+		end
+--		if(n~=5) then
+		self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
+--		end
+		self.compose(ico,0,drf,0,8,8);
+
+		
+		self.write(drf,0,"set_alpha",{28*fr,{r=255,g=255,b=255}});
+		if (fr==7) then
+		self.parent.parent.set_state("statique",{})
+		end
+		return drf		
+		end
+
+	      </script>
+	    </action>
+	  </state>
+
+	  <state id="fadout">
+	    <action id="fx" type="action_livefx">
+	      <args>
+		<val_int name="refresh" value="1"/>
+		<val_list name="frames">
+		  <val_int value="1"/>
+		  <val_int value="2"/>
+		  <val_int value="3"/>
+		  <val_int value="4"/>
+		  <val_int value="5"/>
+		  <val_int value="6"/>
+		  <val_int value="7"/>
+
+		</val_list>
+	      </args>
+	      <script>
+
+		function self.drawing_script(drf,fr)
+		local n=self.parent.parent.parent.n
+
+		if(n==1) then
+		ico=self.create("load",{"medias/icones/new.png"})
+		end
+		if(n==2) then
+		ico=self.create("load",{"medias/icones/open.png"})
+		end
+		if(n==3) then
+		ico=self.create("load",{"medias/icones/save.png"})
+		end
+		if(n==4) then
+		ico=self.create("load",{"medias/icones/options.png"})
+		end
+		if(n==5) then
+		ico=self.create("load",{"medias/icones/credits.png"})
+		end
+		if(n==6) then
+		ico=self.create("load",{"medias/icones/quit.png"})
+		end
+		self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
+		self.compose(ico,0,drf,0,8,8);
+
+		
+		self.write(drf,0,"set_alpha",{32*(8-fr),{r=255,g=255,b=255}});
+		if (fr==7) then
+		self.parent.parent.set_state("statique",{})
+		end
+		return drf		
+		end
+
+	      </script>
+	    </action>
+	  </state>
+	</states>
+	<args>
+	  <val_size name="pixel_size" w="64" h="64"/>
+	</args>
+      </sprite_type>
+
+      <!-- selection box -->
+      <sprite_type name="select_box">
+	<graphics>
+	  <graphic id="coin1" type="graphic_from_file">
+	    <args>
+	      
+	      <val_string name="filename" value="medias/ui/cadre.png"/>
+	      <val_size name="size" w="7" h="7"/>
+	      <val_int name="layer" value="11"/>
+	    </args>
+	    <script>
+	      self.set_cur_drawing (0);
+	      
+	      function self.on_update()
+	      local obj=self.parent.parent;
+	      self.move(obj.get_x(),obj.get_y())
+	      
+	    end
+	    </script>
+	  </graphic>
+	  
+	  <graphic id="coin2" type="graphic_from_file">
+	    <args>
+	      
+	      <val_string name="filename" value="medias/ui/cadre.png"/>
+	      <val_size name="size" w="7" h="7"/>
+	    <val_int name="layer" value="11"/>
+	    </args>
+	    <script>
+	      self.set_cur_drawing (1);
+	      
+	      function self.on_update()
+	      local obj=self.parent.parent;
+	      self.move(obj.get_x(),obj.get_y())
+	      
+	      end
+	    </script>
+	  </graphic>
+	  
+	<graphic id="coin3" type="graphic_from_file">
+	  <args>
+	    
+	    <val_string name="filename" value="medias/ui/cadre.png"/>
+	    <val_size name="size" w="7" h="7"/>
+	    <val_int name="layer" value="11"/>
+	  </args>
+	  <script>
+	    self.set_cur_drawing (2);
+	    
+	    function self.on_update()
+	    local obj=self.parent.parent;
+	    self.move(obj.get_x(),obj.get_y())
+	    
+	    end
+	  </script>
+	</graphic>
+
+	<graphic id="coin4" type="graphic_from_file">
+	  <args>
+	    
+	    <val_string name="filename" value="medias/ui/cadre.png"/>
+	    <val_size name="size" w="7" h="7"/>
+	    <val_int name="layer" value="11"/>
+	  </args>
+	  <script>
+	    self.set_cur_drawing (3);
+
+	    function self.on_update()
+	    local obj=self.parent.parent;
+	    self.move(obj.get_x(),obj.get_y())
+	    
+	    end
+	  </script>
+	</graphic>
+	
+      </graphics>
+      <args>
+	<val_size name="pixel_size" w="7" h="7"/>
+      </args>
+
+      <script>
+	function self.show_all()
+	self.graphics.coin1.show();
+	self.graphics.coin2.show();
+	self.graphics.coin3.show();
+	self.graphics.coin4.show();
+
+	end
+
+	function self.hide_all()
+	self.graphics.coin1.hide();
+	self.graphics.coin2.hide();
+	self.graphics.coin3.hide();
+	self.graphics.coin4.hide();
+
+	end
+
+	function self.move_from_selection(x,y,w,h)
+	self.jump(x,y)
+	self.graphics.coin3.move(x,y);
+	self.graphics.coin4.move(x+w,y);
+	self.graphics.coin1.move(x+w,y+h);
+	self.graphics.coin2.move(x,y+h);
+
+	end
+
+	function self.goto(n)
+	local st=self.parent.parent;
+
+	if (n==7) then
+	st.current_button=1;
+	else
+	if (n==0) then
+	st.current_button=6;
+	else
+	st.current_button=n;
+	end
+	end
+	but=st.buttons[st.current_button];
+	self.move_from_selection(but[2]-7,but[3]-7,64+7,64+7)
+	end
+
+      </script>
+
+      </sprite_type>      
+    </sprite_types>
+    <interactions>
+      <interaction id="main" type="interaction_lua">
+	<script>
+	function self.on_keypress(e)
+	 if e=="echap" then exit(2) end;
+	 if e=="return" then 
+	local st=self.parent.parent;
+	if (st.current_button==1) then
+--	st.fadout();
+	self.parent.parent.parent.load("engine")
+	end
+	if (st.current_button==6) then
+	exit(2)
+	end
+	 end;
+
+         local sprites=self.parent.parent.sprites;	 
+	 if e=="right" then
+	 sprites.selection.goto(sprites.parent.current_button+1)
+--	   sprites.selection.move_from_selection(sprites.selection.get_x()+80,48-7,64+7,64+7)
+	 end
+	 if e=="left" then
+	 sprites.selection.goto(sprites.parent.current_button-1)
+--	   sprites.selection.move_from_selection(sprites.selection.get_x()-80,48-7,64+7,64+7)
+	 end
+
+	end
+	</script>
+      </interaction>
+    </interactions>
+    <script>
+      self.current_button=1;
+      self.buttons={
+      {"b1",100,68},
+      {"b2",170,68},
+      {"b3",240,68},
+      {"b4",100,140},
+      {"b5",170,140},
+      {"b6",240,140}
+      };
+
+      function self.fadout()
+      local sprites=self.sprites;
+      n=1
+      while n &lt; 7 do
+	local button=self.buttons[n]
+        sprites[button[1]].states.set_state ("fadout",{});
+        n=n+1
+      end		  
+
+      end
+
+      function self.on_load()
+      local sprites=self.sprites;
+
+
+      sprites.add_sprite_from_type("bg",0,0);
+
+      sprites.add_sprite_named_from_type("selection","select_box",48,48);
+      sprites.selection.goto(1)
+
+      n=1
+      while n &lt; 7 do
+	local button=self.buttons[n]
+	sprites.add_sprite_named_from_type(button[1],"win",button[2],button[3]);
+        sprites[button[1]].n=n
+        sprites[button[1]].states.set_state ("fadin",{});
+
+        n=n+1
+      end		  
+
+--      sprites[b1].states.set_state ("bouge",{translation={30,{x=48,y=-64}}});
+
+      end
+    </script>
+  </stage>
+</stages>
+
+</xpoc>

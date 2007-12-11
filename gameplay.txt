@@ -1,0 +1,37 @@
+* caracteristiques:
+ - qualité du pelage
+ - durée de vie
+ - vitesse de ponte/reproduction
+ - musculature
+
+* indicateurs
+ - bonheur
+ - fatigue -> mortel
+ - faim -> mortel
+ - sexe
+
+= systeme d'etoile
+icone menu pour voir les etoiles
+
+* deplacer les poule
+prendre/poser
+
+* constructions
+- nid
+- poulailler
+- arbre(s)
+- grillage
+- paille
+- ring
+
+* nourriture
+- grain (differents types) maïs, blé, etc
+- ver
+
+* jour/nuit
+
+* fermier qui se deplace sur la carte
+
+* but ultime : tuer le fermier
+
+* combat de coq et pari

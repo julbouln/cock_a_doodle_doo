@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE xpoc SYSTEM "http://williamkramps.rashitoul.net/xpoc.dtd">
+-->
+
+<xpoc xmlns:xi="http://www.w3.org/2001/XInclude">
+ <infos>
+  <val_string name="cmd" value="cadd-editor"/>
+  <val_string name="name" value="Cock-a-doodle-doo - EDITOR"/>
+  <val_string name="version" value="0.1"/>
+ </infos>
+ <args>
+
+  <val_size name="video_size" w="800" h="600"/>
+  <val_size name="video_default_size" w="1024" h="768"/>
+<!--
+  <val_bool name="video_fullscreen" value="true"/>
+-->
+
+  <val_string name="stage_start" value="rashitoul_engine"/>
+ </args>
+
+ <xi:include href="stages_editor.xml"/>
+
+</xpoc>

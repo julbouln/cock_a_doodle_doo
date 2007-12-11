@@ -1,0 +1,96 @@
+<iface_theme name="wol">
+
+ <iface_style type="iface_text_edit">
+   <properties>
+     <prop_font name="font" path="medias/fonts/Vera.ttf" size="16"/>
+     <prop_pattern name="pattern" path="medias/interface/autre/motifs/texte.png"/>
+     <prop_color name="foreground_color" r="200" g="200" b="200"/>
+   </properties>
+ </iface_style>
+
+ <iface_style type="iface_text_box">
+   <properties>
+     <prop_font name="font" path="medias/fonts/Vera.ttf" size="16"/>
+     <prop_pattern name="pattern" path="medias/interface/autre/motifs/texte.png"/>
+     <prop_color name="foreground_color" r="200" g="200" b="200"/>
+   </properties>
+ </iface_style>
+
+ <iface_style type="iface_password_edit">
+   <properties>
+     <prop_font name="font" path="medias/fonts/Vera.ttf" size="16"/>
+     <prop_pattern name="pattern" path="medias/interface/autre/motifs/texte.png"/>
+     <prop_color name="foreground_color" r="200" g="200" b="200"/>
+   </properties>
+ </iface_style>
+
+ <iface_style type="iface_button">
+   <properties>
+     <prop_pattern name="pattern_normal" path="medias/interface/autre/motifs/motif_bouton0.png"/>
+     <prop_pattern name="pattern_clicked" path="medias/interface/autre/motifs/motif_bouton1.png"/>
+   </properties>
+ </iface_style>
+
+ <iface_style type="iface_button_with_icon">
+   <properties>
+     <prop_pattern name="pattern_normal" path="medias/interface/autre/motifs/motif_bouton0.png"/>
+     <prop_pattern name="pattern_clicked" path="medias/interface/autre/motifs/motif_bouton1.png"/>
+   </properties>
+ </iface_style>
+
+
+<iface_style type="iface_label">
+   <properties>
+     <prop_font name="font" path="medias/fonts/Vera.ttf" size="14"/>
+     <prop_color name="foreground_color" r="0" g="0" b="0"/>
+   </properties>
+
+</iface_style>
+
+<iface_style type="iface_menu">
+   <properties>
+     <prop_pattern name="pattern" path="medias/interface/autre/motifs/motif_bouton0.png"/>
+   </properties>
+ </iface_style>
+
+<iface_style type="iface_menubar">
+   <properties>
+     <prop_pattern name="pattern" path="medias/interface/autre/motifs/motif_bouton0.png"/>
+   </properties>
+ </iface_style>
+
+ <iface_style type="iface_button_with_label">
+   <properties>
+     <prop_pattern name="pattern_normal" path="medias/interface/autre/motifs/motif_bouton0.png"/>
+     <prop_pattern name="pattern_clicked" path="medias/interface/autre/motifs/motif_bouton1.png"/>
+     <prop_font name="font" path="medias/fonts/Vera.ttf" size="18"/>
+     <prop_color name="foreground_color" r="0" g="0" b="0"/>
+   </properties>   
+ </iface_style>
+
+
+
+ <iface_style type="iface_window">
+   <properties>
+     <prop_font name="font" path="medias/fonts/Vera.ttf" size="16"/>
+     <prop_color name="foreground_color" r="0" g="0" b="0"/>
+     <prop_pattern name="pattern_title" path="medias/interface/autre/motifs/boudin.png"/>
+     <prop_pattern name="pattern_title_min" path="medias/interface/autre/motifs/boudin_reduit.png"/>
+     <prop_pattern name="pattern_background" path="medias/interface/autre/motifs/fenetre.png"/>
+     <prop_graphic name="close_button" path="medias/interface/autre/icones/fermer.png" w="13" h="13"/>
+     <prop_graphic name="minimize_button" path="medias/interface/autre/icones/reduire.png" w="13" h="13"/>
+     <prop_graphic name="maximize_button" path="medias/interface/autre/icones/agrandir.png" w="13" h="13"/>
+   </properties>
+ </iface_style>
+
+ <iface_style type="iface_vscrollbar">
+   <properties>
+     <prop_pattern name="pattern_foreground" path="medias/interface/autre/motifs/motif_bouton0.png"/>
+     <prop_pattern name="pattern_background" path="medias/interface/autre/motifs/texte.png"/>
+     <prop_graphic name="top_button" path="medias/interface/autre/icones/fleche_haut.png" w="13" h="13"/>
+     <prop_graphic name="bottom_button" path="medias/interface/autre/icones/fleche_bas.png" w="13" h="13"/>
+   </properties>
+ </iface_style>
+
+
+</iface_theme>

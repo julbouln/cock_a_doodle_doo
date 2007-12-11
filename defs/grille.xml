@@ -1,0 +1,24 @@
+<graphic id="grille" type="graphic_from_drawing_script">
+  <args>
+    <val_int name="layer" value="-4"/>
+    <val_string name="drawing_id" value="grille"/>
+  </args>
+  <script>
+    function self.drawing_script()
+     obj=self.parent.parent;	 
+	       
+     dr=self.create("box",{
+     val_color(200,200,200),
+     val_size(32,32)
+     });	      
+     self.write(dr,0,"set_alpha",{32,{r=255,g=255,b=255}});
+
+     return dr	      	   
+    end      
+    
+    function self.on_update()	 
+     obj=self.parent.parent;	 
+     self.move(obj.get_case_x()*32,obj.get_case_y()*32)
+    end
+  </script>
+</graphic>    

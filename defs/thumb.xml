@@ -1,0 +1,54 @@
+<graphic id="thumb" type="graphic_from_drawing_script" xmlns:xi="http://www.w3.org/2001/XInclude">
+   <args>
+      <val_int name="layer" value="1"/>
+      <val_string name="drawing_id" value="thumb"/>
+    </args>
+    <script>
+      self.hide();
+
+
+      function self.drawing_script()
+	local dr=self.create("rect",{{r=255,g=0,b=0},{w=32,h=32}});
+ 
+--      if self.parent~=nil then
+      local main=self.parent.main;
+-- print (self.parent.get_id())
+-- print (self.parent.main.get_id())
+      local dri=self.create_from_vault(main.get_drawing_id());
+	  local w=main.get_w();
+	  local h=main.get_h();
+	  local wm=32/w * 100;
+	  local hm=32/h * 100;
+
+	  self.write(dri,0,"unset_alpha",{});
+	  dr=self.copy(dri,0,"resize",{{w=wm,h=hm}});
+	  self.write(dr,0,"set_alpha",{{r=255,g=255,b=255}});
+	  self.write(dri,0,"set_alpha",{{r=255,g=255,b=255}});
+
+--      end
+	return dr
+
+      end
+
+      
+
+      function self.on_update()
+       local obj=self.parent.parent;
+       self.move(obj.get_pixel_x()+obj.get_bcentre_x(),obj.get_pixel_y()+obj.get_bcentre_y())
+      end
+      
+      function self.iface_update()
+       local obj=self.parent.parent;
+       self.move(obj.get_x(),obj.get_y())
+      end
+
+      function self.iface_info_update()
+
+      local obj=self.parent.parent;
+       self.move(obj.get_x()+self.x,obj.get_y()+self.y)
+      end
+
+
+    </script>
+ </graphic>
+

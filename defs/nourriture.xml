@@ -1,0 +1,65 @@
+<game_object_type name="nourriture" xmlns:xi="http://www.w3.org/2001/XInclude">    
+  <graphics>
+
+    <graphic id="main" type="graphic_from_file">
+      <args>
+	<val_string name="filename" value="medias/decors/nourriture.png"/>
+	<val_size name="size" w="65" h="49"/>
+	<val_int name="layer" value="-2"/>
+      </args>
+      <script>
+	<xi:include href="nourriture_graphic_script.lua" parse="text"/>		
+      </script>
+    </graphic>
+
+    <graphic id="main_border" type="graphic_from_drawing_fun">
+      <args>
+	<val_string value="with_alpha"/>	   
+	<val_color r="255" g="255" b="255"/>
+	<val_string value="with_border"/>
+	<val_color r="200" g="200" b="200"/>
+	<val_string value="load_multiple"/>
+	<val_string value="medias/decors/nourriture.png"/>
+	<val_size w="65" h="49"/>
+      </args>
+      
+      <script>
+	self.set_layer(-2);
+	self.hide();
+	<xi:include href="graphic_update.lua" parse="text"/>	
+      </script>
+    </graphic>
+
+    <graphic id="main_border_wont" type="graphic_from_drawing_fun">
+      <args>
+	<val_string value="with_alpha"/>	   
+	<val_color r="255" g="255" b="255"/>
+	<val_string value="with_border"/>
+	<val_color r="200" g="0" b="0"/>
+	<val_string value="load_multiple"/>
+	<val_string value="medias/decors/nourriture.png"/>
+	<val_size w="65" h="49"/>
+      </args>
+      
+      <script>
+	self.set_layer(-2);
+	self.hide();
+	<xi:include href="graphic_update.lua" parse="text"/>	
+      </script>
+    </graphic>
+    <xi:include href="thumb.xml"/>
+<!--   <xi:include href="grille.xml"/> -->
+  </graphics>
+  <args>
+    <val_size name="case_size" w="3" h="3"/>
+  </args>
+  <properties>
+    <val_string name="nom" value="Grain"/>
+    <val_int name="qty" value="500"/>
+    <val_string name="metatype" value="nourriture"/>
+    <val_int name="price" value="5"/>
+  </properties>
+  <script>
+    <xi:include href="nourriture.lua" parse="text"/>	
+  </script>
+</game_object_type>

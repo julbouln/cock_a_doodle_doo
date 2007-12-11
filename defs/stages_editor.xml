@@ -1,0 +1,57 @@
+<stages xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <stage id="rashitoul_engine" type="multi_stage">
+    <args>
+<!--      <val_bool name="show_fps" value="true"/> -->
+<!--      <val_bool name="graphic_operations" value="false"/> -->
+    </args>
+    <stages>
+      <stage id="engine" type="game_engine">
+	<args>
+	</args>
+
+	<xi:include href="map_type.xml"/>
+	<interactions>
+	<interaction id="scroll" type="interaction_mouse_scroll">
+	  <args>
+	    <val_int name="scroll" value="8"/>
+	    <val_int name="border" value="4"/>
+	  </args>
+	</interaction>
+
+	<interaction id="main" type="interaction_lua">
+	  <script>
+	    <xi:include href="engine_interaction_editor.lua" parse="text"/> 
+	  </script>
+	</interaction>
+	</interactions>
+
+	<script>
+
+	  function self.sauver_carte()
+	  self.map.save_to_file("autosave.xml");
+	  end
+
+	  function self.on_load()
+	  self.timer.add_task({h=0,m=1,s=0,f=0},self.sauver_carte);
+
+	  self.timer.start();
+	  end
+
+	  function self.on_loop()
+	  self.timer.step();
+	  end
+	</script>
+
+      </stage>
+
+      <stage id="iface" type="iface_stage">
+	<xi:include href="iface_editor.xml"/> 
+	<script>
+	  <xi:include href="iface_load_editor.lua" parse="text"/>
+	</script>
+      </stage>
+
+    </stages>
+  </stage>
+</stages>

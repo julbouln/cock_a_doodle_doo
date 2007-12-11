@@ -1,0 +1,26 @@
+<graphic id="ombre3" type="graphic_from_drawing_script">
+  <args>
+    <val_int name="layer" value="-1"/>
+    <val_string name="drawing_id" value="ombre"/>
+  </args>
+  <script>
+    function self.drawing_script()
+     obj=self.parent.parent;	 
+	       
+     dr=self.create("box",{
+     val_color(255,255,255),
+     val_size(4,4)
+     });	      
+     self.write(dr,0,"filledEllipse",{{x=2,y=1},{r=0,g=0,b=0},{x=2,y=2}});	      
+     self.write(dr,0,"set_alpha",{64,{r=255,g=255,b=255}});	      
+
+
+     return dr	      	   
+    end      
+    
+    function self.on_update()	 
+     obj=self.parent.parent;	 
+     self.move(obj.get_pixel_x()-obj.get_bcentre_x()+4,obj.get_pixel_y()+obj.get_bcentre_y()-2)
+    end
+  </script>
+</graphic>
