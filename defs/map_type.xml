@@ -1,66 +1,39 @@
-	<game_map_type name="rashitoul" xmlns:xi="http://www.w3.org/2001/XInclude">
-	  <game_tile_layers_type>	    
-	    <game_tile_layer_type id="bordures">
-	      <args>
-		<val_int name="layer" value="1"/>
-		<val_string name="file" value="medias/textures/bordures.png"/>
-	      </args>
-	    </game_tile_layer_type>
-	    
-	    <game_tile_layer_type id="terrains">
-	      <args>
-		<val_int name="layer" value="0"/>
-		<val_string name="file" value="medias/textures/terrains.png"/>
-	      </args>
-	    </game_tile_layer_type>
-
-	  </game_tile_layers_type>
-	  
-	  <game_object_maps_type>
-	    <game_object_map_type id="decor" type="with_loading">
-	      <game_object_types  xmlns:xi="http://www.w3.org/2001/XInclude">
-
-
-		<game_object_type name="barriere" xmlns:xi="http://www.w3.org/2001/XInclude">    
-		  <graphics>
-		    <graphic id="main" type="graphic_from_file">
-		      <args>
-			<val_string name="filename" value="medias/decors/barriere_bois1.png"/>
-			<val_size name="size" w="66" h="73"/>
-		      </args>
-		    </graphic>
-		  </graphics>
-		  <args>
-		    <val_size name="case_size" w="2" h="2"/>
-		  </args>
-		</game_object_type>
-
-
-		<game_object_type name="barriere_s" xmlns:xi="http://www.w3.org/2001/XInclude">    
-		  <graphics>
-		    <graphic id="main" type="graphic_from_file">
-		      <args>
-			<val_string name="filename" value="medias/decors/barriere_bois1_s.png"/>
-			<val_size name="size" w="66" h="73"/>
-		      </args>
-		    </graphic>
-		  </graphics>
-		  <args>
-		    <val_size name="case_size" w="2" h="2"/>
-		  </args>
-		</game_object_type>
-		<xi:include href="nourriture.xml" />
-		<xi:include href="nid.xml" />
-	      </game_object_types>
-	    </game_object_map_type>
-	    
-	    <game_object_map_type id="objet" type="with_loading">
-		<game_object_types  xmlns:xi="http://www.w3.org/2001/XInclude">
-		  <xi:include href="poule.xml" />
-		  <xi:include href="coq.xml" />
-		  <xi:include href="poussin.xml" />
-		  <xi:include href="oeuf.xml" />
-		</game_object_types>
-	      </game_object_map_type>
-	    </game_object_maps_type>
-	  </game_map_type>	
+<game_map_type name="rashitoul" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <game_tile_layers_type>	    
+    <game_tile_layer_type id="bordures">
+      <args>
+	<val_int name="layer" value="1"/>
+	<val_string name="file" value="medias/textures/bordures.png"/>
+      </args>
+    </game_tile_layer_type>
+    
+    <game_tile_layer_type id="terrains">
+      <args>
+	<val_int name="layer" value="0"/>
+	<val_string name="file" value="medias/textures/terrains.png"/>
+      </args>
+    </game_tile_layer_type>
+    
+  </game_tile_layers_type>
+  
+  <game_object_maps_type>
+    <game_object_map_type id="decor" type="with_loading">
+      <game_object_types  xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="barriere_bois1.xml" />
+	<xi:include href="barriere_bois1_s.xml" />
+	
+	<xi:include href="nourriture.xml" />
+	<xi:include href="nid.xml" />
+      </game_object_types>
+    </game_object_map_type>
+    
+    <game_object_map_type id="objet" type="with_loading">
+      <game_object_types  xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="poule.xml" />
+	<xi:include href="coq.xml" />
+	<xi:include href="poussin.xml" />
+	<xi:include href="oeuf.xml" />
+      </game_object_types>
+    </game_object_map_type>
+  </game_object_maps_type>
+</game_map_type>	
