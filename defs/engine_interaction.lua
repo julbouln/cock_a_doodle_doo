@@ -68,6 +68,20 @@ end
 
 function self.on_keypress(e)
    local engine=self.parent.parent; 
+   if e=="p" then
+      if engine.pause then
+	 engine.map.unpause();
+	 engine.pause=nil
+	 print ("*unpause*")
+--	 engine.timer.start();
+      else
+	 engine.pause=1
+	 engine.map.pause();
+	 print ("*pause*")
+--	 engine.timer.stop();
+      end
+   end
+
    if e=="echap" then 
 --      gc_dump_head();
       exit(2) 

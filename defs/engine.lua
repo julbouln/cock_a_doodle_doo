@@ -21,7 +21,15 @@ self.pose_achat=nil
 self.game_speed=1
 
 self.volaille_compteur=0
+self.victoire=nil
 
+self.pause=nil
+
+function self.verifier_victoire()
+   if self.victoire then
+      print("Victory!")
+   end
+end
 
 function self.compter_volaille(k,obj)
    self.volaille_compteur=self.volaille_compteur+1;
@@ -319,6 +327,7 @@ function self.on_load()
    self.timer.add_task(val_time(0,1,0,0),self.autosave);
 
    self.timer.add_task(val_time(0,0,10,0),self.compter_volailles);
+   self.timer.add_task(val_time(0,0,10,0),self.verifier_victoire);
 
 
 
@@ -337,5 +346,7 @@ end
 
 function self.on_loop()
 --   gc_infos();
-   self.timer.step();
+
+      self.timer.step();
+
 end

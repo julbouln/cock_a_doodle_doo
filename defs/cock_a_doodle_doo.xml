@@ -85,6 +85,20 @@
 	</graphics>
       </sprite_type>
 
+      <sprite_type name="win_level_pattern">
+	<graphics>
+	  <graphic id="main" type="graphic_pattern">
+	    <args>
+	      <val_string name="file" value="medias/ui/win.png"/>
+	      <val_size name="size" w="400" h="320"/>
+	      <val_int name="layer" value="4"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <xi:include href="niveau_info.xml" />
+
       <xi:include href="vente_info.xml" />
       <xi:include href="achat_info.xml" />
 
@@ -350,6 +364,9 @@
 
 	   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-208,24);
 	   sprites.achat_info.graphics.main.hide();
+
+	   sprites.add_sprite_named_from_type("niveau_info","niveau_info",100,100);
+	  sprites.niveau_info.graphics.main.hide();
 
 
 --	   sprites.add_sprite_named_from_type("nuit","nuit",0,0);
