@@ -53,50 +53,77 @@ function self.my_drawing_script(drf,fr)
    self.compose(nom,0,drc,0,50,12)
    
    if obj.get_type()=="nourriture" then
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Reserve",13,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,44)
+
       local ico=self.create("load",{"medias/icones/pense/faim.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,10,38)
+      self.compose(ico,0,drc,0,80,38)
 
       local v=self.count_bar(floor(obj.properties.qty/5))
-      self.compose(v,0,drc,0,64,44)
+      self.compose(v,0,drc,0,134,44)
    end
 
    if obj.get_type()=="nid" then
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Quantity",12,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,44)
+
       local ico=self.create("load",{"medias/icones/pense/pondre.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,10,38)
+      self.compose(ico,0,drc,0,80,38)
 
       local v=self.count_bar(floor((100*obj.properties.oeufs)/12))
-      self.compose(v,0,drc,0,64,44)
+      self.compose(v,0,drc,0,134,44)
 
       local v=self.count_bar_simple(obj.properties.couvaison,30,172,3)
-      self.compose(v,0,drc,0,64,44)
+      self.compose(v,0,drc,0,134,44)
    end
 
    if obj.get_type()=="poule" or obj.get_type()=="coq" or obj.get_type()=="poussin" then
 
       -- bonheur
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Happiness",12,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,44)
+
       local ico=self.create("load",{"medias/icones/32x32/smiley.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,10,38)
+      self.compose(ico,0,drc,0,90,38)
       
       local v=self.count_bar(obj.properties.bonheur)
-      self.compose(v,0,drc,0,64,44)
+      self.compose(v,0,drc,0,134,44)
       
       -- sante
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Health",13,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,78)
+
       local ico=self.create("load",{"medias/icones/32x32/sante.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,10,70)
+      self.compose(ico,0,drc,0,90,70)
       
       local v=self.count_bar(obj.properties.sante)
-      self.compose(v,0,drc,0,64,78)
+      self.compose(v,0,drc,0,134,78)
    
       -- pelage
-      --		ico=self.create("load",{"medias/icones/32x32/pelage.png"})
-      --		self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      --		self.compose(ico,0,drc,0,10,96)
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Pelt",13,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,108)
+
+      ico=self.create("load",{"medias/icones/32x32/pelage.png"})
+      self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
+      self.compose(ico,0,drc,0,90,102)
+
+      local v=self.count_bar(0)
+      self.compose(v,0,drc,0,134,108)
       
       -- sexe
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Reproduction",11,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,138)
+
 --      if (obj.properties.sexe=="female") then
       local ico=self.create("load",{"medias/icones/32x32/sexe_femelle.png"})
 --      end
@@ -105,25 +132,29 @@ function self.my_drawing_script(drf,fr)
       end
       
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,10,102)
+      self.compose(ico,0,drc,0,90,134)
    
       local v=self.count_bar(obj.properties.fertilite)
-      self.compose(v,0,drc,0,64,108)
+      self.compose(v,0,drc,0,134,138)
 
 
       -- vieillesse
+      local nom=self.create("create_text",{{r=0,g=0,b=0},"Aging",13,"medias/fonts/samos.ttf"})
+      self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+      self.compose(nom,0,drc,0,10,168)
+
       local ico=self.create("load",{"medias/icones/autres/mourrir.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,4,134)
+      self.compose(ico,0,drc,0,84,166)
 
       local v=self.count_bar((200 - obj.properties.age)/2)
-      self.compose(v,0,drc,0,64,138)
+      self.compose(v,0,drc,0,134,168)
 
 -- prix
       local price=floor(obj.properties.masse*10*(obj.properties.sante + obj.properties.bonheur)/200)
       local v=self.create("create_text",{{r=0,g=0,b=0},price,20,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,78,276)
+      self.compose(v,0,drc,0,124,276)
 
    end
 
@@ -131,7 +162,7 @@ function self.my_drawing_script(drf,fr)
       if obj.properties.oeufs >= 6 then
 	 local v=self.create("create_text",{{r=0,g=0,b=0},"6",20,"medias/fonts/samos.ttf"})		
 	 self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-	 self.compose(v,0,drc,0,78,276)
+	 self.compose(v,0,drc,0,124,276)
       end
   end
  
@@ -139,11 +170,11 @@ function self.my_drawing_script(drf,fr)
 
       local v=self.create("create_text",{{r=0,g=0,b=0},"Sell",16,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,10,278)
+      self.compose(v,0,drc,0,50,278)
    
       local ico=self.create("load",{"medias/icones/32x32/vente.png"})
-      self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,50,272)
+      self.write(ico,0,"set_alpha",{64,{r=255,g=255,b=255}});
+      self.compose(ico,0,drc,0,90,272)
    end
    
    self.write(drc,0,"set_alpha",{fr,{r=255,g=255,b=255}});

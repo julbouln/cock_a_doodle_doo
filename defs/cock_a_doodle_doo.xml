@@ -129,6 +129,22 @@
 	</variables>
       </sprite_type>
 
+      <sprite_type name="population">
+	<graphics>
+	  <graphic id="main" type="graphic_text">
+	    <args>
+	      <val_string name="font_file" value="medias/fonts/Vera.ttf"/>
+	      <val_int name="font_size" value="12"/>
+	      <val_color name="font_color" r="0" g="0" b="0"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+	<variables>
+	  <val_int name="total" value="0"/>
+	</variables>
+      </sprite_type>
+
       <sprite_type name="menu_icon">
 	<graphics>
 	  <graphic id="main" type="graphic_from_file">
@@ -309,11 +325,15 @@
 	  
 	  sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
 	  sprites.argent.graphics.main.set_text("$ 50")
-	  
-	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-158,296);
+
+	  sprites.add_sprite_named_from_type("population","population",scr.w-120,4);
+	  sprites.population.graphics.main.set_text("0")
+	  engine=self.parent.game
+	  engine.compter_volailles()	  
+	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-118,296);
 	  sprites.vente_icon.graphics.main.hide()
 	  
-	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-158,296);
+	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-118,296);
 	  sprites.achat_icon.graphics.main.hide()
 
 	  sprites.add_sprite_named_from_type("bulle","bulle",0,0);

@@ -20,6 +20,23 @@ self.pose_achat=nil
 
 self.game_speed=1
 
+self.volaille_compteur=0
+
+
+function self.compter_volaille(k,obj)
+   self.volaille_compteur=self.volaille_compteur+1;
+end
+
+function self.compter_volailles()
+   local stages=self.parent.parent;
+   self.volaille_compteur=0
+   self.map.objet.foreach_object(self.compter_volaille)   
+
+   stages.engine.ui.sprites.population.properties.total=self.volaille_compteur
+   stages.engine.ui.sprites.population.graphics.main.set_text(format("%i",stages.engine.ui.sprites.population.properties.total))
+
+end
+
 function self.current_buy_object()
    local ot=self.buy_list[self.current_buy];
    return self.map.decor.types[ot]
@@ -237,6 +254,9 @@ function self.on_load()
 
    self.map.objet.foreach_object(self.faire_vivre_l)
    self.map.objet.foreach_object(self.faire_vieillir_l)
+
+--   print(self.map.properties)
+
  --  self.map.resize(24,24);
  --  self.map.init_tile_layer("terrains",12);
    
@@ -297,6 +317,8 @@ function self.on_load()
    self.timer.add_task(val_time(0,0,10,0),self.verifications);
 
    self.timer.add_task(val_time(0,1,0,0),self.autosave);
+
+   self.timer.add_task(val_time(0,0,10,0),self.compter_volailles);
 
 
 
