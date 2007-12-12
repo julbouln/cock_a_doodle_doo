@@ -110,10 +110,20 @@ function self.my_drawing_script(drf,fr)
       local v=self.count_bar(obj.properties.fertilite)
       self.compose(v,0,drc,0,64,108)
 
+
+      -- vieillesse
+      local ico=self.create("load",{"medias/icones/autres/mourrir.png"})
+      self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
+      self.compose(ico,0,drc,0,4,134)
+
+      local v=self.count_bar((200 - obj.properties.age)/2)
+      self.compose(v,0,drc,0,64,138)
+
+-- prix
       local price=floor(obj.properties.masse*10*(obj.properties.sante + obj.properties.bonheur)/200)
       local v=self.create("create_text",{{r=0,g=0,b=0},price,20,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,78,176)
+      self.compose(v,0,drc,0,78,276)
 
    end
 
@@ -121,7 +131,7 @@ function self.my_drawing_script(drf,fr)
       if obj.properties.oeufs >= 6 then
 	 local v=self.create("create_text",{{r=0,g=0,b=0},"6",20,"medias/fonts/samos.ttf"})		
 	 self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-	 self.compose(v,0,drc,0,78,176)
+	 self.compose(v,0,drc,0,78,276)
       end
   end
  
@@ -129,11 +139,11 @@ function self.my_drawing_script(drf,fr)
 
       local v=self.create("create_text",{{r=0,g=0,b=0},"Sell",16,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,10,178)
+      self.compose(v,0,drc,0,10,278)
    
       local ico=self.create("load",{"medias/icones/32x32/vente.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,50,172)
+      self.compose(ico,0,drc,0,50,272)
    end
    
    self.write(drc,0,"set_alpha",{fr,{r=255,g=255,b=255}});

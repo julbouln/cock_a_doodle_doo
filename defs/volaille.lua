@@ -424,8 +424,8 @@ end
 
       if self.states.get_state() ~= "marcher" then
 	 self.affiche_pense();
-	 local rx=randomize(31);
-	 local ry=randomize(31);
+	 local rx=randomize(root.stages.engine.game.map.get_w() - 1);
+	 local ry=randomize(root.stages.engine.game.map.get_h() - 1);
 	 
 	 local o=root.stages.engine.game.map.objet.get_object_at_position(rx,ry)
 	 if o==nil or o==self then

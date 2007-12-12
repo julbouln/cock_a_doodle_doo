@@ -11,64 +11,50 @@
 	  </args>
 	    <script>
 	      function self.drawing_script()
-	      dr=self.create("box",{{r=0,g=0,b=0},{w=640,h=480}});
+	      local dr=self.create("box",{val_color(0,0,0),val_size(640,480)});
 	      return dr
 	      end
-	    </script>
-
-	  <script>
-	    <xi:include href="scripts/default_update.lua" parse="text"/>
+	    function self.on_update()
+	    end
 	  </script>
 	</graphic>
 
 	<graphic id="poc" type="graphic_from_drawing_script">
 	  <args>
 	    <val_int name="layer" value="4"/>
-	    <val_text name="drawing_script">
+	    <val_string name="drawing_id" value="logo_txt"/>
+	  </args>
 	    <script>
 	      function self.drawing_script()
-	      dr=self.create("create_text",{{r=200,g=200,b=200},"P O C",120,"medias/DirtyEgo.ttf"});
-	      self.write(dr,0,"set_alpha",{{r=255,g=255,b=255}});
-	      ddr=self.copy(dr,0,"resize",{{w=100,h=50}});
-	      return ddr
-	    </val_text>
-	  </args>
-	  <script>
-	       self.move(-200,300);
-	       function self.on_update()
-	       end
-	  </script>
-	</graphic>
-<!--
+	      local dr=self.create("create_text",{{r=200,g=200,b=200},"P O C",120,"medias/fonts/DirtyEgo.ttf"});
 
-	<graphic id="poc" type="graphic_text">
-	  <args>
-	    <val_int name="layer" value="4"/>
-	    <val_string name="font_file" value="medias/DirtyEgo.ttf"/>
-	    <val_int name="font_size" value="120"/>
-	    <val_color name="font_color" r="200" g="200" b="200"/>
-	     </args>
-	     <script>
-	       self.set_text("P O C");
-	       self.move(-200,300);
+	      local ddr=self.copy(dr,0,"resize",{{w=100,h=50}});
+	      self.write(ddr,0,"set_alpha",{{r=255,g=255,b=255}});
+	      return ddr
+	      end
+
 	       function self.on_update()
+	       self.move(-200,300);
 	       end
-	     </script>
-	   </graphic>
--->
+	    </script>
+
+
+	</graphic>
+
 	<graphic id="main" type="graphic_from_drawing_script">
 	  <args>
 	    <val_int name="layer" value="0"/>
-	    <val_text name="drawing_script">
-	      dr=self.create("load",{"medias/logo_poc.png"});
-	      drr=self.copy(dr,0,"resize",{{w=50,h=50}})
-	      
-	      return drr
-	    </val_text>
+	    <val_string name="drawing_id" value="logo_img"/>
 	  </args>
 	  <script>
-	    self.move(200,-300);
+	      function self.drawing_script()
+	      local dr=self.create("load",{"medias/intro/logo_poc.png"});
+	      local drr=self.copy(dr,0,"resize",{{w=50,h=50}})	      
+	      return drr	      
+	      end
+
 	    function self.on_update()
+	    self.move(200,-300);
 	    end
 	  </script>
 	</graphic>
@@ -83,7 +69,7 @@
 	      function self.on_loop()
 	      obj=self.parent.parent.parent;
 	      stages=obj.parent.parent.parent;
-	      stages.load("menu")
+	      stages.load("engine")
 	      end
 	    </script>
 	  </action>

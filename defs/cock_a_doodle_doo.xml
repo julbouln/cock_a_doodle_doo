@@ -15,6 +15,7 @@
  </args>
 
 <stages xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="intro_poc.xml"/>	    
   <stage id="engine" type="multi_stage">
     <args>
       <val_string name="cursor_file" value="medias/divers/main.png"/>
@@ -77,7 +78,7 @@
 	  <graphic id="main" type="graphic_pattern">
 	    <args>
 	      <val_string name="file" value="medias/ui/win.png"/>
-	      <val_size name="size" w="140" h="224"/>
+	      <val_size name="size" w="220" h="324"/>
 	      <val_int name="layer" value="4"/>
 	    </args>
 	  </graphic>
@@ -309,10 +310,10 @@
 	  sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
 	  sprites.argent.graphics.main.set_text("$ 50")
 	  
-	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-78,196);
+	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-158,296);
 	  sprites.vente_icon.graphics.main.hide()
 	  
-	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-78,196);
+	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-158,296);
 	  sprites.achat_icon.graphics.main.hide()
 
 	  sprites.add_sprite_named_from_type("bulle","bulle",0,0);
@@ -324,10 +325,10 @@
 --           sprites.menu.states.set_state ("fadin",{});
 
 
-	   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-128,24);
+	   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-208,24);
 	   sprites.vente_info.graphics.main.hide();
 
-	   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-128,24);
+	   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-208,24);
 	   sprites.achat_info.graphics.main.hide();
 
 

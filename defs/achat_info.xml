@@ -28,7 +28,7 @@
 	<script>
 	  <xi:include href="achat_info_script.lua" parse="text"/>
 	  function self.drawing_script(dr,fr)
-	  return self.my_drawing_script(dr, fr*20)
+	  return self.my_drawing_script(dr, fr*28)
 	  end
 	</script>
       </action>
@@ -51,7 +51,7 @@
 	<script>
 	  <xi:include href="achat_info_script.lua" parse="text"/>
 	  function self.drawing_script(dr,fr)
-	  return self.my_drawing_script(dr, fr*20)
+	  return self.my_drawing_script(dr, fr*28)
 	  end	  
 	</script>
       </action>
@@ -74,7 +74,7 @@
 	<script>
 	  <xi:include href="achat_info_script.lua" parse="text"/>
 	  function self.drawing_script(dr,fr)
-	  return self.my_drawing_script(dr, 20*(8-fr))
+	  return self.my_drawing_script(dr, 28*(8-fr))
 	  end
 
 	  function self.on_loop()
@@ -96,6 +96,6 @@
     
   </states>
   <args>
-    <val_size name="pixel_size" w="140" h="224"/>
+    <val_size name="pixel_size" w="220" h="324"/>
   </args>
 </sprite_type>

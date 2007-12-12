@@ -21,6 +21,10 @@
       <game_object_types  xmlns:xi="http://www.w3.org/2001/XInclude">
 	<xi:include href="barriere_bois1.xml" />
 	<xi:include href="barriere_bois1_s.xml" />
+
+	<xi:include href="chene.xml" />
+	<xi:include href="orme.xml" />
+	<xi:include href="saule_pleureur.xml" />
 	
 	<xi:include href="nourriture.xml" />
 	<xi:include href="nid.xml" />

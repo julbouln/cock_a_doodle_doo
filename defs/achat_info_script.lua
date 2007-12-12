@@ -50,15 +50,15 @@ function self.my_drawing_script(drf,fr)
       
       local v=self.create("create_text",{{r=0,g=0,b=0},"Buy",16,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,10,178)
+      self.compose(v,0,drc,0,10,278)
       
       local ico=self.create("load",{"medias/icones/32x32/achat.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,50,172)
+      self.compose(ico,0,drc,0,50,272)
       
       local v=self.create("create_text",{{r=0,g=0,b=0},obj.properties.price,20,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,78,176)
+      self.compose(v,0,drc,0,78,276)
       
       self.write(drc,0,"set_alpha",{fr,{r=255,g=255,b=255}});
       
