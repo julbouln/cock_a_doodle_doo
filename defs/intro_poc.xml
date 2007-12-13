@@ -69,7 +69,7 @@
 	      function self.on_loop()
 	      obj=self.parent.parent.parent;
 	      stages=obj.parent.parent.parent;
-	      stages.load("engine")
+	      stages.load("start")
 	      end
 	    </script>
 	  </action>

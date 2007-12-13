@@ -11,7 +11,7 @@
   <val_size name="video_size" w="320" h="240"/>
   <val_size name="video_default_size" w="320" h="240"/>
 
-  <val_string name="stage_start" value="engine"/>
+  <val_string name="stage_start" value="intro"/>
  </args>
 
 <stages xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -344,6 +344,7 @@
 	    </args>
 	    <script>
 	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.parent.engine.game.map.save_to_file("auto.sav")
 	      self.parent.parent.parent.parent.load("start")
 
 	      end
@@ -457,7 +458,8 @@
       </stage>
     </stages>
     <script>
-    
+      self.open=nil
+
       function self.demarre_niveau_info()
       self.game.map.pause();
       self.ui.sprites.pause.graphics.main.show();
@@ -467,7 +469,11 @@
       
       function self.on_load()
       print("* load engine")
+      if self.open ~= nil then
+      self.game.charger_niveau(self.open)
+      else
       self.game.charger_niveau("niveau1.xml")
+      end
       self.demarre_niveau_info()
       end
     </script>

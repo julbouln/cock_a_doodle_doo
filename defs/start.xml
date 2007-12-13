@@ -10,16 +10,13 @@
       <!-- background -->
       <sprite_type name="bg">
 	<graphics>
-	<graphic id="fond" type="graphic_from_drawing_script">
+	<graphic id="fond" type="graphic_from_file">
 	  <args>
 	    <val_int name="layer" value="-4"/>
-	    <val_string name="drawing_id" value="bg"/>
+	      <val_string name="filename" value="medias/ui/fond.png"/>
+	      <val_size name="size" w="640" h="480"/>
 	  </args>
-	    <script>
-	      function self.drawing_script()
-	      local dr=self.create("box",{val_color(0,0,0),val_size(640,480)});
-	      return dr
-	      end
+	  <script>
 	    function self.on_update()
 	    end
 	  </script>
@@ -56,9 +53,10 @@
 	      <val_string name="drawing_id" value="fwin"/>
 	    </args>
 	    <script>
-		<xi:include href="win.lua" parse="text"/>		
+	      <xi:include href="win.lua" parse="text"/>		
 	    </script>
 	  </graphic>
+
 	</graphics>
 	
 	<states>    
@@ -86,8 +84,15 @@
 	      <script>
 
 		function self.drawing_script(drf,fr)
---		local n=fr;
 		local n=self.parent.parent.parent.n
+
+   local root=main()
+   local sprites=root.stages.start.sprites;
+
+   local p=sprites.types.win_pattern;
+   local drc=self.create_from_vault(p.graphics.main.get_drawing_id());
+
+-- self.write(drc,0,"set_alpha",{128,{r=255,g=255,b=255}});
 
 		if(n==1) then
 		ico=self.create("load",{"medias/icones/new.png"})
@@ -110,14 +115,14 @@
 --		if(n~=5) then
 		self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
 --		end
-		self.compose(ico,0,drf,0,8,8);
+		self.compose(ico,0,drc,0,8,8);
 
 		
-		self.write(drf,0,"set_alpha",{28*fr,{r=255,g=255,b=255}});
+		self.write(drc,0,"set_alpha",{28*fr,{r=255,g=255,b=255}});
 		if (fr==7) then
 		self.parent.parent.set_state("statique",{})
 		end
-		return drf		
+		return drc
 		end
 
 	      </script>
@@ -308,31 +313,58 @@
       </sprite_type>      
     </sprite_types>
     <interactions>
+
+	  <interaction id="b1" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="b1"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.load("engine")
+	      end
+	    </script>
+	  </interaction>
+
+	  <interaction id="b2" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="b2"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.engine.open="auto.sav"
+	      self.parent.parent.parent.load("engine")
+	      end
+	    </script>
+	  </interaction>
+
+	  <interaction id="b3" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="b3"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.engine.game.map.save_to_file("auto.sav")
+	      print("game saved")
+	      end
+	    </script>
+	  </interaction>
+
+	  <interaction id="b6" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="b6"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      exit(2)	      
+
+	      end
+	    </script>
+	  </interaction>
+
       <interaction id="main" type="interaction_lua">
 	<script>
 	function self.on_keypress(e)
 	 if e=="echap" then exit(2) end;
-	 if e=="return" then 
-	local st=self.parent.parent;
-	if (st.current_button==1) then
---	st.fadout();
-	self.parent.parent.parent.load("engine")
-	end
-	if (st.current_button==6) then
-	exit(2)
-	end
-	 end;
-
-         local sprites=self.parent.parent.sprites;	 
-	 if e=="right" then
-	 sprites.selection.goto(sprites.parent.current_button+1)
---	   sprites.selection.move_from_selection(sprites.selection.get_x()+80,48-7,64+7,64+7)
-	 end
-	 if e=="left" then
-	 sprites.selection.goto(sprites.parent.current_button-1)
---	   sprites.selection.move_from_selection(sprites.selection.get_x()-80,48-7,64+7,64+7)
-	 end
-
 	end
 	</script>
       </interaction>
@@ -340,12 +372,12 @@
     <script>
       self.current_button=1;
       self.buttons={
-      {"b1",100,68},
-      {"b2",170,68},
-      {"b3",240,68},
-      {"b4",100,140},
-      {"b5",170,140},
-      {"b6",240,140}
+      {"b1",100+160,68+120},
+      {"b2",170+160,68+120},
+      {"b3",240+160,68+120},
+      {"b4",100+160,140+120},
+      {"b5",170+160,140+120},
+      {"b6",240+160,140+120}
       };
 
       function self.fadout()
@@ -363,20 +395,20 @@
       local sprites=self.sprites;
 
 
-      sprites.add_sprite_from_type("bg",0,0);
+      sprites.add_sprite_from_type("bg",160,120);
 
-      sprites.add_sprite_named_from_type("selection","select_box",48,48);
-      sprites.selection.goto(1)
+--      sprites.add_sprite_named_from_type("selection","select_box",48,48);
+--      sprites.selection.goto(1)
 
-      n=1
+n=1
       while n &lt; 7 do
 	local button=self.buttons[n]
 	sprites.add_sprite_named_from_type(button[1],"win",button[2],button[3]);
         sprites[button[1]].n=n
 
         sprites[button[1]].states.set_state ("fadin",{});
-
-        n=n+1
+      
+      n=n+1
       end		  
 
 --      sprites[b1].states.set_state ("bouge",{translation={30,{x=48,y=-64}}});
