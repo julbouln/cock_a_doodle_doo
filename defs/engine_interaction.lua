@@ -73,11 +73,13 @@ function self.on_keypress(e)
 	 engine.map.unpause();
 	 engine.pause=nil
 	 print ("*unpause*")
+	 engine.parent.ui.sprites.pause.graphics.main.hide();
 --	 engine.timer.start();
       else
 	 engine.pause=1
 	 engine.map.pause();
 	 print ("*pause*")
+	 engine.parent.ui.sprites.pause.graphics.main.show();
 --	 engine.timer.stop();
       end
    end
