@@ -257,69 +257,16 @@ function self.autosave()
    self.map.save_to_file("autosave.xml")
 end
 
-function self.on_load()
-   self.map.load_from_file("niveau1.xml");
+function self.charger_niveau(f)
+   self.map.load_from_file(f);
 
    self.map.objet.foreach_object(self.faire_vivre_l)
    self.map.objet.foreach_object(self.faire_vieillir_l)
+end
 
---   print(self.map.properties)
+function self.on_load()
+   print ("* load game")
 
- --  self.map.resize(24,24);
- --  self.map.init_tile_layer("terrains",12);
-   
---   self.visual.set_position(200,240);
-   
---   poussin=self.map.objet.add_object_from_type("poussin",10,11);
---   self.faire_vieillir(poussin);
---   self.faire_vivre(poussin);
-
-
---   local coq=self.map.objet.add_object_from_type("coq",3,2);
---   self.faire_vieillir(coq);
---   self.faire_vivre(coq);
-
---   local coq=self.map.objet.add_object_from_type("coq",3,2);
---   self.faire_vieillir(coq);
---   self.faire_vivre(coq);
-
---   local poule=self.map.objet.add_object_from_type("poule",3,4);
---   self.faire_vieillir(poule);
---   self.faire_vivre(poule);
-
---   poule=self.map.objet.add_object_from_type("poule",3,3);
---   self.faire_vieillir(poule);
---   self.faire_vivre(poule);
-
---   poule=self.map.objet.add_object_from_type("poule",3,3);
---   self.faire_vieillir(poule);
---   self.faire_vivre(poule);
---   poule=self.map.objet.add_object_from_type("poule",3,3);
---   self.faire_vieillir(poule);
---   self.faire_vivre(poule);
---   poule=self.map.objet.add_object_from_type("poule",3,3);
---   self.faire_vieillir(poule);
---   self.faire_vivre(poule);
-
---   local   n=0
---   while n < 10 do
---     x=randomize(20)
---      y=randomize(20)
---      local poule=self.map.objet.add_object_from_type("poule",x,y);
---      self.faire_vieillir(poule);
---      self.faire_vivre(poule);
---      n=n+1
---   end
-
-
---   local nid=self.map.decor.add_object_from_type("nid",4,3);
---   local nourriture=self.map.decor.add_object_from_type("nourriture",4,5);
-
---   self.map.decor[nourriture].properties.qty=500
---   self.map.decor[nourriture].graphics.main.on_update()
---   print(self.map.decor[nourriture].properties.qty)
-
--- 
    self.timer.add_task(val_time(0,0,5,0),self.transformations);
    self.timer.add_task(val_time(0,0,5,0),self.eclosions);
    self.timer.add_task(val_time(0,0,10,0),self.verifications);
@@ -329,16 +276,12 @@ function self.on_load()
    self.timer.add_task(val_time(0,0,10,0),self.compter_volailles);
    self.timer.add_task(val_time(0,0,10,0),self.verifier_victoire);
 
-
-
 --   self.timer.add_task(val_time(0,0,10,0),gc_infos);
 --   self.timer.add_task(val_time(0,0,20,0),gc_full);
 --   self.timer.add_task(val_time(0,0,10,0),gc_dump_heap);
 
 --   self.timer.add_task(val_time(0,1,0,0),sync_caches);
 --   self.timer.add_task(val_time(0,1,0,0),gc_full);
-
-   
 
    self.timer.start();
 

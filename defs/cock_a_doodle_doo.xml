@@ -104,6 +104,18 @@
       <xi:include href="achat_info.xml" />
 
       <!-- icons -->
+      <sprite_type name="valider_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/ui/valider.png"/>
+	      <val_size name="size" w="35" h="18"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
       <sprite_type name="vente_icon">
 	<graphics>
 	  <graphic id="main" type="graphic_from_file">
@@ -115,6 +127,8 @@
 	  </graphic>
 	</graphics>
       </sprite_type>
+
+
 
       <sprite_type name="achat_icon">
 	<graphics>
@@ -139,9 +153,6 @@
 	    </args>
 	  </graphic>
 	</graphics>
-	<variables>
-	  <val_int name="total" value="50"/>
-	</variables>
       </sprite_type>
 
       <sprite_type name="pause">
@@ -159,6 +170,19 @@
 
       <sprite_type name="population">
 	<graphics>
+	  <graphic id="icon" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/autres/population.png"/>
+	      <val_size name="size" w="10" h="10"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	    <script>
+	      function self.on_update()
+	         local obj=self.parent.parent;
+	      self.move(obj.get_x()-16,obj.get_y()+2)
+	      end
+	    </script>
+	  </graphic>
 	  <graphic id="main" type="graphic_text">
 	    <args>
 	      <val_string name="font_file" value="medias/fonts/Vera.ttf"/>
@@ -190,6 +214,19 @@
 	  <graphic id="main" type="graphic_from_file">
 	    <args>
 	      <val_string name="filename" value="medias/icones/16x16/batiment.png"/>
+	      <val_size name="size" w="16" h="16"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+
+      <sprite_type name="stats_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/16x16/stats.png"/>
 	      <val_size name="size" w="16" h="16"/>
 	      <val_int name="layer" value="5"/>
 	    </args>
@@ -273,6 +310,16 @@
       </sprite_types>
 	
 	<interactions>
+
+	  <interaction id="menu_vente" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="valider_niveau"/>
+	    </args>
+	    <script>
+		<xi:include href="interaction_valider_niveau.lua" parse="text" />
+	    </script>
+	  </interaction>
+
 	  <interaction id="menu_vente" type="interaction_sprite">
 	    <args>
 	      <val_string name="sprite_id" value="vente_icon"/>
@@ -336,10 +383,27 @@
 	      end
 	    </script>
 	  </interaction>
+
+
+	  <interaction id="menu_feed" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="stats_icon"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      local sprites=self.parent.parent.sprites
+	      local stages=self.parent.parent.parent.parent
+	      local game=stages.engine.game
+	      sprites.valider_niveau.graphics.main.show();
+	      sprites.niveau_info.graphics.main.show();
+	      end
+	      </script>
+	  </interaction>
 	</interactions>
 
 	<script>
 	  function self.on_load()
+      print("* load ui")
 	  local sprites=self.sprites;
 	  local scr=screen_size()
 
@@ -350,6 +414,7 @@
 	  sprites.add_sprite_named_from_type("menu_icon","menu_icon",10,4);
 	  sprites.add_sprite_named_from_type("build_icon","build_icon",34,4);
 	  sprites.add_sprite_named_from_type("feed_icon","feed_icon",58,4);
+	  sprites.add_sprite_named_from_type("stats_icon","stats_icon",82,4);
 	  
 	  sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
 	  sprites.argent.graphics.main.set_text("$ 50")
@@ -358,7 +423,7 @@
 	  sprites.pause.graphics.main.set_text("PAUSE");
 	  sprites.pause.graphics.main.hide();
 
-	  sprites.add_sprite_named_from_type("population","population",scr.w-120,4);
+	  sprites.add_sprite_named_from_type("population","population",scr.w-100,4);
 	  sprites.population.graphics.main.set_text("0")
 	  engine=self.parent.game
 	  engine.compter_volailles()	  
@@ -369,13 +434,10 @@
 	  sprites.achat_icon.graphics.main.hide()
 
 	  sprites.add_sprite_named_from_type("bulle","bulle",0,0);
---          sprites.bulle.states.set_state ("fadin",{});
 
 	  sprites.bulle.graphics.main.hide()
 
 	   sprites.add_sprite_named_from_type("menu","win_menu",-4,-4);
---           sprites.menu.states.set_state ("fadin",{});
-
 
 	   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-208,24);
 	   sprites.vente_info.graphics.main.hide();
@@ -383,16 +445,33 @@
 	   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-208,24);
 	   sprites.achat_info.graphics.main.hide();
 
-	   sprites.add_sprite_named_from_type("niveau_info","niveau_info",100,100);
+
+
+	  sprites.add_sprite_named_from_type("niveau_info","niveau_info",100,100);
 	  sprites.niveau_info.graphics.main.hide();
+	  sprites.add_sprite_named_from_type("valider_niveau","valider_icon",450,390);
+	  sprites.valider_niveau.graphics.main.hide();
 
-
---	   sprites.add_sprite_named_from_type("nuit","nuit",0,0);
---	   sprites.nuit.graphics.main.show();
 	  end
 	</script>
       </stage>
     </stages>
+    <script>
+    
+      function self.demarre_niveau_info()
+      self.game.map.pause();
+      self.ui.sprites.pause.graphics.main.show();
+      self.ui.sprites.niveau_info.graphics.main.show();
+      self.ui.sprites.valider_niveau.graphics.main.show();
+      end
+      
+      function self.on_load()
+      print("* load engine")
+      self.game.charger_niveau("niveau1.xml")
+      self.demarre_niveau_info()
+      end
+    </script>
+
   </stage>
 
 	  

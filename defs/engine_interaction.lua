@@ -37,8 +37,8 @@ function self.on_mouseclick(x,y)
    local pobj=engine.map.decor[engine.pose_achat] 
    if pobj ~= nil then
       if pobj.wont==0 then
-	 engine.parent.ui.sprites.argent.properties.total=engine.parent.ui.sprites.argent.properties.total-pobj.properties.price
-	 engine.parent.ui.sprites.argent.graphics.main.set_text(format("$ %i",engine.parent.ui.sprites.argent.properties.total))
+	 engine.map.properties.argent=engine.map.properties.argent-pobj.properties.price
+	 engine.parent.ui.sprites.argent.graphics.main.set_text(format("$ %i",engine.map.properties.argent))
 	 pobj.graphics.main_border_wont.hide();
 	 engine.pose_achat=nil
       end

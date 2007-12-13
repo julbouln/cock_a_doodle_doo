@@ -15,7 +15,7 @@
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,60,12)
 
-	local titre=self.create("create_text",{{r=0,g=0,b=0},"For this first level, you just need : ",14,"medias/fonts/Vera.ttf"})
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"To win this level, you need : ",14,"medias/fonts/Vera.ttf"})
 
 
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
@@ -29,6 +29,12 @@
 	local titre=self.create("create_text",{{r=0,g=0,b=0},"- 10 poultry.",14,"medias/fonts/Vera.ttf"})
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,30,120)
+
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"OK",18,"medias/fonts/samos.ttf"})
+   self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+   self.compose(titre,0,drf,0,330,288)
+
+
 
 	return drf
 	end
