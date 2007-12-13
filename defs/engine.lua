@@ -27,7 +27,12 @@ self.pause=nil
 
 function self.verifier_victoire()
    if self.victoire then
+      local sprites=self.parent.ui.sprites;
       print("Victory!")
+      sprites.valider_victoire.graphics.main.show();
+      sprites.victoire_info.graphics.main.show();
+      sprites.valider_victoire.visible=true
+      self.map.pause();
    end
 end
 

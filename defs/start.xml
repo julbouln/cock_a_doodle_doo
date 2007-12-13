@@ -320,6 +320,7 @@
 	    </args>
 	    <script>
 	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.engine.open=nil
 	      self.parent.parent.parent.load("engine")
 	      end
 	    </script>

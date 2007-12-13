@@ -11,7 +11,7 @@
   <val_size name="video_size" w="320" h="240"/>
   <val_size name="video_default_size" w="320" h="240"/>
 
-  <val_string name="stage_start" value="intro"/>
+  <val_string name="stage_start" value="engine"/>
  </args>
 
 <stages xmlns:xi="http://www.w3.org/2001/XInclude">
@@ -99,6 +99,7 @@
       </sprite_type>
 
       <xi:include href="niveau_info.xml" />
+      <xi:include href="victoire_info.xml" />
 
       <xi:include href="vente_info.xml" />
       <xi:include href="achat_info.xml" />
@@ -311,12 +312,21 @@
 	
 	<interactions>
 
-	  <interaction id="menu_vente" type="interaction_sprite">
+	  <interaction id="valider_niveau" type="interaction_sprite">
 	    <args>
 	      <val_string name="sprite_id" value="valider_niveau"/>
 	    </args>
 	    <script>
 		<xi:include href="interaction_valider_niveau.lua" parse="text" />
+	    </script>
+	  </interaction>
+
+	  <interaction id="valider_victoire" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="valider_victoire"/>
+	    </args>
+	    <script>
+		<xi:include href="interaction_valider_victoire.lua" parse="text" />
 	    </script>
 	  </interaction>
 
@@ -397,6 +407,7 @@
 	      local game=stages.engine.game
 	      sprites.valider_niveau.graphics.main.show();
 	      sprites.niveau_info.graphics.main.show();
+	      sprites.valider_niveau.visible=1
 	      end
 	      </script>
 	  </interaction>
@@ -452,6 +463,14 @@
 	  sprites.niveau_info.graphics.main.hide();
 	  sprites.add_sprite_named_from_type("valider_niveau","valider_icon",450,390);
 	  sprites.valider_niveau.graphics.main.hide();
+	  sprites.valider_niveau.visible=nil
+
+	  sprites.add_sprite_named_from_type("victoire_info","victoire_info",100,100);
+	  sprites.victoire_info.graphics.main.hide();
+	  sprites.add_sprite_named_from_type("valider_victoire","valider_icon",450,390);
+	  sprites.valider_victoire.graphics.main.hide();
+	  sprites.valider_victoire.visible=nil
+
 
 	  end
 	</script>
@@ -465,6 +484,8 @@
       self.ui.sprites.pause.graphics.main.show();
       self.ui.sprites.niveau_info.graphics.main.show();
       self.ui.sprites.valider_niveau.graphics.main.show();
+      self.ui.sprites.valider_niveau.visible=1
+      
       end
       
       function self.on_load()
