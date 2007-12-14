@@ -50,15 +50,29 @@ function self.my_drawing_script(drf,fr)
       
       local v=self.create("create_text",{{r=0,g=0,b=0},"Buy",16,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,50,278)
+      self.compose(v,0,drc,0,50,248)
       
       local ico=self.create("load",{"medias/icones/32x32/achat.png"})
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(ico,0,drc,0,90,272)
+      self.compose(ico,0,drc,0,90,242)
       
       local v=self.create("create_text",{{r=0,g=0,b=0},obj.properties.price,20,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
-      self.compose(v,0,drc,0,124,276)
+      self.compose(v,0,drc,0,124,246)
+
+      if obj.properties.metatype=="nourriture" then
+	 local v=self.create("create_text",{{r=0,g=0,b=0},format("%i/%i",root.stages.engine.game.selection_nourriture,size(root.stages.engine.game.achats_nourriture)),20,"medias/fonts/Vera.ttf"})		
+      self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
+      self.compose(v,0,drc,0,88,286)
+      end
+
+      if obj.properties.metatype=="nid" then
+	 local v=self.create("create_text",{{r=0,g=0,b=0},format("%i/%i",root.stages.engine.game.selection_batiment,size(root.stages.engine.game.achats_batiment)),20,"medias/fonts/Vera.ttf"})		
+      self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
+      self.compose(v,0,drc,0,88,286)
+      end
+
+
       
       self.write(drc,0,"set_alpha",{fr,{r=255,g=255,b=255}});
       

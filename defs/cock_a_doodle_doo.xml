@@ -380,7 +380,7 @@
 	      sprites.achat_icon.visible=1
 	      sprites.vente_info.graphics.main.hide();
 
-	      game.current_buy=2
+	      game.achat_encours=game.achats_batiment[game.selection_batiment]
 	      return 1
 	      end
 	    </script>
@@ -400,7 +400,8 @@
 	      sprites.achat_info.graphics.main.show();
 	      sprites.achat_icon.visible=1
 	      sprites.vente_info.graphics.main.hide();
-	      game.current_buy=1
+	      game.achat_encours=game.achats_nourriture[game.selection_nourriture]
+
 	      return 1
 	      end
 	    </script>
@@ -453,7 +454,7 @@
 	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-118,296);
 	  sprites.vente_icon.graphics.main.hide()
 	  
-	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-118,296);
+	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-118,266);
 	  sprites.achat_icon.graphics.main.hide()
 
 	  sprites.add_sprite_named_from_type("bulle","bulle",0,0);

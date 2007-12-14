@@ -85,7 +85,7 @@
 	  self.parent.parent.set_no_state()
 	  root.stages.engine.ui.sprites.achat_icon.graphics.main.hide()
 	  root.stages.engine.ui.sprites.achat_info.graphics.main.hide()	  
-	  root.stages.engine.game.current_buy=0
+	  root.stages.engine.game.achat_encours=nil
 	  end
 
 	  end

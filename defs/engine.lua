@@ -14,7 +14,18 @@ end
 
 self.buy=nil
 self.buy_list={"mais","nid"}
-self.current_buy=0
+
+self.achats_nourriture={"mais","ble"}
+self.achats_batiment={"nid"}
+self.achats_decoration={"chene","orme","saule_pleureur"}
+
+self.selection_nourriture=1
+self.selection_batiment=1
+self.selection_decoration=1
+
+self.achat_encours=nil
+
+-- self.current_buy=0
 
 self.pose_achat=nil
 
@@ -51,8 +62,8 @@ function self.compter_volailles()
 end
 
 function self.current_buy_object()
-   local ot=self.buy_list[self.current_buy];
-   return self.map.decor.types[ot]
+--   local ot=self.buy_list[self.current_buy];
+   return self.map.decor.types[self.achat_encours]
 end
 
 -- selection

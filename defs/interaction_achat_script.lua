@@ -12,7 +12,7 @@ function self.on_tracked_mouseclick(x,y)
 
       
    end
-   game.current_buy=0
+   game.achat_encours=nil
    stages.engine.game.unselect_all()
    return 1
 else
