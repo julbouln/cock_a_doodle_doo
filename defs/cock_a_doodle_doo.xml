@@ -374,7 +374,8 @@
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 	      local game=stages.engine.game
-	      sprites.achat_info.states.set_state ("fadin",{});
+      stages.engine.game.unselect_all()	      
+sprites.achat_info.states.set_state ("fadin",{});
 	      sprites.achat_info.graphics.main.show();
 	      sprites.achat_icon.visible=1
 	      sprites.vente_info.graphics.main.hide();
@@ -394,6 +395,7 @@
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 	      local game=stages.engine.game
+      stages.engine.game.unselect_all()
 	      sprites.achat_info.states.set_state ("fadin",{});
 	      sprites.achat_info.graphics.main.show();
 	      sprites.achat_icon.visible=1

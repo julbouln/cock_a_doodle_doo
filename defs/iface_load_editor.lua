@@ -96,7 +96,7 @@ function self.ajout_editeur(m,k,o)
       iface[o.get_id()].sprite.graphics.thumb.set_layer(30);
      iface[o.get_id()].sprite.graphics.main.hide();
 
---      iface[o.get_id()].show();
+ --      iface[o.get_id()].show();
       
    end   
 end
