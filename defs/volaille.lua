@@ -32,6 +32,10 @@ function self.nettoyer()
 
 end
 
+function self.prix()
+   return floor(self.properties.masse*10*(self.properties.sante + self.properties.bonheur + self.properties.pelage)/200)
+end
+
 
 function self.proche_heuristic(obj)
    local ch=0
@@ -207,10 +211,10 @@ function self.voir_autour()
    local root=main()
    self.bonus_bonheur=0
    -- maj environement
-   local ax=-6
-   while ax~=6 do
-      local ay=-6
-      while ay~=6 do
+   local ax=-4
+   while ax~=4 do
+      local ay=-4
+      while ay~=4 do
 	 local ao=root.stages.engine.game.map.decor.get_object_at_position(self.get_case_x()+ax,self.get_case_y()+ay)
 	 if ao~=nil and ao.properties.metatype=="decoration" then
 --	    print (format("%s (%s)",ao.get_id(),ao.get_type()))

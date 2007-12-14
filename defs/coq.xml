@@ -240,7 +240,7 @@
     
     <val_int name="bonheur" value="50"/>
     <val_int name="sante" value="50"/>
-    <val_int name="pelage" value="50"/>
+    <val_int name="pelage" value="0"/>
     <val_int name="fertilite" value="0"/>
     
     <val_int name="intelligence" value="0"/>

@@ -58,6 +58,8 @@
     <val_int name="qty" value="500"/>
     <val_string name="metatype" value="nourriture"/>
     <val_int name="price" value="5"/>
+    <val_int name="bonus_nourriture" value="0"/>
+    <val_int name="bonus_pelage" value="1"/>
   </properties>
   <script>
     <xi:include href="nourriture.lua" parse="text"/>	

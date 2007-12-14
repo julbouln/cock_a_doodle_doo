@@ -116,7 +116,7 @@ function self.my_drawing_script(drf,fr)
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
       self.compose(ico,0,drc,0,90,102)
 
-      local v=self.count_bar(0)
+      local v=self.count_bar(obj.properties.pelage)
       self.compose(v,0,drc,0,134,108)
       
       -- sexe
@@ -151,7 +151,8 @@ function self.my_drawing_script(drf,fr)
       self.compose(v,0,drc,0,134,168)
 
 -- prix
-      local price=floor(obj.properties.masse*10*(obj.properties.sante + obj.properties.bonheur)/200)
+--      local price=floor(obj.properties.masse*10*(obj.properties.sante + obj.properties.bonheur)/200)
+      local price=obj.prix()
       local v=self.create("create_text",{{r=0,g=0,b=0},price,20,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
       self.compose(v,0,drc,0,124,276)

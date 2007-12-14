@@ -10,7 +10,10 @@ function self.on_loop()
       ao.properties.qty=ao.properties.qty-(1*game_speed)
       ao.graphics.main.on_update();
 
-      obj.properties.sante=obj.properties.sante+(5*game_speed)
+      if obj.properties.pelage < 100 then
+	 obj.properties.pelage=obj.properties.pelage+ao.properties.bonus_pelage
+      end
+      obj.properties.sante=obj.properties.sante+((5+ao.properties.bonus_nourriture)*game_speed)
 
       if obj.properties.masse < 5.0 then
 	 obj.properties.masse=obj.properties.masse + (0.01*game_speed)
