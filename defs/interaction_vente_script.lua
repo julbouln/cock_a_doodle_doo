@@ -4,11 +4,9 @@ function self.on_mouseclick(x,y)
    local obj=stages.engine.game.selection
    
    if obj ~=nil then
-      if obj.get_type()=="poule" or obj.get_type()=="coq" then
-	 print("sell click")
+      if obj.properties.metatype=="poule" or obj.properties.metatype=="coq" then
 	 obj.states.set_state("vendre",{vend={val_time(0,0,1,0)}})
 	 obj=nil
-
       end
 
 

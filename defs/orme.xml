@@ -67,6 +67,7 @@
 
 
        <val_string name="nom" value="Elm"/>
+    <val_string name="metatype" value="decoration"/>
 </properties>
 <script>
     self.init_bcentre("main");

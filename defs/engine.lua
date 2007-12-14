@@ -1,6 +1,6 @@
 
 function self.verification(k,ao)
-   if ao.get_type()=="nourriture" then
+   if ao.properties.metatype=="nourriture" then
       if ao.properties.qty <= 0 then
 	 
 	 self.map.decor.delete_object(ao.get_id())
@@ -31,7 +31,7 @@ function self.verifier_victoire()
       print("Victory!")
       sprites.valider_victoire.graphics.main.show();
       sprites.victoire_info.graphics.main.show();
-      sprites.valider_victoire.visible=true
+      sprites.valider_victoire.visible=1
       self.map.pause();
    end
 end
@@ -163,7 +163,7 @@ function self.eclosion(k,o)
    local ox=o.get_case_x();
    local oy=o.get_case_y();
 
-   if (o.get_type()=="nid" and o.properties.oeufs >= 12 and o.properties.couvaison >= 100) then
+   if (o.properties.metatype=="nid" and o.properties.oeufs >= 12 and o.properties.couvaison >= 100) then
       o.properties.oeufs=0
       o.properties.couvaison=0
       local n=0
@@ -185,14 +185,14 @@ function self.transformation(k,o)
    local ox=o.get_case_x();
    local oy=o.get_case_y();
 
-   if ((o.get_type()=="poule" or o.get_type()=="coq") and o.properties.age > 200) then
+   if ((o.properties.metatype=="poule" or o.properties.metatype=="coq") and o.properties.age > 200) then
       -- meurt
       o.nettoyer();
       self.meurt(o);
       self.map.objet.delete_object(oid);
    end
    
-   if (o.get_type()=="poussin" and o.properties.age > 50) then
+   if (o.properties.metatype=="poussin" and o.properties.age > 50) then
 
       local sexe=o.properties.sexe
       local connait=o.connait

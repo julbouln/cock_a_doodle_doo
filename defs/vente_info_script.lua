@@ -52,7 +52,7 @@ function self.my_drawing_script(drf,fr)
    self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(nom,0,drc,0,50,12)
    
-   if obj.get_type()=="nourriture" then
+   if obj.properties.metatype=="nourriture" then
       local nom=self.create("create_text",{{r=0,g=0,b=0},"Reserve",13,"medias/fonts/samos.ttf"})
       self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
       self.compose(nom,0,drc,0,10,44)
@@ -65,7 +65,7 @@ function self.my_drawing_script(drf,fr)
       self.compose(v,0,drc,0,134,44)
    end
 
-   if obj.get_type()=="nid" then
+   if obj.properties.metatype=="nid" then
       local nom=self.create("create_text",{{r=0,g=0,b=0},"Quantity",12,"medias/fonts/samos.ttf"})
       self.write(nom,0,"set_alpha",{255,{r=255,g=255,b=255}});   
       self.compose(nom,0,drc,0,10,44)
@@ -81,7 +81,7 @@ function self.my_drawing_script(drf,fr)
       self.compose(v,0,drc,0,134,44)
    end
 
-   if obj.get_type()=="poule" or obj.get_type()=="coq" or obj.get_type()=="poussin" then
+   if obj.properties.metatype=="poule" or obj.properties.metatype=="coq" or obj.properties.metatype=="poussin" then
 
       -- bonheur
       local nom=self.create("create_text",{{r=0,g=0,b=0},"Happiness",12,"medias/fonts/samos.ttf"})
@@ -158,7 +158,7 @@ function self.my_drawing_script(drf,fr)
 
    end
 
-   if obj.get_type()=="nid" then
+   if obj.properties.metatype=="nid" then
       if obj.properties.oeufs >= 6 then
 	 local v=self.create("create_text",{{r=0,g=0,b=0},"6",20,"medias/fonts/samos.ttf"})		
 	 self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
@@ -166,7 +166,7 @@ function self.my_drawing_script(drf,fr)
       end
   end
  
-   if obj.get_type()~="nourriture" then
+   if obj.properties.metatype~="nourriture" then
 
       local v=self.create("create_text",{{r=0,g=0,b=0},"Sell",16,"medias/fonts/samos.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
@@ -202,15 +202,15 @@ function self.on_start(ev)
 
    local obj=root.stages.engine.game.selection
    if obj~=nil then	
-      if obj.get_type()=="nid" then	 
+      if obj.properties.metatype=="nid" then	 
 	 if obj.properties.oeufs >= 6 then
 	    sprites.vente_icon.graphics.main.show()
 	 end
       end
-      if  obj.get_type()=="poule" then
+      if  obj.properties.metatype=="poule" then
 	 sprites.vente_icon.graphics.main.show()
       end
-      if obj.get_type()=="coq" then
+      if obj.properties.metatype=="coq" then
 	 sprites.vente_icon.graphics.main.show()
       end
    end

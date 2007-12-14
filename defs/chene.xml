@@ -62,11 +62,14 @@
     </graphics>
 <args>
     <val_size name="case_size" w="1" h="1"/>
+
 </args>
      <properties>
 
 
        <val_string name="nom" value="Oak"/>
+    <val_string name="metatype" value="decoration"/>
+
 </properties>
 <script>
     self.init_bcentre("main");

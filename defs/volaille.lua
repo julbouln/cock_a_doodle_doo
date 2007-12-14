@@ -69,7 +69,7 @@ function self.connait_nombre_type(t)
 
    while n < self.n_connait do
       local obj=self.recup_object(self.connait[n])
-      if obj~=nil and obj.get_type()==t then
+      if obj~=nil and obj.properties.metatype==t then
 	 ct=ct+1
       end
       n=n+1
@@ -113,7 +113,7 @@ function self.plus_proche(t)
       if self.connait[n]~=nil then
 	 local obj=self.recup_object(self.connait[n])
 	 if obj~=nil then
-	    if obj.get_type()==t then
+	    if obj.properties.metatype==t then
 	       local mx=self.get_case_x()-obj.get_case_x()
 	       local my=self.get_case_y()-obj.get_case_y()
 	       local ch=sqrt(mx*mx+my*my)
@@ -201,7 +201,7 @@ function self.voir_autour()
 	 local ao=root.stages.engine.game.map.decor.get_object_at_position(self.get_case_x()+ax,self.get_case_y()+ay)
 	 if ao~=nil and (self.connait_deja(ao.get_id()) == nil) then
 --	    print("-- connait")
---	    print(ao.get_type())
+
 	    self.connait[self.n_connait]=ao.get_id()
 	    self.n_connait=self.n_connait+1
 	 end
@@ -394,7 +394,6 @@ function self.vivre()
 	    if self.states.get_state() ~= "reproduire" and self.states.get_state()~="marcher" then		  
 	       ao.properties.fertile=1
 	       self.meme_sens(ao)
-	       --	       print(ao.get_type())
 	       self.change_state("reproduire",{
 				    feconde={val_time(0,0,1,0)}
 				 });

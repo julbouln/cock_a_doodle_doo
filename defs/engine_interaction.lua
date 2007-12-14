@@ -51,7 +51,7 @@ function self.on_mouseclick(x,y)
       obj=dobj
    end
    
-   if(dobj ~= nil and (dobj.get_type()=="nid" and obj.get_type()=="oeuf")) then
+   if(dobj ~= nil and (dobj.properties.metatype=="nid" and obj.get_type()=="oeuf")) then
       obj=dobj
    end
    

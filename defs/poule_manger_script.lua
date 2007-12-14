@@ -5,7 +5,7 @@ function self.on_loop()
    
       local game_speed=root.stages.engine.game.game_speed
 
-   if ao and ao.get_type()=="nourriture" then
+   if ao and ao.properties.metatype=="nourriture" then
 
       ao.properties.qty=ao.properties.qty-(1*game_speed)
       ao.graphics.main.on_update();

@@ -12,10 +12,10 @@ function self.thumb(id)
 
    local dr=nil
 
-   if o.get_type()=="nourriture" then
+   if o.properties.metatype=="nourriture" then
       dr=self.copy(dri,2,"resize",{{w=wm,h=hm}});
    end
-   if o.get_type()=="nid" then
+   if o.properties.metatype=="nid" then
       dr=self.copy(dri,0,"resize",{{w=wm,h=hm}});
    end
 
