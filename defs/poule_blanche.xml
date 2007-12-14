@@ -1,4 +1,4 @@
-<game_object_type name="poule"
+<game_object_type name="poule_blanche"
 		  xmlns:xi="http://www.w3.org/2001/XInclude">
   
   <graphics>
@@ -12,7 +12,7 @@
 	<val_color r="200" g="200" b="200"/>
 	<val_string value="with_mirror3"/>
 	<val_string value="load_multiple"/>
-	<val_string value="medias/creatures/poule.png"/>
+	<val_string value="medias/creatures/poule_blanche.png"/>
 	<val_size w="36" h="33"/>
       </args>
       
@@ -29,7 +29,7 @@
 	<val_color r="255" g="255" b="255"/>
 	<val_string value="with_mirror3"/>
 	<val_string value="load_multiple"/>
-	<val_string value="medias/creatures/poule.png"/>
+	<val_string value="medias/creatures/poule_blanche.png"/>
 	<val_size w="36" h="33"/>
       </args>
       <script>
@@ -247,7 +247,7 @@
     <val_int name="speed" value="2"/>
     <val_int name="vie" value="5"/>
     
-    <val_string name="nom" value="Chicken"/>
+    <val_string name="nom" value="White Chicken"/>
     
     <val_float name="masse" value="2"/>
     

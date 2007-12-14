@@ -29,6 +29,7 @@
 	<!-- Nourritures -->
 	<xi:include href="mais.xml" />
 	<xi:include href="ble.xml" />
+
 	<!-- Nids -->
 	<xi:include href="nid.xml" />
       </game_object_types>
@@ -36,7 +37,12 @@
     
     <game_object_map_type id="objet" type="with_loading">
       <game_object_types  xmlns:xi="http://www.w3.org/2001/XInclude">
+
 	<xi:include href="poule.xml" />
+	<xi:include href="poule_noir.xml" />
+	<xi:include href="poule_blanche.xml" />
+	<xi:include href="poule_jaune.xml" />
+
 	<xi:include href="coq.xml" />
 	<xi:include href="poussin.xml" />
 	<xi:include href="oeuf.xml" />
