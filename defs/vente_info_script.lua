@@ -116,7 +116,7 @@ function self.my_drawing_script(drf,fr)
       self.write(ico,0,"set_alpha",{255,{r=255,g=255,b=255}});
       self.compose(ico,0,drc,0,90,102)
 
-      local v=self.count_bar(obj.properties.pelage)
+      local v=self.count_bar(obj.properties.pelage/2)
       self.compose(v,0,drc,0,134,108)
       
       -- sexe

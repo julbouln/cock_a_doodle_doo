@@ -33,7 +33,7 @@ function self.nettoyer()
 end
 
 function self.prix()
-   return floor(self.properties.masse*10*(self.properties.sante + self.properties.bonheur + self.properties.pelage)/200)
+   return floor(self.properties.masse*10*(self.properties.sante + self.properties.bonheur + (self.properties.pelage/2))/200)
 end
 
 

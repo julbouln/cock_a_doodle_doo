@@ -40,6 +40,7 @@
 
 	<interaction id="main" type="interaction_lua">
 	    <script>
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
 	      <xi:include href="engine_interaction.lua" parse="text"/>
 	    </script>
 	  </interaction>
@@ -335,6 +336,7 @@
 	      <val_string name="sprite_id" value="vente_icon"/>
 	    </args>
 	    <script>
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
 		<xi:include href="interaction_vente_script.lua" parse="text" />
 	    </script>
 	  </interaction>
@@ -344,7 +346,8 @@
 	      <val_string name="sprite_id" value="achat_icon"/>
 	    </args>
 	    <script>
-		<xi:include href="interaction_achat_script.lua" parse="text" />
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
+	      <xi:include href="interaction_achat_script.lua" parse="text" />
 	    </script>
 	  </interaction>
 
@@ -366,15 +369,18 @@
 	      <val_string name="sprite_id" value="build_icon"/>
 	    </args>
 	    <script>
-	      function self.on_mouseclick(x,y)
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
+	      function self.on_tracked_mouseclick(x,y)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 	      local game=stages.engine.game
 	      sprites.achat_info.states.set_state ("fadin",{});
 	      sprites.achat_info.graphics.main.show();
-
+	      sprites.achat_icon.visible=1
 	      sprites.vente_info.graphics.main.hide();
+
 	      game.current_buy=2
+	      return 1
 	      end
 	    </script>
 	  </interaction>
@@ -383,21 +389,23 @@
 	      <val_string name="sprite_id" value="feed_icon"/>
 	    </args>
 	    <script>
-	      function self.on_mouseclick(x,y)
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
+	      function self.on_tracked_mouseclick(x,y)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 	      local game=stages.engine.game
 	      sprites.achat_info.states.set_state ("fadin",{});
 	      sprites.achat_info.graphics.main.show();
-
+	      sprites.achat_icon.visible=1
 	      sprites.vente_info.graphics.main.hide();
 	      game.current_buy=1
+	      return 1
 	      end
 	    </script>
 	  </interaction>
 
 
-	  <interaction id="menu_feed" type="interaction_sprite">
+	  <interaction id="menu_stats" type="interaction_sprite">
 	    <args>
 	      <val_string name="sprite_id" value="stats_icon"/>
 	    </args>

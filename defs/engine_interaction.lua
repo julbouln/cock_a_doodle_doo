@@ -26,13 +26,22 @@ function self.on_mouseover(x,y)
    
 end
 
-function self.on_mouseclick(x,y)
+
+function self.finalize_tracked()
+   local root=main()
+--   print ("finalize tracked")
+   root.tracked=nil
+end
+
+function self.on_tracked_mouseclick(x,y)
    local engine=self.parent.parent;
    local vis=engine.visual;
    local cx=floor((x+vis.get_x())/32);
    local cy=floor((y+vis.get_y())/32);
    local obj=engine.map.objet.get_object_at_position(cx,cy);
    local dobj=engine.map.decor.get_object_at_position(cx,cy);
+
+--   print("click moteur")
 
    local pobj=engine.map.decor[engine.pose_achat] 
    if pobj ~= nil then
@@ -61,9 +70,7 @@ function self.on_mouseclick(x,y)
       local sprites=engine.parent.ui.sprites
       engine.unselect_all()
    end
-   
-   
-   
+   return nil
 end
 
 function self.on_keypress(e)

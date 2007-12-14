@@ -72,6 +72,8 @@ function self.select_object(obj)
    
    sprites.achat_info.states.set_no_state();
    sprites.achat_info.graphics.main.hide();
+
+   sprites.vente_icon.visible=1
    
 end
 
@@ -83,9 +85,18 @@ end
 function self.unselect_all()
    local sprites=self.parent.ui.sprites;
 
+   
+--   sprites.achat_info.states.set_state("fadout",{});
+--   sprites.vente_info.states.set_state("fadout",{});
 
-   sprites.achat_info.states.set_state("fadout",{});
-   sprites.vente_info.states.set_state("fadout",{});
+   sprites.achat_info.graphics.main.hide()
+   sprites.vente_info.graphics.main.hide()
+   sprites.achat_icon.graphics.main.hide()
+   sprites.vente_icon.graphics.main.hide()
+
+   sprites.achat_icon.visible=nil
+   sprites.vente_icon.visible=nil
+
 
    self.map.objet.foreach_object(self.unselect_object)
    self.map.decor.foreach_object(self.unselect_object)
