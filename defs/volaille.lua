@@ -18,6 +18,9 @@ self.rand_nourriture=0
 self.dcase_x=-2
 self.dcase_y=-2
 
+self.bonus_bonheur=0
+
+
 function self.nettoyer()
    local root=main()
    local bulle=root.stages.engine.ui.sprites.bulle
@@ -37,6 +40,14 @@ function self.proche_heuristic(obj)
    end
    return ch
 end
+
+function self.rendre_heureux()
+   local root=main()
+   local game_speed=root.stages.engine.game.game_speed
+   if self.properties.bonheur < 100 then
+      self.properties.bonheur=self.properties.bonheur+((1+self.bonus_bonheur)*game_speed)
+   end
+end
    
 function self.vieillir()
    local root=main()
@@ -47,6 +58,7 @@ function self.vieillir()
    if (self.properties.bonheur > 0) then
       self.properties.bonheur=self.properties.bonheur-(5*game_speed)
    end
+
    
    if (self.properties.sante > 0) then
       self.properties.sante=self.properties.sante-(5*game_speed)
@@ -193,21 +205,26 @@ end
 
 function self.voir_autour()
    local root=main()
+   self.bonus_bonheur=0
    -- maj environement
-   local ax=-4
-   while ax~=4 do
-      local ay=-4
-      while ay~=4 do
+   local ax=-6
+   while ax~=6 do
+      local ay=-6
+      while ay~=6 do
 	 local ao=root.stages.engine.game.map.decor.get_object_at_position(self.get_case_x()+ax,self.get_case_y()+ay)
+	 if ao~=nil and ao.properties.metatype=="decoration" then
+--	    print (format("%s (%s)",ao.get_id(),ao.get_type()))
+	    self.bonus_bonheur=self.bonus_bonheur+ao.properties.bonus_bonheur
+	 end
+
 	 if ao~=nil and (self.connait_deja(ao.get_id()) == nil) then
---	    print("-- connait")
+--	    print(format("- %s (%s) decouvre %s (%s)", self.get_id(),self.get_type(), ao.get_id(), ao.get_type()))
 
 	    self.connait[self.n_connait]=ao.get_id()
 	    self.n_connait=self.n_connait+1
 	 end
 
 	 if ax ~= 0 or ay ~= 0 then
-
 	    local ao=root.stages.engine.game.map.objet.get_object_at_position(self.get_case_x()+ax,self.get_case_y()+ay)
 	    if ao~=nil and (self.connait_deja(ao.get_id()) == nil) then
 --  plante !
@@ -321,8 +338,13 @@ function self.vivre()
       self.veut="manger";
    end
 
-  
+   if self.states.get_state() == "marcher" then
+      self.rendre_heureux()
+   end
+   
    local ao=self.reflechir();
+
+
 
    if ao and self.states.get_state() ~= "vendre" then
       -- a cote

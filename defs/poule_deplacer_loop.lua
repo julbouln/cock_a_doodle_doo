@@ -41,7 +41,7 @@ function self.on_loop()
 
   if obj.dpix>=32 then
 
-      obj.rendre_heureux()
+
       
       obj.dpix=0;
       obj.pathfinding();

@@ -13,7 +13,7 @@ end
 
 
 self.buy=nil
-self.buy_list={"nourriture","nid"}
+self.buy_list={"mais","nid"}
 self.current_buy=0
 
 self.pose_achat=nil

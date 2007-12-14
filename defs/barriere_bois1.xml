@@ -33,6 +33,7 @@
   </args>
   <properties>
     <val_string name="nom" value="Wood Barrier"/>
+    <val_int name="bonus_bonheur" value="0"/>
   </properties>
   <script>
     self.init_bcentre("main");

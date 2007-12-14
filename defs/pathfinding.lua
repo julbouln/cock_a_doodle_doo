@@ -7,13 +7,7 @@ function self.pathfinding_start(dx,dy)
    self.path_dy=dy
 end
 
-function self.rendre_heureux()
-   local root=main()
-   local game_speed=root.stages.engine.game.game_speed
-   if self.properties.bonheur < 100 then
-      self.properties.bonheur=self.properties.bonheur+(1*game_speed)
-   end
-end
+
 
 function self.pathfinding()
    local cx=self.get_case_x();

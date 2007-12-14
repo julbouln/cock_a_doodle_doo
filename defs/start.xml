@@ -311,8 +311,52 @@
       </script>
 
       </sprite_type>      
+
+      <sprite_type name="continue">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/ui/valider.png"/>
+	      <val_size name="size" w="35" h="18"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+
+	  <graphic id="continue" type="graphic_text">
+	    <args>
+	      <val_string name="font_file" value="medias/fonts/samos.ttf"/>
+	      <val_int name="font_size" value="24"/>
+	      <val_color name="font_color" r="0" g="0" b="0"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+
+	    <script>
+	      function self.on_update()
+	         local obj=self.parent.parent;
+	      self.move(obj.get_x()-110,obj.get_y()-4)
+	      end
+	    </script>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+
     </sprite_types>
     <interactions>
+	  <interaction id="continue" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="continue"/>
+	    </args>
+	    <script>
+	      function self.on_mouseclick(x,y)
+	      self.parent.parent.parent.engine.open=nil
+
+	      if self.parent.parent.can_continue then
+	      self.parent.parent.parent.continue("engine")
+	      end
+	      end
+	    </script>
+	  </interaction>
 
 	  <interaction id="b1" type="interaction_sprite">
 	    <args>
@@ -334,6 +378,7 @@
 	      function self.on_mouseclick(x,y)
 	      self.parent.parent.parent.engine.open="auto.sav"
 	      self.parent.parent.parent.load("engine")
+
 	      end
 	    </script>
 	  </interaction>
@@ -371,6 +416,7 @@
       </interaction>
     </interactions>
     <script>
+
       self.current_button=1;
       self.buttons={
       {"b1",100+160,68+120},
@@ -413,6 +459,15 @@ n=1
       end		  
 
 --      sprites[b1].states.set_state ("bouge",{translation={30,{x=48,y=-64}}});
+
+
+      sprites.add_sprite_named_from_type("continue","continue",540,400);
+
+      if self.can_continue then
+      else
+      sprites.continue.graphics.main.hide();
+      sprites.continue.graphics.continue.hide();
+      end
 
       end
     </script>
