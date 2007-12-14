@@ -8,9 +8,9 @@ function self.on_mouseclick(x,y)
 --   print (root.tracked)
    if root.tracked then
    else
---      print (self.get_id())
       root.tracked=self.on_tracked_mouseclick(x,y)   
 
    end
    self.finalize_tracked()   
+   
 end

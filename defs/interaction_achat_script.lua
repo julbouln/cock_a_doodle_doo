@@ -13,12 +13,12 @@ function self.on_tracked_mouseclick(x,y)
       
    end
    game.current_buy=0
-      stages.engine.game.unselect_all()
+   stages.engine.game.unselect_all()
    return 1
 else
-      stages.engine.game.unselect_all()
-return nil
-   end
+
+   return nil
+end
 
 --   stages.engine.ui.sprites.achat_icon.visible=nil
    

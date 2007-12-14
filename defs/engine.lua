@@ -69,7 +69,7 @@ function self.select_object(obj)
    
    sprites.vente_info.states.set_state ("fadin",{});
    sprites.vente_info.graphics.main.show();
-   
+
    sprites.achat_info.states.set_no_state();
    sprites.achat_info.graphics.main.hide();
 
@@ -85,7 +85,6 @@ end
 function self.unselect_all()
    local sprites=self.parent.ui.sprites;
 
-   
 --   sprites.achat_info.states.set_state("fadout",{});
 --   sprites.vente_info.states.set_state("fadout",{});
 

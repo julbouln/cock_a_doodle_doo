@@ -152,6 +152,8 @@ end
 end
 
 -- Clique souris sur la carte
+
+
 function self.on_mouseclick(x,y,b)
    local engine=self.parent.parent;
    local vis=engine.visual;

@@ -3,7 +3,6 @@ function self.on_tracked_mouseclick(x,y)
    local game=stages.engine.game
    local obj=stages.engine.game.selection
    
-
    if stages.engine.ui.sprites.vente_icon.visible then
       print("click vendre")
       if obj ~=nil then
@@ -24,7 +23,6 @@ function self.on_tracked_mouseclick(x,y)
       stages.engine.game.unselect_all()
       return 1
    else
-      stages.engine.game.unselect_all()
    return nil
    end
 

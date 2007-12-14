@@ -189,8 +189,6 @@ function self.on_loop()
    if (self.get_frame()==7) then
       self.parent.parent.set_state("statique",{})
    end
-   
-
 end
 
 function self.on_start(ev)
