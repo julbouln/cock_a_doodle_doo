@@ -69,6 +69,7 @@
        <val_string name="nom" value="Elm"/>
     <val_string name="metatype" value="decoration"/>
     <val_int name="bonus_bonheur" value="1"/>
+    <val_int name="price" value="100"/>
 </properties>
 <script>
     self.init_bcentre("main");

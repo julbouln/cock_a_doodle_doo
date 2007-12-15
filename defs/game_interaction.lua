@@ -13,12 +13,12 @@ function self.on_mouseover(x,y)
 	 obj.wont=1
 	 obj.graphics.main.hide();
 	 obj.graphics.main_border.hide();
-	 obj.graphics.main_border_wont.show();
+--	 obj.graphics.main_border_wont.show();
       else
 	 obj.wont=0
 	 obj.graphics.main.show();
 	 obj.graphics.main_border.show();
-	 obj.graphics.main_border_wont.hide();
+--	 obj.graphics.main_border_wont.hide();
       end      
 
       obj.move(cx,cy)	      
@@ -48,7 +48,7 @@ function self.on_tracked_mouseclick(x,y)
       if pobj.wont==0 then
 	 engine.map.properties.argent=engine.map.properties.argent-pobj.properties.price
 	 engine.parent.ui.sprites.argent.graphics.main.set_text(format("$ %i",engine.map.properties.argent))
-	 pobj.graphics.main_border_wont.hide();
+--	 pobj.graphics.main_border_wont.hide();
 	 engine.pose_achat=nil
       end
    end

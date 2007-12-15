@@ -18,6 +18,9 @@ function self.thumb(id)
    if o.properties.metatype=="nid" then
       dr=self.copy(dri,0,"resize",{{w=wm,h=hm}});
    end
+   if o.properties.metatype=="decoration" then
+      dr=self.copy(dri,0,"resize",{{w=wm,h=hm}});
+   end
 
    self.write(dr,0,"set_alpha",{{r=255,g=255,b=255}});
    self.write(dri,0,"set_alpha",{{r=255,g=255,b=255}});
@@ -70,6 +73,12 @@ function self.my_drawing_script(drf,fr)
 	 local v=self.create("create_text",{{r=0,g=0,b=0},format("%i/%i",root.stages.engine.game.selection_batiment,size(root.stages.engine.game.achats_batiment)),20,"medias/fonts/Vera.ttf"})		
       self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
       self.compose(v,0,drc,0,88,286)
+   end
+
+      if obj.properties.metatype=="decoration" then
+	 local v=self.create("create_text",{{r=0,g=0,b=0},format("%i/%i",root.stages.engine.game.selection_decoration,size(root.stages.engine.game.achats_decoration)),20,"medias/fonts/Vera.ttf"})		
+	 self.write(v,0,"set_alpha",{255,{r=255,g=255,b=255}});
+	 self.compose(v,0,drc,0,88,286)
       end
 
 

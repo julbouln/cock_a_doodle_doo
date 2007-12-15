@@ -274,6 +274,18 @@
 	</graphics>
       </sprite_type>
 
+      <sprite_type name="decoration_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/icones/16x16/decoration.png"/>
+	      <val_size name="size" w="16" h="16"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
       <!-- menu-window -->
       <sprite_type name="win_menu">
 	<graphics>
@@ -423,6 +435,24 @@
 	    </script>
 	  </interaction>
 
+	  <interaction id="menu_decoration" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="decoration_icon"/>
+	    </args>
+	    <script>
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
+	      function self.on_tracked_mouseclick(x,y)
+	      local sprites=self.parent.parent.sprites
+	      local stages=self.parent.parent.parent.parent
+
+	      stages.engine.game.unselect_all()
+	      stages.engine.ui.afficher_achat("decoration")
+
+	      return 1
+	      end
+	    </script>
+	  </interaction>
+
 
 	  <interaction id="menu_stats" type="interaction_sprite">
 	    <args>
@@ -450,14 +480,27 @@
 	      function self.on_tracked_mouseclick(x,y)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
+	      local cb=stages.engine.game.current_buy_object()
+	      local metatype=cb.properties.metatype
 
 	      if sprites.suivant_icon.visible then
+	      if metatype=="nourriture" then
 	      stages.engine.game.selection_nourriture=stages.engine.game.selection_nourriture+1
+	      end
+
+	      if metatype=="nid" then
+	      stages.engine.game.selection_batiment=stages.engine.game.selection_batiment+1
+	      end
+
+	      if metatype=="decoration" then
+	      stages.engine.game.selection_decoration=stages.engine.game.selection_decoration+1
+	      end
+
 	      stages.engine.game.unselect_all()
 	      stages.engine.ui.cacher_achat()
 	      
-	      local cb=stages.engine.game.current_buy_object()
-	      stages.engine.ui.afficher_achat(cb.properties.metatype)
+
+	      stages.engine.ui.afficher_achat(metatype)
 
 	      return 1
 	      else
@@ -477,13 +520,26 @@
 	      function self.on_tracked_mouseclick(x,y)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
+	      local cb=stages.engine.game.current_buy_object()
+	      local metatype=cb.properties.metatype
 
 	      if sprites.precedent_icon.visible then
+	      if metatype=="nourriture" then
 	      stages.engine.game.selection_nourriture=stages.engine.game.selection_nourriture-1
+	      end
+
+	      if metatype=="nid" then
+	      stages.engine.game.selection_batiment=stages.engine.game.selection_batiment-1
+	      end
+
+	      if metatype=="decoration" then
+	      stages.engine.game.selection_decoration=stages.engine.game.selection_decoration-1
+	      end
+
 	      stages.engine.game.unselect_all()
 	      stages.engine.ui.cacher_achat()
-	      local cb=stages.engine.game.current_buy_object()
-	      stages.engine.ui.afficher_achat(cb.properties.metatype)
+
+	      stages.engine.ui.afficher_achat(metatype)
 	      return 1
 	      else
 	      return nil

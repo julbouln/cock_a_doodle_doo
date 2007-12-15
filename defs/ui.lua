@@ -63,7 +63,17 @@ function self.afficher_achat(metatype)
 	 sprites.precedent_icon.graphics.main.show()
 	 sprites.precedent_icon.visible=1
       end
+   end
 
+   if metatype=="decoration" then
+      if game.selection_decoration < size(game.achats_decoration) then
+	 sprites.suivant_icon.graphics.main.show()
+	 sprites.suivant_icon.visible=1
+      end
+      if game.selection_decoration > 1 then
+	 sprites.precedent_icon.graphics.main.show()
+	 sprites.precedent_icon.visible=1
+      end
    end
 
    sprites.achat_icon.graphics.main.show();
@@ -72,8 +82,13 @@ function self.afficher_achat(metatype)
    if metatype=="nourriture" then
       game.achat_encours=game.achats_nourriture[game.selection_nourriture]
    end
+
    if metatype=="nid" then
       game.achat_encours=game.achats_batiment[game.selection_batiment]
+   end
+
+   if metatype=="decoration" then
+      game.achat_encours=game.achats_decoration[game.selection_decoration]
    end
 
    self.cacher_vente()
@@ -88,9 +103,10 @@ function self.on_load()
    sprites.main_cursor.graphics.main.hide();
    
    sprites.add_sprite_named_from_type("menu_icon","menu_icon",10,4);
-   sprites.add_sprite_named_from_type("build_icon","build_icon",34,4);
-   sprites.add_sprite_named_from_type("feed_icon","feed_icon",58,4);
-   sprites.add_sprite_named_from_type("stats_icon","stats_icon",82,4);
+   sprites.add_sprite_named_from_type("build_icon","build_icon",100,4);
+   sprites.add_sprite_named_from_type("feed_icon","feed_icon",124,4);
+   sprites.add_sprite_named_from_type("decoration_icon","decoration_icon",148,4);
+   sprites.add_sprite_named_from_type("stats_icon","stats_icon",400,4);
    
    sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
    sprites.argent.graphics.main.set_text("$ 50")
