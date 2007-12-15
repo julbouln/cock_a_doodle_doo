@@ -41,12 +41,12 @@
 	<interaction id="main" type="interaction_lua">
 	    <script>
 	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
-	      <xi:include href="engine_interaction.lua" parse="text"/>
+	      <xi:include href="game_interaction.lua" parse="text"/>
 	    </script>
 	  </interaction>
 	</interactions>
 	<script>
-	  <xi:include href="engine.lua" parse="text"/>		
+	  <xi:include href="game.lua" parse="text"/>		
 	</script>
       </stage>
       <stage id="ui" type="sprite_engine">
@@ -138,6 +138,30 @@
 	    <args>
 	      <val_string name="filename" value="medias/icones/32x32/achat.png"/>
 	      <val_size name="size" w="32" h="32"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <sprite_type name="suivant_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/ui/suivant.png"/>
+	      <val_size name="size" w="18" h="18"/>
+	      <val_int name="layer" value="5"/>
+	    </args>
+	  </graphic>
+	</graphics>
+      </sprite_type>
+
+      <sprite_type name="precedent_icon">
+	<graphics>
+	  <graphic id="main" type="graphic_from_file">
+	    <args>
+	      <val_string name="filename" value="medias/ui/precedent.png"/>
+	      <val_size name="size" w="18" h="18"/>
 	      <val_int name="layer" value="5"/>
 	    </args>
 	  </graphic>
@@ -373,18 +397,14 @@
 	      function self.on_tracked_mouseclick(x,y)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
-	      local game=stages.engine.game
-	      stages.engine.game.unselect_all()	      
-	      sprites.achat_info.states.set_state ("fadin",{});
-	      sprites.achat_info.graphics.main.show();
-	      sprites.achat_icon.visible=1
-	      sprites.vente_info.graphics.main.hide();
 
-	      game.achat_encours=game.achats_batiment[game.selection_batiment]
+	      stages.engine.game.unselect_all()	      
+	      stages.engine.ui.afficher_achat("nid")
 	      return 1
 	      end
 	    </script>
 	  </interaction>
+
 	  <interaction id="menu_feed" type="interaction_sprite">
 	    <args>
 	      <val_string name="sprite_id" value="feed_icon"/>
@@ -394,13 +414,9 @@
 	      function self.on_tracked_mouseclick(x,y)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
-	      local game=stages.engine.game
+
 	      stages.engine.game.unselect_all()
-	      sprites.achat_info.states.set_state ("fadin",{});
-	      sprites.achat_info.graphics.main.show();
-	      sprites.achat_icon.visible=1
-	      sprites.vente_info.graphics.main.hide();
-	      game.achat_encours=game.achats_nourriture[game.selection_nourriture]
+	      stages.engine.ui.afficher_achat("nourriture")
 
 	      return 1
 	      end
@@ -423,92 +439,68 @@
 	      end
 	      </script>
 	  </interaction>
+
+	  <interaction id="suivant_icon" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="suivant_icon"/>
+	    </args>
+	    <script>
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
+	      
+	      function self.on_tracked_mouseclick(x,y)
+	      local sprites=self.parent.parent.sprites
+	      local stages=self.parent.parent.parent.parent
+
+	      if sprites.suivant_icon.visible then
+	      stages.engine.game.selection_nourriture=stages.engine.game.selection_nourriture+1
+	      stages.engine.game.unselect_all()
+	      stages.engine.ui.cacher_achat()
+	      
+	      local cb=stages.engine.game.current_buy_object()
+	      stages.engine.ui.afficher_achat(cb.properties.metatype)
+
+	      return 1
+	      else
+	      return nil
+	      end
+	      end
+	    </script>
+	  </interaction>
+
+	  <interaction id="precedent_icon" type="interaction_sprite">
+	    <args>
+	      <val_string name="sprite_id" value="precedent_icon"/>
+	    </args>
+	    <script>
+	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
+	      
+	      function self.on_tracked_mouseclick(x,y)
+	      local sprites=self.parent.parent.sprites
+	      local stages=self.parent.parent.parent.parent
+
+	      if sprites.precedent_icon.visible then
+	      stages.engine.game.selection_nourriture=stages.engine.game.selection_nourriture-1
+	      stages.engine.game.unselect_all()
+	      stages.engine.ui.cacher_achat()
+	      local cb=stages.engine.game.current_buy_object()
+	      stages.engine.ui.afficher_achat(cb.properties.metatype)
+	      return 1
+	      else
+	      return nil
+	      end
+	      end
+	    </script>
+	  </interaction>
+
 	</interactions>
 
 	<script>
-	  function self.on_load()
-      print("* load ui")
-	  local sprites=self.sprites;
-	  local scr=screen_size()
-
-	  sprites.add_sprite_named_from_type("main_cursor","main",16,12);
-	  sprites.main_cursor.graphics.main.hide();
-	  
-	  
-	  sprites.add_sprite_named_from_type("menu_icon","menu_icon",10,4);
-	  sprites.add_sprite_named_from_type("build_icon","build_icon",34,4);
-	  sprites.add_sprite_named_from_type("feed_icon","feed_icon",58,4);
-	  sprites.add_sprite_named_from_type("stats_icon","stats_icon",82,4);
-	  
-	  sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
-	  sprites.argent.graphics.main.set_text("$ 50")
-
-	  sprites.add_sprite_named_from_type("pause","pause",16,32);
-	  sprites.pause.graphics.main.set_text("PAUSE");
-	  sprites.pause.graphics.main.hide();
-
-	  sprites.add_sprite_named_from_type("population","population",scr.w-100,4);
-	  sprites.population.graphics.main.set_text("0")
-	  engine=self.parent.game
-	  engine.compter_volailles()	  
-	  sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-118,296);
-	  sprites.vente_icon.graphics.main.hide()
-	  
-	  sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-118,266);
-	  sprites.achat_icon.graphics.main.hide()
-
-	  sprites.add_sprite_named_from_type("bulle","bulle",0,0);
-
-	  sprites.bulle.graphics.main.hide()
-
-	   sprites.add_sprite_named_from_type("menu","win_menu",-4,-4);
-
-	   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-208,24);
-	   sprites.vente_info.graphics.main.hide();
-
-	   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-208,24);
-	   sprites.achat_info.graphics.main.hide();
-
-
-
-	  sprites.add_sprite_named_from_type("niveau_info","niveau_info",100,100);
-	  sprites.niveau_info.graphics.main.hide();
-	  sprites.add_sprite_named_from_type("valider_niveau","valider_icon",450,390);
-	  sprites.valider_niveau.graphics.main.hide();
-	  sprites.valider_niveau.visible=nil
-
-	  sprites.add_sprite_named_from_type("victoire_info","victoire_info",100,100);
-	  sprites.victoire_info.graphics.main.hide();
-	  sprites.add_sprite_named_from_type("valider_victoire","valider_icon",450,390);
-	  sprites.valider_victoire.graphics.main.hide();
-	  sprites.valider_victoire.visible=nil
-
-
-	  end
+	  <xi:include href="ui.lua" parse="text"/>		
 	</script>
       </stage>
     </stages>
     <script>
-      self.open=nil
-
-      function self.demarre_niveau_info()
-      self.game.map.pause();
-      self.ui.sprites.pause.graphics.main.show();
-      self.ui.sprites.niveau_info.graphics.main.show();
-      self.ui.sprites.valider_niveau.graphics.main.show();
-      self.ui.sprites.valider_niveau.visible=1
-      
-      end
-      
-      function self.on_load()
-      print("* load engine")
-      if self.open ~= nil then
-      self.game.charger_niveau(self.open)
-      else
-      self.game.charger_niveau("niveau1.xml")
-      end
-      self.demarre_niveau_info()
-      end
+      <xi:include href="engine.lua" parse="text"/>		
     </script>
 
   </stage>
