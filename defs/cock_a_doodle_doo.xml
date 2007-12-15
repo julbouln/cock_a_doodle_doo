@@ -4,7 +4,7 @@
  <infos>
   <val_string name="cmd" value="cadd"/>
   <val_string name="name" value="Cock-a-doodle-doo!"/>
-  <val_string name="version" value="0.1"/>
+  <val_string name="version" value="0.2"/>
  </infos>
  <args>
 
