@@ -33,7 +33,7 @@ function self.finalize_tracked()
    root.tracked=nil
 end
 
-function self.on_tracked_mouseclick(x,y)
+function self.on_tracked_mouseclick(x,y,b)
    local engine=self.parent.parent;
    local vis=engine.visual;
    local cx=floor((x+vis.get_x())/32);

@@ -406,7 +406,7 @@
 	    </args>
 	    <script>
 	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
-	      function self.on_tracked_mouseclick(x,y)
+	      function self.on_tracked_mouseclick(x,y,b)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 
@@ -423,7 +423,7 @@
 	    </args>
 	    <script>
 	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
-	      function self.on_tracked_mouseclick(x,y)
+	      function self.on_tracked_mouseclick(x,y,b)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 
@@ -441,7 +441,7 @@
 	    </args>
 	    <script>
 	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
-	      function self.on_tracked_mouseclick(x,y)
+	      function self.on_tracked_mouseclick(x,y,b)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 
@@ -477,7 +477,7 @@
 	    <script>
 	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
 	      
-	      function self.on_tracked_mouseclick(x,y)
+	      function self.on_tracked_mouseclick(x,y,b)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 	      local cb=stages.engine.game.current_buy_object()
@@ -517,7 +517,7 @@
 	    <script>
 	      <xi:include href="fixed_mouseclick.lua" parse="text"/>
 	      
-	      function self.on_tracked_mouseclick(x,y)
+	      function self.on_tracked_mouseclick(x,y,b)
 	      local sprites=self.parent.parent.sprites
 	      local stages=self.parent.parent.parent.parent
 	      local cb=stages.engine.game.current_buy_object()

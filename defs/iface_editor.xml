@@ -872,6 +872,7 @@
     </sprite>
 
     <script>
+<xi:include href="fixed_mouseclick.lua" parse="text"/>
 
     function self.set_clicked()
       self.sprite.graphics.case_normal.set_layer(10);
@@ -884,7 +885,8 @@
 
     end
 
-      function self.on_click(x,y)
+      function self.on_tracked_click(x,y)
+print("click objet")
       local iface=self.parent.parent;
       local engine=self.parent.parent.parent.engine;
       local mt=engine.map[iface.outil.valeur.map];
@@ -892,7 +894,9 @@
     iface.outil.type="objet";
       iface.reset_outils();
       
-
+if iface.outil.valeur.id then
+      mt.delete_object(iface.outil.valeur.id);
+end
       
 --      if engine.interactions.main.place_obj~=nil then
 --      mt.delete_object(engine.interactions.main.place_obj);
@@ -900,8 +904,8 @@
 
       n=mt.add_object_from_type(t,15,15);
       iface.outil.valeur.id=n;
-    self.set_clicked();
-
+self.set_clicked();
+return 1
       end
     </script>
 
@@ -969,6 +973,7 @@
     </sprite>
 
     <script>
+<xi:include href="fixed_mouseclick.lua" parse="text"/>
 
     function self.set_clicked()
       self.sprite.graphics.case_normal.set_layer(10);
@@ -982,12 +987,19 @@
     end
 
 
-      function self.on_click(x,y)
+      function self.on_tracked_click(x,y)
       self.set_clicked();
       local iface=self.parent.parent;
+      local engine=self.parent.parent.parent.engine;
+      local mt=engine.map[iface.outil.valeur.map];
     iface.outil.type="terrain";
-      iface.outil.valeur.num=self.sprite.graphics.case_terrain.get_cur_drawing();
+if iface.outil.valeur.id then
+      mt.delete_object(iface.outil.valeur.id);
+iface.outil.valeur.id=nil
+end
 
+      iface.outil.valeur.num=self.sprite.graphics.case_terrain.get_cur_drawing();
+return 1
       end
     </script>
 

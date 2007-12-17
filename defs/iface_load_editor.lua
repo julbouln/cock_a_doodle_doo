@@ -60,6 +60,7 @@ function self.ajout_editeur(m,k,o)
    local engine=self.parent.engine;
    local mo=engine.map[m];
 
+
    if o.graphics.thumb~=nil then
 --      print(o.graphics.thumb.get_drawing_id())
 --      o.graphics.thumb.make_thumb(o.graphics.main);   

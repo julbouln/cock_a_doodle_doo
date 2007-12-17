@@ -153,8 +153,13 @@ end
 
 -- Clique souris sur la carte
 
+function self.finalize_tracked()
+   local root=main()
+   root.tracked=nil
+end
 
-function self.on_mouseclick(x,y,b)
+function self.on_tracked_mouseclick(x,y,b)
+
    local engine=self.parent.parent;
    local vis=engine.visual;
    local iface=engine.parent.iface;
@@ -203,7 +208,7 @@ function self.on_mouseclick(x,y,b)
       end
       
    end
-
+   return nil
 end
 
 function self.on_mouserelease(x,y,b)

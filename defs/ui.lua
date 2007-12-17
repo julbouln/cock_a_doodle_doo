@@ -13,7 +13,7 @@ function self.afficher_vente()
    sprites.vente_info.graphics.main.show();
 
    local obj=root.stages.engine.game.selection
-   if obj~=nil and (obj.metatype=="poule" or obj.metatype=="coq" or obj.metatype=="nid") then
+   if obj~=nil and (obj.properties.metatype=="poule" or obj.properties.metatype=="coq" or obj.properties.metatype=="nid") then
       sprites.vente_icon.graphics.main.show();
       sprites.vente_icon.visible=1
    end
