@@ -1,0 +1,51 @@
+  <game_object_type name="caillou3" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <graphics>
+      <!-- BORDURE -->
+      <graphic id="main_border" type="graphic_from_drawing_fun">
+	 <args>
+	   <val_string value="with_alpha"/>	   
+	   <val_color r="255" g="255" b="255"/>
+	   <val_string value="with_border"/>
+	   <val_color r="200" g="200" b="0"/>
+
+	   <val_string value="load_multiple"/>
+	   <val_string value="medias/decors/caillou3.png"/>
+	   <val_size w="37" h="25"/>
+	 </args>
+	 <script>
+
+	self.hide();
+	<xi:include href="graphic_update.lua" parse="text"/>	
+	 </script>
+      </graphic>
+      <!-- GRAPHISME PRINCIPAL -->
+      <graphic id="main" type="graphic_from_file">
+	 <args>
+	   <val_string name="filename" value="medias/decors/caillou3.png"/>
+	   <val_size name="size" w="37" h="25"/>
+	 </args>
+	 <script>
+	<xi:include href="graphic_update.lua" parse="text"/>	
+	 </script>
+      </graphic>
+      <xi:include href="thumb.xml"/>
+
+    </graphics>
+<args>
+    <val_size name="case_size" w="1" h="1"/>
+
+</args>
+     <properties>
+
+
+       <val_string name="nom" value="Rock"/>
+    <val_string name="metatype" value="decoration"/>
+    <val_int name="bonus_bonheur" value="0"/>
+    <val_int name="price" value="50"/>
+</properties>
+<script>
+      <xi:include href="decor.lua" parse="text"/>	
+
+     </script>
+  </game_object_type>
