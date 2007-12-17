@@ -117,8 +117,7 @@ function self.on_load()
    
    sprites.add_sprite_named_from_type("population","population",scr.w-100,4);
    sprites.population.graphics.main.set_text("0")
-   engine=self.parent.game
-   engine.compter_volailles()	  
+
    sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-118,296);
    sprites.vente_icon.graphics.main.hide()
    

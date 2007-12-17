@@ -1,16 +1,4 @@
 
-function self.verification(k,ao)
-   if ao.properties.metatype=="nourriture" then
-      if ao.properties.qty <= 0 then
-	 
-	 self.map.decor.delete_object(ao.get_id())
-
-      end
-   end
-
-end
-
-
 self.buy=nil
 self.buy_list={"mais","nid"}
 
@@ -34,6 +22,22 @@ self.volaille_compteur=0
 self.victoire=nil
 
 self.pause=nil
+
+-- selection
+self.selection=nil
+self.current_poule=0
+
+
+function self.verification(k,ao)
+   if ao.properties.metatype=="nourriture" then
+      if ao.properties.qty <= 0 then
+	 
+	 self.map.decor.delete_object(ao.get_id())
+
+      end
+   end
+end
+
 
 function self.verifier_victoire()
    if self.victoire then
@@ -65,9 +69,6 @@ function self.current_buy_object()
    return self.map.decor.types[self.achat_encours]
 end
 
--- selection
-self.selection=nil
-self.current_poule=0
 
 
 function self.select_object(obj)
@@ -109,9 +110,7 @@ function self.select_poules()
       while y < 8 do
 	 local obj=self.map.objet.get_object_at_position(floor(self.visual.get_x()/32+x),floor(self.visual.get_y()/32+y)) 
 	 if(obj ~= nil) then
-	    	    
-
-	    
+	    	    	    
 	    if(self.current_poule==n_poules) then
 	       self.select_object(obj)
 	    else
@@ -125,6 +124,7 @@ function self.select_poules()
       end
       x=x+1
    end 
+
    if(self.current_poule >= n_poules) then
       sprites.vente_info.states.set_state ("fadout",{});
       self.current_poule=-1;
@@ -244,8 +244,6 @@ function self.verifications()
    self.map.decor.foreach_object(self.verification)
 end
 
-
-
 function self.faire_vieillir(poule)
   self.map.objet[poule].timer.add_task(val_time(0,0,10,0), self.map.objet[poule].vieillir);
 end
@@ -253,7 +251,6 @@ end
 function self.faire_vieillir_l(k,obj)
    self.faire_vieillir(k)
 end
-
 
 function self.faire_vivre(poule)
    self.map.objet[poule].timer.add_task(val_time(0,0,1,0), self.map.objet[poule].vivre);

@@ -17,4 +17,6 @@ function self.on_load()
       self.game.charger_niveau("niveau1.xml")
    end
    self.demarre_niveau_info()
+ 
+   self.game.compter_volailles()	  
 end

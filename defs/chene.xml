@@ -73,6 +73,7 @@
     <val_int name="price" value="150"/>
 </properties>
 <script>
-    self.init_bcentre("main");
+      <xi:include href="decor.lua" parse="text"/>	
+
      </script>
   </game_object_type>

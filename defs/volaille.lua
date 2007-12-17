@@ -73,8 +73,7 @@ function self.vieillir()
       gm.map.objet.delete_object(self.get_id());
       
    end
-   
---   print(size(self))
+
 end
 
 
@@ -91,9 +90,7 @@ function self.connait_nombre_type(t)
       n=n+1
    end
 
---      print(ct)
    return ct
-
 end
 
 function self.connait_premier_vide()
@@ -120,7 +117,7 @@ function self.recup_object(id)
 end
 
 
-function self.plus_proche(t)
+function self.trouver_plus_proche(t)
    local h=1000
    local robj=nil
    
@@ -128,6 +125,7 @@ function self.plus_proche(t)
    while n < self.n_connait do
       if self.connait[n]~=nil then
 	 local obj=self.recup_object(self.connait[n])
+
 	 if obj~=nil then
 	    if obj.properties.metatype==t then
 	       local mx=self.get_case_x()-obj.get_case_x()
@@ -162,22 +160,27 @@ function self.reflechir()
    local po=nil
 
    if (self.veut=="couver") then	     
-      po=self.plus_proche("nid")
+      po=self.trouver_plus_proche("nid")
       return po
    end
 
    if (self.veut=="manger") then	     
-      po=self.plus_proche("nourriture")
+      po=self.trouver_plus_proche("nourriture")
       return po
    end
 
    if (self.veut=="pondre" ) then
-      po=self.plus_proche("nid")
+      po=self.trouver_plus_proche("nid")
      return po
    end
 
    if (self.veut=="reproduire") then	     
-      po=self.plus_proche("poule")
+      po=self.trouver_plus_proche("poule")
+     return po
+   end
+
+   if (self.veut=="bouger") then	     
+      po=self.trouver_plus_proche("decoration")
      return po
    end
       
@@ -348,8 +351,6 @@ function self.vivre()
    
    local ao=self.reflechir();
 
-
-
    if ao and self.states.get_state() ~= "vendre" then
       -- a cote
       if self.veut=="manger" then
@@ -449,9 +450,14 @@ end
 
       if self.states.get_state() ~= "marcher" then
 	 self.affiche_pense();
-	 local rx=randomize(root.stages.engine.game.map.get_w() - 1);
-	 local ry=randomize(root.stages.engine.game.map.get_h() - 1);
-	 
+	 if ao~=nil then
+	    rx=(ao.get_case_x() - 2 + randomize(2));
+	    ry=(ao.get_case_y() - 2 + randomize(2));
+	 else
+	 rx=randomize(root.stages.engine.game.map.get_w() - 1);
+	 ry=randomize(root.stages.engine.game.map.get_h() - 1);
+	 end
+
 	 local o=root.stages.engine.game.map.objet.get_object_at_position(rx,ry)
 	 if o==nil or o==self then
 	    self.pathfinding_start(rx,ry)
