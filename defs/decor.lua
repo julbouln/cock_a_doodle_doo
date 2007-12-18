@@ -8,7 +8,8 @@ function self.proche_heuristic(obj)
    if ao~=nil and ao~=obj then
       ch=ch+10
    end
-   
+
+   ch=ch-self.properties.bonus_bonheur
 --   ch=ch+floor(self.properties.oeufs/6)
    return ch
 end

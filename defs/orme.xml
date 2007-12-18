@@ -30,7 +30,7 @@
 	 </script>
       </graphic>
       <xi:include href="thumb.xml"/>
-
+ <xi:include href="grille.xml"/> 
 
 <graphic id="ombre" type="graphic_from_drawing_script">
   <args>

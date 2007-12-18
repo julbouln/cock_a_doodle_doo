@@ -1,8 +1,6 @@
 
 function self.on_start(v)
    local obj=self.parent.parent.parent;
-
-
 end
 
 function self.on_loop()
@@ -11,8 +9,6 @@ function self.on_loop()
    local speed=obj.properties.speed;
    local np=obj.next_position();   
 
-
-
    local st=obj.states.get_state_val();
 --   obj.tourner()
 
@@ -20,10 +16,9 @@ function self.on_loop()
    if st.deplacement[0].dir=="east" then obj.turn(6) end;
    if st.deplacement[0].dir=="north" then obj.turn(0) end;
    if st.deplacement[0].dir=="south" then obj.turn(4) end;
-
-
    
-   local fo=map.objet.get_object_at_position(np.x,np.y)
+--   local fo=map.objet.get_object_at_position(np.x,np.y)
+--   local deo=map.decor.get_object_at_position(np.x,np.y)
 
 --   if map.is_position_blocking(np.x,np.y)~=nil or fo~=nil or self.dpix>=96 then
 
@@ -40,13 +35,8 @@ function self.on_loop()
    
 
   if obj.dpix>=32 then
-
-
-      
       obj.dpix=0;
       obj.pathfinding();
-
-
    else
       obj.dpix=obj.dpix+obj.properties.speed;
    end

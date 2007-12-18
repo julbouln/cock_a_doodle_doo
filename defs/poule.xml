@@ -38,7 +38,7 @@
 
     </graphic>
 
-<!-- <xi:include href="grille.xml"/> -->
+ <xi:include href="grille.xml"/> 
     <xi:include href="ombre.xml"/>
     <xi:include href="thumb.xml"/>
   </graphics>
