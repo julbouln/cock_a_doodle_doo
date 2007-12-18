@@ -179,10 +179,10 @@ function self.reflechir()
      return po
    end
 
-   if (self.veut=="bouger") then	     
-      po=self.trouver_plus_proche("decoration")
-     return po
-   end
+--   if (self.veut=="bouger") then	     
+--      po=self.trouver_plus_proche("decoration")
+--     return po
+--   end
       
    return nil
 end
@@ -361,7 +361,7 @@ function self.vivre()
 		(self.dcase_y == 0 and self.dcase_x == 1) or
 		(self.dcase_y == 0 and self.dcase_x == 0)) 
 	 then
-
+	    
 
 	    if self.states.get_state() ~= "marcher" and self.states.get_state() ~= "manger" then
 	       local o=root.stages.engine.game.map.objet.get_object_at_position(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y)
@@ -396,7 +396,6 @@ function self.vivre()
 	 else
 	    self.dcase_x=randomize(3)-1
 	    self.dcase_y=randomize(3)-1	 
-
 	 end
 
       else
@@ -455,13 +454,15 @@ end
 --	    ry=(ao.get_case_y() - 2 + randomize(2));
 	 --   rx=(ao.get_case_x() + 2)
 	 --	    ry=(ao.get_case_y() + 2)
---	 else
+	 --	 else
+--	 print(format("%s@%s : Destination : %i,%i",self.get_id(),self.get_type(),rx,ry))
 	 rx=randomize(root.stages.engine.game.map.get_w() - 1);
 	 ry=randomize(root.stages.engine.game.map.get_h() - 1);
 --	 end
 
 	 local o=root.stages.engine.game.map.objet.get_object_at_position(rx,ry)
-	 if o==nil or o==self then
+	 local deo=root.stages.engine.game.map.decor.get_object_at_position(rx,ry)
+	 if (deo==nil and o==nil) then
 	    self.pathfinding_start(rx,ry)
 	    self.pathfinding();
 	 end

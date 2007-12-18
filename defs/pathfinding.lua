@@ -56,9 +56,15 @@ function self.pf_heuristic(x,y)
    local r=0
    local deo=map.decor.get_object_at_position(x,y)
    if deo~=nil and deo.properties.metatype=="decoration" then
+--      print(format("PATHFINDING %s@%s : obstacle %i,%i : %s@%s",self.get_id(),self.get_type(),x,y,deo.get_id(),deo.get_type()))      
    r=r+2.0
    end
-   r=r+(sqrt(diffx*diffx+diffy*diffy))+self.pf_dir_cost(x,y)
+   local oo=map.objet.get_object_at_position(x,y)
+   if oo~=nil then
+--      print(format("PATHFINDING %s@%s : obstacle %i,%i : %s@%s",self.get_id(),self.get_type(),x,y,deo.get_id(),deo.get_type()))      
+   r=r+0.5
+   end
+   r=r+(sqrt(diffx*diffx+diffy*diffy))+ self.pf_dir_cost(x,y)
    return r
 end
 
@@ -77,7 +83,7 @@ end
 
 function self.pf_calc_best(x,y)
    r=self.pf_heuristic(x,y)   
-   print(format("PATHFINDING %s@%s : %i,%i=%f",self.get_id(),self.get_type(),x,y,r))
+--   print(format("PATHFINDING %s@%s : %i,%i=%f",self.get_id(),self.get_type(),x,y,r))
 
    self.pf_best(r,x,y)
 end
@@ -98,7 +104,7 @@ function self.pathfinding()
    self.pf_calc_best(cx,cy-1)
    self.pf_calc_best(cx,cy+1)
 
-   print(format("PATHFINDING %s@%s : from %i,%i : to %i,%i = %i,%i(%f)",self.get_id(), self.get_type(),cx,cy,self.path_dx,self.path_dy,self.best_x,self.best_y,self.best_r))
+--   print(format("PATHFINDING %s@%s : from %i,%i to %i,%i = %i,%i(%f)",self.get_id(), self.get_type(),cx,cy,self.path_dx,self.path_dy,self.best_x,self.best_y,self.best_r))
 
 
 --   print("Best path")
