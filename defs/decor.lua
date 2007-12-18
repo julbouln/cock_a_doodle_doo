@@ -9,7 +9,7 @@ function self.proche_heuristic(obj)
       ch=ch+10
    end
 
-   ch=ch-self.properties.bonus_bonheur
+   ch=ch-(2*self.properties.bonus_bonheur)
 --   ch=ch+floor(self.properties.oeufs/6)
    return ch
 end

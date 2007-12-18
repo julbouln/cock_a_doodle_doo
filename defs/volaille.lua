@@ -450,15 +450,15 @@ end
 
       if self.states.get_state() ~= "marcher" then
 	 self.affiche_pense();
-	 if ao~=nil then
-	    rx=(ao.get_case_x() - 2 + randomize(2));
-	    ry=(ao.get_case_y() - 2 + randomize(2));
---	    rx=(ao.get_case_x() + 2)
---	    ry=(ao.get_case_y() + 2)
-	 else
+--	 if ao~=nil then
+--	    rx=(ao.get_case_x() - 2 + randomize(2));
+--	    ry=(ao.get_case_y() - 2 + randomize(2));
+	 --   rx=(ao.get_case_x() + 2)
+	 --	    ry=(ao.get_case_y() + 2)
+--	 else
 	 rx=randomize(root.stages.engine.game.map.get_w() - 1);
 	 ry=randomize(root.stages.engine.game.map.get_h() - 1);
-	 end
+--	 end
 
 	 local o=root.stages.engine.game.map.objet.get_object_at_position(rx,ry)
 	 if o==nil or o==self then
