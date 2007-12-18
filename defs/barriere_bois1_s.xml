@@ -29,7 +29,6 @@
 
     </graphic>
     <xi:include href="thumb.xml"/>
- <xi:include href="grille.xml"/> 
   </graphics>
   <args>
     <val_size name="case_size" w="2" h="2"/>

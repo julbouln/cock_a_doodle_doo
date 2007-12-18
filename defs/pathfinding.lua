@@ -3,6 +3,7 @@
 function self.pathfinding_start(dx,dy)
    self.path_dx=dx
    self.path_dy=dy
+   self.path_duration=0
 end
 
 function self.pf_dir_cost(x,y)
@@ -64,6 +65,10 @@ function self.pf_heuristic(x,y)
 --      print(format("PATHFINDING %s@%s : obstacle %i,%i : %s@%s",self.get_id(),self.get_type(),x,y,deo.get_id(),deo.get_type()))      
    r=r+0.5
    end
+   if(x<0 or y<0 or x>=map.get_w() or y>=map.get_h()) then
+      r=r+4
+   end
+   
    r=r+(sqrt(diffx*diffx+diffy*diffy))+ self.pf_dir_cost(x,y)
    return r
 end
@@ -97,6 +102,9 @@ function self.pathfinding()
    
    local map=self.parent.parent;
 
+   self.path_duration=self.path_duration+1
+--   print(format("%s:%s : %i",self.get_id(),self.get_type(),self.path_duration))
+
    self.move(cx,cy)
    self.best_r=10000.0
    self.pf_calc_best(cx-1,cy)
@@ -116,9 +124,10 @@ function self.pathfinding()
 
 --   self.pf_calc_best(cx,cy)
 
-
+   local map=self.parent.parent;
+   local deo=map.decor.get_object_at_position(cx +diffx,cy+diffy)
    
-   if rx==0 and ry==0 then
+   if (rx==0 and ry==0) or (deo~=nil and deo.properties.metatype=="decoration"  ) or self.path_duration > map.get_w() + map.get_h() then
       local rt=randomize(10)+1;
       local rtf=randomize(15)+1;
       

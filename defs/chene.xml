@@ -59,7 +59,6 @@
   </script>
 </graphic>
 
- <xi:include href="grille.xml"/> 
     </graphics>
 <args>
     <val_size name="case_size" w="1" h="1"/>

@@ -4,7 +4,7 @@ self.buy_list={"mais","nid"}
 
 self.achats_nourriture={"mais","ble"}
 self.achats_batiment={"nid"}
-self.achats_decoration={"chene","orme","saule_pleureur"}
+self.achats_decoration={"pin","chene","orme","saule_pleureur"}
 
 self.selection_nourriture=1
 self.selection_batiment=1

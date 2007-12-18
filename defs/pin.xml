@@ -58,7 +58,7 @@
     end
   </script>
 </graphic>
- <xi:include href="grille.xml"/> 
+
     </graphics>
 <args>
     <val_size name="case_size" w="1" h="1"/>
@@ -69,8 +69,8 @@
 
        <val_string name="nom" value="Pin"/>
     <val_string name="metatype" value="decoration"/>
-    <val_int name="bonus_bonheur" value="1"/>
-    <val_int name="price" value="200"/>
+    <val_int name="bonus_bonheur" value="0"/>
+    <val_int name="price" value="10"/>
 </properties>
 <script>
       <xi:include href="decor.lua" parse="text"/>	
