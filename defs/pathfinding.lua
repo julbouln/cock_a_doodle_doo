@@ -9,9 +9,12 @@ end
 function self.pf_heuristic(x,y)
    local diffx=self.path_dx-x;
    local diffy=self.path_dy-y;
-   local r=(sqrt(diffx*diffx+diffy*diffy))
---   print("Heuristic:")
---   print(r)
+   local r=0
+   local deo=map.decor.get_object_at_position(x,y)
+   if deo~=nil and deo.properties.metatype=="decoration"
+   r=r+2
+   end
+   r=r+(sqrt(diffx*diffx+diffy*diffy))
    return r
 end
 
@@ -31,6 +34,7 @@ end
 function self.pf_calc_best(x,y)
    r=self.pf_heuristic(x,y)   
 --   print(format("PATHFINDING %s@%s : %i,%i=%f",self.get_id(),self.get_type(),x,y,r))
+
    self.pf_best(r,x,y)
 end
 
