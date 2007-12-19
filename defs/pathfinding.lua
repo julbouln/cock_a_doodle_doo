@@ -17,7 +17,7 @@ function self.pf_node_cost(x,y)
    local r=0
    while n < size(self.path_list) do
       if self.path_list[n][0]==x and self.path_list[n][1]==y then
-	 r=r+2.0
+	 r=r+1.5
       end
       n=n+1
    end
@@ -50,18 +50,18 @@ function self.pf_dir_cost(x,y)
       local st=self.states.get_state_val();
 
       if st~=nil and st.deplacement~=nil and st.deplacement[0]~=nil and st.deplacement[0].dir~=dir then
-	 if dir=="west" and st.deplacement[0].dir=="east" then
-	    return 1.0
-	 end
-	 if dir=="east" and st.deplacement[0].dir=="west" then
-	    return 1.0
-	 end
-	 if dir=="north" and st.deplacement[0].dir=="south" then
-	    return 1.0
-	 end
-	 if dir=="south" and st.deplacement[0].dir=="north" then
-	    return 1.0
-	 end
+--	 if dir=="west" and st.deplacement[0].dir=="east" then
+--	    return 1.0
+--	 end
+--	 if dir=="east" and st.deplacement[0].dir=="west" then
+--	    return 1.0
+--	 end
+--	 if dir=="north" and st.deplacement[0].dir=="south" then
+--	    return 1.0
+--	 end
+--	 if dir=="south" and st.deplacement[0].dir=="north" then
+--	    return 1.0
+--	 end
 	 return 0.5
       else
 	 return 0
@@ -145,8 +145,8 @@ function self.pathfinding()
 --   print(format("%i,%i",cx+diffx,cy+diffy))
 
    self.path_list[size(self.path_list)]={}
-   self.path_list[size(self.path_list) - 1][1]=cx+diffx
-   self.path_list[size(self.path_list) - 1][2]=cy+diffy
+   self.path_list[size(self.path_list) - 1][0]=cx+diffx
+   self.path_list[size(self.path_list) - 1][1]=cy+diffy
    
    if (rx==0 and ry==0) or (deo~=nil and deo.properties.metatype=="decoration"  ) or self.path_duration > map.get_w() + map.get_h() then
       local rt=randomize(10)+1;
