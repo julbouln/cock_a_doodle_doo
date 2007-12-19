@@ -253,6 +253,6 @@
   <script>
     <xi:include href="volaille.lua" parse="text"/>
     <xi:include href="coq.lua" parse="text"/>
-    <xi:include href="pathfinding.lua" parse="text"/>
+    <xi:include href="pathfinding_astar.lua" parse="text"/>
   </script>
 </game_object_type>   
