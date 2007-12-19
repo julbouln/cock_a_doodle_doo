@@ -12,6 +12,7 @@ function self.pf_push_open(n)
    local e=nil
    while i < self.n_open_list do
       if self.pf_open_list[i]~=nil and self.pf_open_list[i].x == n.x and self.pf_open_list[i].y == n.y then
+--	 self.pf_open_list[i]=n
 	 e=1
       end
       i=i+1
@@ -46,7 +47,11 @@ end
 function self.pf_heuristic(x,y)
    local diffx=self.path_dx-x;
    local diffy=self.path_dy-y;
-   return floor((sqrt(diffx*diffx+diffy*diffy))*10)
+--   local h=floor((sqrt(diffx*diffx+diffy*diffy))*10)
+--   print(format("vol d'oiseau : %i",h))
+   local h=(sqrt(diffx*diffx) + sqrt(diffy*diffy)) * 10
+--   print(format("manhatan : %i",h1))
+   return h
 end
 
 function self.pf_g(n)
@@ -102,7 +107,7 @@ function self.pf_calc(p,cx,cy)
    while i < self.n_open_list do 
       if self.pf_open_list[i] ~= nil then
 	 local ntmp=self.pf_open_list[i]
-
+	 
 	 fc=self.pf_heuristic(ntmp.x,ntmp.y) + self.pf_g(i)
 --	 print(format("%i,%i = %i",ntmp.x,ntmp.y,fc))
 	 if fc < f then
@@ -121,13 +126,14 @@ function self.pf_calc(p,cx,cy)
 
       if bno.x > 0 and bno.y > 0 and bno.x < map.get_w() and bno.y < map.get_h() then
 	 if bno.x~=self.path_dx or bno.y~=self.path_dy then
---	    print(format("PATHFINDING : %s@%s calc %i,%i",self.get_id(),self.get_type(),bno.x,bno.y))
+	    print(format("PATHFINDING : %s@%s calc %i,%i : %i",self.get_id(),self.get_type(),bno.x,bno.y,f))
 	    self.pf_open_list[bn]=nil	    
 	    r=self.pf_calc(bno.p,bno.x,bno.y,10)
 
 	 else
 --	    print(format("PATHFINDING : %s@%s calc destination %i,%i",self.get_id(),self.get_type(),bno.x,bno.y))
 	    self.pf_open_list[bn]=nil
+--	    print(format("PATHFINDING : %i tested.",self.n_open_list))
 	    c=self.pf_push_closed(self.pf_node(bno.p,bno.x,bno.y,10))
 	    r=c
 	 end
@@ -212,6 +218,9 @@ function self.pf_get_path(r)
 
    while n ~= nil do
       tmpl[i]=n      
+      if n~=nil then
+--	 print(format("PATHFINDING : %s@%s %i,%i", self.get_id(),self.get_type(),n.x,n.y))
+      end
       n=self.pf_closed_list[n.p]
       i=i+1
    end
@@ -229,13 +238,24 @@ function self.pathfinding_start(dx,dy)
    self.path_dy=dy
    local cx=self.get_case_x()
    local cy=self.get_case_y()
+
+   if cx==dx and cy==dy then
+      local rt=randomize(10)+1;
+      local rtf=randomize(15)+1;
+
+      self.states.set_state ("immobile",{
+				attendre={val_time(0,0,rt,rtf)}
+			     });      
+
+else
    self.pf_open_list={}
    self.pf_closed_list={}
+   self.n_open_list=0
    self.current_path=1
    self.current_node=nil
-
+   self.path={}
    r=self.pf_calc(nil,cx,cy)
    self.pf_get_path(r)
-   print(format("PATHFINDING : %s@%s %i cases, %i,%i -> %i,%i",self.get_id(),self.get_type(),size(self.path),cx,cy,self.path_dx,self.path_dy))
- 
+--   print(format("PATHFINDING : %s@%s %i cases, %i,%i -> %i,%i",self.get_id(),self.get_type(),size(self.pf_closed_list),cx,cy,self.path_dx,self.path_dy))
+end 
 end

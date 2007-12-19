@@ -3,7 +3,7 @@ function self.veut_reproduction()
    local game_speed=root.stages.engine.game.game_speed
 
    if (self.properties.fertilite < 100) then
-      self.properties.fertilite=self.properties.fertilite+(8*game_speed)
+      self.properties.fertilite=self.properties.fertilite+(4*game_speed)
    else
       self.veut="reproduire";
    end
