@@ -50,34 +50,17 @@ function self.pf_calc(p,cx,cy)
    bn=nil
    local map=self.parent.parent;
 
-
-   fc=self.pf_heuristic(cx-1,cy) + self.pf_g(n1)
-   if fc < f then
-      f=fc
-      bn=n1
+   i=0
+   while i~=size(self.pf_open_list) do 
+      if self.pf_open_list[i] ~= nil then
+	 local ntmp=self.pf_open_list[i]
+	 fc=self.pf_heuristic(ntmp.x,ntmp.y) + self.pf_g(i)
+	 if fc < f then
+	    f=fc
+	    bn=i
+	 end
+      end
    end
-
-
-
-   fc=self.pf_heuristic(cx+1,cy) + self.pf_g(n2)
-   if fc < f then
-      f=fc
-      bn=n2
-   end
-
-
-   fc=self.pf_heuristic(cx,cy-1) + self.pf_g(n3)
-   if fc < f then
-      f=fc
-      bn=n3
-   end
-
-   fc=self.pf_heuristic(cx,cy+1) + self.pf_g(n4)
-   if fc < f then
-      f=fc
-      bn=n4
-   end
-
 
    bno=self.pf_open_list[bn]
    
