@@ -120,13 +120,11 @@ function self.pf_calc(p,cx,cy)
 
    if bn~=nil then
       bno=self.pf_open_list[bn]
-
-
 --      print(format("PATHFINDING : %i,%i",bno.x,bno.y))
 
       if bno.x > 0 and bno.y > 0 and bno.x < map.get_w() and bno.y < map.get_h() then
 	 if bno.x~=self.path_dx or bno.y~=self.path_dy then
-	    print(format("PATHFINDING : %s@%s calc %i,%i : %i",self.get_id(),self.get_type(),bno.x,bno.y,f))
+--	    print(format("PATHFINDING : %s@%s calc %i,%i : %i",self.get_id(),self.get_type(),bno.x,bno.y,f))
 	    self.pf_open_list[bn]=nil	    
 	    r=self.pf_calc(bno.p,bno.x,bno.y,10)
 
@@ -247,15 +245,15 @@ function self.pathfinding_start(dx,dy)
 				attendre={val_time(0,0,rt,rtf)}
 			     });      
 
-else
-   self.pf_open_list={}
-   self.pf_closed_list={}
-   self.n_open_list=0
-   self.current_path=1
-   self.current_node=nil
-   self.path={}
-   r=self.pf_calc(nil,cx,cy)
-   self.pf_get_path(r)
+   else
+      self.pf_open_list={}
+      self.pf_closed_list={}
+      self.n_open_list=0
+      self.current_path=1
+      self.current_node=nil
+      self.path={}
+      r=self.pf_calc(nil,cx,cy)
+      self.pf_get_path(r)
 --   print(format("PATHFINDING : %s@%s %i cases, %i,%i -> %i,%i",self.get_id(),self.get_type(),size(self.pf_closed_list),cx,cy,self.path_dx,self.path_dy))
-end 
+   end 
 end
