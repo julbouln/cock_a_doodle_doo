@@ -1,9 +1,6 @@
 <game_object_type name="poule"
 		  xmlns:xi="http://www.w3.org/2001/XInclude">
-  
   <graphics>
-
-
     <graphic id="main_border" type="graphic_from_drawing_fun">
       <args>
 	<val_string value="with_alpha"/>	   
@@ -267,6 +264,6 @@
   <script>
     <xi:include href="volaille.lua" parse="text"/>
     <xi:include href="poule.lua" parse="text"/>
-    <xi:include href="pathfinding.lua" parse="text"/>
+    <xi:include href="pathfinding_ocaml.lua" parse="text"/>
   </script>
 </game_object_type>   

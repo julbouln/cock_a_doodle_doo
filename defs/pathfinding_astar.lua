@@ -1,4 +1,5 @@
 -- A* pathfinding implementation
+-- TODO in ocaml
 self.path={}
 self.current_path=1
 self.pf_open_list={}
@@ -69,6 +70,7 @@ function self.pf_g(n)
    return g
 end
 
+      -- NOTE : self.on_pathfinding_check_obstacle(x,y)
 function self.pf_is_obstacle(x,y)
    local map=self.parent.parent;   
    local deo=map.decor.get_object_at_position(x,y)
@@ -156,6 +158,8 @@ function self.pathfinding()
    if (rx==0 and ry==0)  or cnode==nil then
 --or self.current_path >= size(self.pf_closed_list) then 
 --      print(format("PATHFINDING : %s@%s %i %i,%i destination!",self.get_id(),self.get_type(),self.current_path,cx,cy))
+
+      -- NOTE : self.on_pathfinding_destination(x,y)
       
       local rt=randomize(10)+1;
       local rtf=randomize(15)+1;
@@ -166,7 +170,7 @@ function self.pathfinding()
 
 
    else
-
+      -- NOTE : self.on_pathfinding_step(x,y)
       local diffx=cnode.x - cx
       local diffy=cnode.y - cy
 
