@@ -18,11 +18,13 @@ function self.veut_couvaison()
    local ancien_veut=self.veut
    self.veut="couver";
    local ao=self.reflechir();
+   if ao~=nil then
    local o=root.stages.engine.game.map.objet.get_object_at_position(ao.get_case_x(),ao.get_case_y())
    if ao.properties.oeufs >= 12 and ao.properties.couvaison < 100 and (o==nil or o==self) then	 
       --	 ao.properties.couvaison
    else
       self.veut=ancien_veut
+   end
    end
 end
 

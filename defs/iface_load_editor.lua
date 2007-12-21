@@ -40,6 +40,7 @@ function self.clear_objet()
       engine=self.parent.engine;
       local mo=engine.map[self.outil.valeur.map];
       mo.delete_object(self.outil.valeur.id);
+      self.outil.valeur.id=nil
    end
 end
 

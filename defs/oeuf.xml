@@ -52,6 +52,7 @@
     <val_int name="age" value="0"/>		    
 
     <val_int name="qty" value="1"/>
+    <val_string name="metatype" value="oeuf"/>
   </variables>
   <script>
     function self.vieillir()

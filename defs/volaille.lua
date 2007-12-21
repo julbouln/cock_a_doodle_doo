@@ -1,5 +1,5 @@
 function self.on_create()
-   print(format("Create %s",self.get_id()))
+   print(format("# Create %s@%s",self.get_id(),self.get_type()))
 
    self.init_bcentre("main");
    local rt=randomize(10)+1;
@@ -65,8 +65,12 @@ function self.vieillir()
    -- jamais satisfait
    if (self.properties.bonheur > 0) then
       self.properties.bonheur=self.properties.bonheur-(5*game_speed)
-   end
 
+   end
+   
+   if self.properties.bonheur < 0 then
+      self.properties.bonheur=0
+   end
    
    if (self.properties.sante > 0) then
       self.properties.sante=self.properties.sante-(5*game_speed)
@@ -326,7 +330,10 @@ function self.vivre()
    local root=main()
    self.voir_autour();
 
+--   print(format("Vie %s@%s",self.get_id(),self.get_type()))
+
    self.veut="rien"
+
 
    if (self.properties.sante < 50) then
       self.veut="manger"
@@ -341,8 +348,9 @@ function self.vivre()
    end
 
    self.veut_couvaison();
-
    self.veut_reproduction();
+
+
    
    -- vital !
    if (self.properties.sante < 25) then

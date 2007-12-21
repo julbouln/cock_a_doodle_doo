@@ -249,15 +249,19 @@ function self.faire_vieillir(poule)
 end
 
 function self.faire_vieillir_l(k,obj)
-   self.faire_vieillir(k)
+--   if obj.metatype~="oeuf" then
+      self.faire_vieillir(k)
+--   end
 end
 
 function self.faire_vivre(poule)
-   self.map.objet[poule].timer.add_task(val_time(0,0,1,0), self.map.objet[poule].vivre);
+   self.map.objet[poule].timer.add_task(val_time(0,0,2,0), self.map.objet[poule].vivre);
 end
 
 function self.faire_vivre_l(k,obj)
-   self.faire_vivre(k)
+--   if obj.metatype~="oeuf" then
+      self.faire_vivre(k)
+--   end
 end
 
 function self.autosave()

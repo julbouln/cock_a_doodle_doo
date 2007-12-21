@@ -895,7 +895,8 @@ print("click objet")
       iface.reset_outils();
       
 if iface.outil.valeur.id then
-      mt.delete_object(iface.outil.valeur.id);
+mt.delete_object(iface.outil.valeur.id);
+iface.outil.valeur.id=nil
 end
       
 --      if engine.interactions.main.place_obj~=nil then
@@ -904,8 +905,8 @@ end
 
       n=mt.add_object_from_type(t,15,15);
       iface.outil.valeur.id=n;
-self.set_clicked();
-return 1
+      self.set_clicked();
+      return 1
       end
     </script>
 

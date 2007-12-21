@@ -65,6 +65,8 @@ function self.on_tracked_mouseclick(x,y,b)
    end
    
    if(obj ~=nil ) then
+      print(format("# Select %s@%s",obj.get_id(),obj.get_type()))
+      --      dump(obj.properties) 
       engine.select_object(obj)
    else
       local sprites=engine.parent.ui.sprites
