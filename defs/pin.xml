@@ -71,6 +71,7 @@
     <val_string name="metatype" value="decoration"/>
     <val_int name="bonus_bonheur" value="0"/>
     <val_int name="price" value="10"/>
+    <val_int name="obstacle" value="1"/>
 </properties>
 <script>
       <xi:include href="decor.lua" parse="text"/>	

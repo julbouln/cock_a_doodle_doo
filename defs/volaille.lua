@@ -1,25 +1,29 @@
-self.init_bcentre("main");
-local rt=randomize(10)+1;
-local rtf=randomize(15)+1;
-self.states.set_state ("immobile",{
-			  attendre={val_time(0,0,rt,rtf)}
-		    });
+function self.on_create()
+   print(format("Create %s",self.get_id()))
 
-self.dpix=0;
-self.veut="rien"
+   self.init_bcentre("main");
+   local rt=randomize(10)+1;
+   local rtf=randomize(15)+1;
+   self.states.set_state ("immobile",{
+			     attendre={val_time(0,0,rt,rtf)}
+			  });
+   
+   self.dpix=0;
+   self.veut="rien"
 
--- IA
-self.connait={}
-self.n_connait=0
+   -- IA
+   self.n_connait=size(self.properties.connait) - 1
 
-self.rand_poule=0
-self.rand_nourriture=0
+   self.rand_poule=0
+   self.rand_nourriture=0
 
-self.dcase_x=-2
-self.dcase_y=-2
+   self.dcase_x=-2
+   self.dcase_y=-2
 
-self.bonus_bonheur=0
+   self.bonus_bonheur=0
 
+
+end
 
 function self.nettoyer()
    local root=main()
@@ -83,7 +87,7 @@ function self.connait_nombre_type(t)
    local n=0
 
    while n < self.n_connait do
-      local obj=self.recup_object(self.connait[n])
+      local obj=self.recup_object(self.properties.connait[n])
       if obj~=nil and obj.properties.metatype==t then
 	 ct=ct+1
       end
@@ -97,7 +101,7 @@ function self.connait_premier_vide()
    local n=0
 
    while n < self.n_connait do
-      if self.connait[n]==nil then
+      if self.properties.connait[n]==nil then
 	 return n
       end
       n=n+1
@@ -123,8 +127,8 @@ function self.trouver_plus_proche(t)
    
    local n=0
    while n < self.n_connait do
-      if self.connait[n]~=nil then
-	 local obj=self.recup_object(self.connait[n])
+      if self.properties.connait[n]~=nil then
+	 local obj=self.recup_object(self.properties.connait[n])
 
 	 if obj~=nil then
 	    if obj.properties.metatype==t then
@@ -190,8 +194,8 @@ end
 function self.connait_disparu(aoid)
    local n=0
    while n < self.n_connait do
-      if (self.connait[n] == aoid) then
-	 self.connait[n]=nil
+      if (self.properties.connait[n] == aoid) then
+	 self.properties.connait[n]=nil
       end
       n=n+1
    end
@@ -200,7 +204,7 @@ end
 function self.connait_deja(aoid)
    local n=0
    while n < self.n_connait do
-      if (self.connait[n] == aoid) then
+      if (self.properties.connait[n] == aoid) then
 	 return 1
       end
       n=n+1
@@ -227,7 +231,7 @@ function self.voir_autour()
 	 if ao~=nil and (self.connait_deja(ao.get_id()) == nil) then
 --	    print(format("- %s (%s) decouvre %s (%s)", self.get_id(),self.get_type(), ao.get_id(), ao.get_type()))
 
-	    self.connait[self.n_connait]=ao.get_id()
+	    self.properties.connait[self.n_connait]=ao.get_id()
 	    self.n_connait=self.n_connait+1
 	 end
 
@@ -236,7 +240,7 @@ function self.voir_autour()
 	    if ao~=nil and (self.connait_deja(ao.get_id()) == nil) then
 --  plante !
 --	       self.faire_face(ao)
-	       self.connait[self.n_connait]=ao.get_id()
+	       self.properties.connait[self.n_connait]=ao.get_id()
 	       self.n_connait=self.n_connait+1
 	    end
 	    

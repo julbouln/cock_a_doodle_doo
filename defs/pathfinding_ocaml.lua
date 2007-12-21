@@ -5,11 +5,17 @@ end
 function self.on_pathfinding_check_obstacle(x,y)
    local map=self.parent.parent;   
    local deo=map.decor.get_object_at_position(x,y)
-   if deo~=nil and deo.properties.metatype=="decoration" then
+--   if deo~=nil and deo.properties.metatype=="decoration" then
+   if deo~=nil and deo.properties.obstacle==1 then
       return 1
    else
       return 0
    end
+
+end
+
+function self.on_pathfinding_noway()
+   self.on_pathfinding_destination()
 end
 
 function self.on_pathfinding_destination()

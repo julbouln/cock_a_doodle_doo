@@ -263,7 +263,7 @@
 		    
     <val_int name="age" value="50"/>		    
     <val_string name="metatype" value="poule"/>
-
+    <val_list name="connait"/>
   </variables> 
   <script>
     <xi:include href="volaille.lua" parse="text"/>

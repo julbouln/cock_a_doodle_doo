@@ -144,10 +144,11 @@
     <val_int name="age" value="20"/>		    		    
 
     <val_string name="metatype" value="poussin"/>
+    <val_list name="connait"/>
   </variables> 
   <script>
     <xi:include href="volaille.lua" parse="text"/>
     <xi:include href="poussin.lua" parse="text"/>
-    <xi:include href="pathfinding.lua" parse="text"/>    
+    <xi:include href="pathfinding_ocaml.lua" parse="text"/>    
   </script>
 </game_object_type>   
