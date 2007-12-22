@@ -1,0 +1,39 @@
+<sprite_type name="victoire_info" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <graphics>
+    <graphic id="main" type="graphic_from_drawing_script">
+      <args>
+	<val_int name="layer" value="4"/>
+	<val_string name="drawing_id" value="finfo"/>
+      </args>
+      <script>
+	function self.drawing_script()
+	local sprites=self.parent.parent.parent;
+	p=sprites.types.win_level_pattern;
+	drf=self.create_from_vault(p.graphics.main.get_drawing_id());
+
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"Victory!",30,"medias/fonts/samos.ttf"})
+   self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+   self.compose(titre,0,drf,0,130,12)
+
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"Congratulation, you succeeded in your task! ",14,"medias/fonts/Vera.ttf"})
+
+
+   self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+   self.compose(titre,0,drf,0,20,80)
+
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"Next Level",18,"medias/fonts/samos.ttf"})
+   self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+   self.compose(titre,0,drf,0,240,288)
+
+
+
+	return drf
+	end
+      </script>
+    </graphic>
+  </graphics>
+
+  <args>
+    <val_size name="pixel_size" w="400" h="320"/>
+  </args>
+</sprite_type>
