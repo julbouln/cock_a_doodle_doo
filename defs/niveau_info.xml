@@ -12,7 +12,7 @@
 	drf=self.create_from_vault(p.graphics.main.get_drawing_id());
 
 	local titre=self.create("create_text",{{r=0,g=0,b=0},"Level objectives",24,"medias/fonts/samos.ttf"})
-   self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
+	self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,60,12)
 
 	local titre=self.create("create_text",{{r=0,g=0,b=0},"To win this level, you need : ",14,"medias/fonts/Vera.ttf"})

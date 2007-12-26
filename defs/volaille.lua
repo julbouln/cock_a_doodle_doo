@@ -64,7 +64,7 @@ function self.vieillir()
 
    -- jamais satisfait
    if (self.properties.bonheur > 0) then
-      self.properties.bonheur=self.properties.bonheur-(5*game_speed)
+      self.properties.bonheur=self.properties.bonheur-(2*game_speed)
 
    end
    
@@ -73,7 +73,7 @@ function self.vieillir()
    end
    
    if (self.properties.sante > 0) then
-      self.properties.sante=self.properties.sante-(5*game_speed)
+      self.properties.sante=self.properties.sante-(4*game_speed)
    else
       -- meurt par manque de nourriture
       local gm=root.stages.engine.game
@@ -159,22 +159,22 @@ end
 function self.reflechir()
    local n=0
 
-   local ct_poule=0
-   local nb_poule=self.connait_nombre_type("poule")
+--   local ct_poule=0
+--   local nb_poule=self.connait_nombre_type("poule")
 
-   local ct_nourriture=0
-   local nb_nourriture=self.connait_nombre_type("nourriture")
+--   local ct_nourriture=0
+--   local nb_nourriture=self.connait_nombre_type("nourriture")
 
    local po=nil
-
-   if (self.veut=="couver") then	     
-      po=self.trouver_plus_proche("nid")
-      return po
-   end
 
    if (self.veut=="manger") then	     
       po=self.trouver_plus_proche("nourriture")
       return po
+   end
+
+   if (self.veut=="reproduire") then	     
+      po=self.trouver_plus_proche("poule")
+     return po
    end
 
    if (self.veut=="pondre" ) then
@@ -182,9 +182,9 @@ function self.reflechir()
      return po
    end
 
-   if (self.veut=="reproduire") then	     
-      po=self.trouver_plus_proche("poule")
-     return po
+   if (self.veut=="couver") then	     
+      po=self.trouver_plus_proche("nid")
+      return po
    end
 
 --   if (self.veut=="bouger") then	     
@@ -326,6 +326,100 @@ function self.change_state(st,args)
    end
 end
 
+
+function self.faire_manger(ao)	 
+   local root=main()
+   if ((self.dcase_x == 0 and self.dcase_y == -1) or
+       (self.dcase_x == 0 and self.dcase_y == 1) or
+	  (self.dcase_y == 0 and self.dcase_x == -1) or
+	  (self.dcase_y == 0 and self.dcase_x == 1) or
+	  (self.dcase_y == 0 and self.dcase_x == 0)) 
+   then
+	    
+      
+      if self.states.get_state() ~= "marcher" and self.states.get_state() ~= "manger" then
+	 local o=root.stages.engine.game.map.objet.get_object_at_position(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y)
+	 if o~=nil and o~=self then
+	    self.dcase_x=randomize(3)-1
+	    self.dcase_y=randomize(3)-1	 
+	 else
+	    self.affiche_pense();		  
+	    self.pathfinding_start(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y);
+	    self.pathfinding();		  
+	 end
+      end
+
+      if self.at_position(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y) then
+	 local co=root.stages.engine.game.map.objet.get_object_at_position(self.get_case_x(),self.get_case_y())
+	 
+	 if co~=nil and co~=self then
+	    self.dcase_x=randomize(3)-1
+	    self.dcase_y=randomize(3)-1	 
+	 else
+	    if self.states.get_state()~="marcher" and self.states.get_state() ~= "manger" then
+	       
+	       self.faire_face(ao)
+	       self.tourner()
+	       self.change_state("manger",{
+				    mange={val_time(0,0,1,0)}
+				 });
+	    end
+	 end
+      end
+      
+   else
+      self.dcase_x=randomize(3)-1
+      self.dcase_y=randomize(3)-1	 
+   end
+   
+
+end
+
+function self.faire_pondre()
+   self.change_state("pondre",{
+			pond={val_time(0,0,2,0)}
+		     });
+end
+
+function self.faire_couver()
+   self.change_state("couver",{
+			couve={val_time(0,0,1,0)}
+		     });
+end
+
+function self.faire_reproduire(ao)
+   ao.properties.fertile=1
+   self.meme_sens(ao)
+   self.change_state("reproduire",{
+			feconde={val_time(0,0,1,0)}
+		     });
+
+end
+
+function self.faire_bouger(ao)
+   local root=main()
+   self.affiche_pense();
+--	 if ao~=nil then
+--	    rx=(ao.get_case_x() - 2 + randomize(2));
+--	    ry=(ao.get_case_y() - 2 + randomize(2));
+	 --   rx=(ao.get_case_x() + 2)
+	 --	    ry=(ao.get_case_y() + 2)
+	 --	 else
+--	 print(format("%s@%s : Destination : %i,%i",self.get_id(),self.get_type(),rx,ry))
+   rx=randomize(root.stages.engine.game.map.get_w() - 1);
+   ry=randomize(root.stages.engine.game.map.get_h() - 1);
+--	 end
+
+   local o=root.stages.engine.game.map.objet.get_object_at_position(rx,ry)
+   local deo=root.stages.engine.game.map.decor.get_object_at_position(rx,ry)
+   if (deo==nil and o==nil) then
+      self.pathfinding_start(rx,ry)
+      self.pathfinding();
+   end
+   
+
+end
+
 function self.vivre()
    local root=main()
    self.voir_autour();
@@ -349,13 +443,13 @@ function self.vivre()
 
    self.veut_couvaison();
    self.veut_reproduction();
-
-
    
    -- vital !
    if (self.properties.sante < 25) then
       self.veut="manger";
    end
+   
+--   print (format("%s@%s veut %s",self.get_id(),self.get_type(),self.veut))
 
    if self.states.get_state() == "marcher" then
       self.rendre_heureux()
@@ -363,125 +457,60 @@ function self.vivre()
    
    local ao=self.reflechir();
 
-   if ao and self.states.get_state() ~= "vendre" then
+   if self.states.get_state() ~= "vendre" then
       -- a cote
-      if self.veut=="manger" then
-	 
-	 if ((self.dcase_x == 0 and self.dcase_y == -1) or
-	     (self.dcase_x == 0 and self.dcase_y == 1) or
-		(self.dcase_y == 0 and self.dcase_x == -1) or
-		(self.dcase_y == 0 and self.dcase_x == 1) or
-		(self.dcase_y == 0 and self.dcase_x == 0)) 
-	 then
-	    
-
-	    if self.states.get_state() ~= "marcher" and self.states.get_state() ~= "manger" then
-	       local o=root.stages.engine.game.map.objet.get_object_at_position(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y)
-	       if o~=nil and o~=self then
-		  self.dcase_x=randomize(3)-1
-		  self.dcase_y=randomize(3)-1	 
-	       else
-		  self.affiche_pense();		  
-		  self.pathfinding_start(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y);
-		  self.pathfinding();		  
-	       end
-	    end
-
-	    if self.at_position(ao.get_case_x()+self.dcase_x,ao.get_case_y()+self.dcase_y) then
-	       local co=root.stages.engine.game.map.objet.get_object_at_position(self.get_case_x(),self.get_case_y())
-
-	       if co~=nil and co~=self then
-		  self.dcase_x=randomize(3)-1
-		  self.dcase_y=randomize(3)-1	 
-	       else
-		  if self.states.get_state()~="marcher" and self.states.get_state() ~= "manger" then
-		     
-		     self.faire_face(ao)
-		     self.tourner()
-		     self.change_state("manger",{
-					  mange={val_time(0,0,1,0)}
-				       });
-		  end
-	       end
-	    end
-	    
-	 else
-	    self.dcase_x=randomize(3)-1
-	    self.dcase_y=randomize(3)-1	 
-	 end
-
+      if ao and self.veut=="manger" then
+	 self.faire_manger(ao)
+	 return nil
       else
     
       -- dessus        
-	 if self.at_position(ao.get_case_x(),ao.get_case_y()) then	     	    	    
-	 -- poule seulement
-	 if self.veut=="pondre" and self.states.get_state()~="marcher" then
-	    self.change_state("pondre",{
-				       pond={val_time(0,0,2,0)}
-				    });
-	 end
+	 if self.states.get_state()~="marcher" then
 
-	 if self.veut=="couver" and self.states.get_state()~="marcher" then
-	    self.change_state("couver",{
-				       couve={val_time(0,0,1,0)}
-				    });
-	 end
+	    if self.veut=="bouger" then	    
+	       self.faire_bouger(ao)
+	       return nil
+	    end
+
+	    if ao then
+	       if self.at_position(ao.get_case_x(),ao.get_case_y()) then	     	    	    
+	       -- poule seulement
+	       if self.veut=="pondre" then
+		  self.faire_pondre()
+		  return nil
+	       end
+
+	       if self.veut=="couver" then
+		  self.faire_couver()
+		  return nil
+	       end
 	    
-	 -- coq seulement
-	 if self.veut=="reproduire" then
-	    if self.states.get_state() ~= "reproduire" and self.states.get_state()~="marcher" then		  
-	       ao.properties.fertile=1
-	       self.meme_sens(ao)
-	       self.change_state("reproduire",{
-				    feconde={val_time(0,0,1,0)}
-				 });
+	       -- coq seulement
+	       if self.veut=="reproduire" then
+		  if self.states.get_state() ~= "reproduire" then
+		     self.faire_reproduire(ao)
+		     return nil
+		  end
+	       end
+	    else
+	       self.affiche_pense();
+	       self.pathfinding_start(ao.get_case_x(),ao.get_case_y());
+	       self.pathfinding();
+	       return nil
 	    end
 	 end
-      else
-	 if self.states.get_state() ~= "marcher" then
-	    
-	    self.affiche_pense();
-	    self.pathfinding_start(ao.get_case_x(),ao.get_case_y());
-	    self.pathfinding();
-	 end
       end
-      
-   end
-end
-   
-   if self.veut=="rien" then
-      if self.states.get_state() ~= "marcher" and  self.states.get_state() ~= "vendre" then
-	 self.states.set_state("immobile",{
-			   attendre={val_time(0,0,5,0)}
-			});
-      end
-   end
-   
-   if self.veut=="bouger" then
 
-      if self.states.get_state() ~= "marcher" then
-	 self.affiche_pense();
---	 if ao~=nil then
---	    rx=(ao.get_case_x() - 2 + randomize(2));
---	    ry=(ao.get_case_y() - 2 + randomize(2));
-	 --   rx=(ao.get_case_x() + 2)
-	 --	    ry=(ao.get_case_y() + 2)
-	 --	 else
---	 print(format("%s@%s : Destination : %i,%i",self.get_id(),self.get_type(),rx,ry))
-	 rx=randomize(root.stages.engine.game.map.get_w() - 1);
-	 ry=randomize(root.stages.engine.game.map.get_h() - 1);
---	 end
-
-	 local o=root.stages.engine.game.map.objet.get_object_at_position(rx,ry)
-	 local deo=root.stages.engine.game.map.decor.get_object_at_position(rx,ry)
-	 if (deo==nil and o==nil) then
-	    self.pathfinding_start(rx,ry)
-	    self.pathfinding();
+	 if self.veut=="rien" then
+	    self.states.set_state("immobile",{
+				     attendre={val_time(0,0,5,0)}
+				  });
+	    return nil
 	 end
       end
    end
    
-
+   return nil
 end
 
 
