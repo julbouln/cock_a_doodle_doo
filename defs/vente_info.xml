@@ -100,6 +100,6 @@
     
   </states>
   <args>
-    <val_size name="pixel_size" w="220" h="324"/>
+    <val_size name="pixel_size" w="220" h="220"/>
   </args>
 </sprite_type>

@@ -80,7 +80,7 @@
 	  <graphic id="main" type="graphic_pattern">
 	    <args>
 	      <val_string name="file" value="medias/ui/win.png"/>
-	      <val_size name="size" w="220" h="324"/>
+	      <val_size name="size" w="220" h="220"/>
 	      <val_int name="layer" value="4"/>
 	    </args>
 	  </graphic>
@@ -92,7 +92,7 @@
 	  <graphic id="main" type="graphic_pattern">
 	    <args>
 	      <val_string name="file" value="medias/ui/win.png"/>
-	      <val_size name="size" w="400" h="320"/>
+	      <val_size name="size" w="320" h="200"/>
 	      <val_int name="layer" value="4"/>
 	    </args>
 	  </graphic>
@@ -292,7 +292,7 @@
 	  <graphic id="main" type="graphic_pattern">
 	    <args>
 	      <val_string name="file" value="medias/ui/win.png"/>
-	      <val_size name="size" w="650" h="36"/>
+	      <val_size name="size" w="800" h="36"/>
 	      <val_int name="layer" value="4"/>
 	    </args>
 	  </graphic>

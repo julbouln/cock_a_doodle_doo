@@ -417,14 +417,15 @@
     </interactions>
     <script>
 
+
       self.current_button=1;
       self.buttons={
-      {"b1",100+160,68+120},
-      {"b2",170+160,68+120},
-      {"b3",240+160,68+120},
-      {"b4",100+160,140+120},
-      {"b5",170+160,140+120},
-      {"b6",240+160,140+120}
+      {"b1",100,68},
+      {"b2",170,68},
+      {"b3",240,68},
+      {"b4",100,140},
+      {"b5",170,140},
+      {"b6",240,140}
       };
 
       function self.fadout()
@@ -440,9 +441,11 @@
 
       function self.on_load()
       local sprites=self.sprites;
+      local scr=screen_size()
+      local dx=(scr.w - 320)/2
+      local dy=(scr.h - 240)/2
 
-
-      sprites.add_sprite_from_type("bg",160,120);
+      sprites.add_sprite_from_type("bg",dx,dy);
 
 --      sprites.add_sprite_named_from_type("selection","select_box",48,48);
 --      sprites.selection.goto(1)
@@ -450,7 +453,7 @@
 n=1
       while n &lt; 7 do
 	local button=self.buttons[n]
-	sprites.add_sprite_named_from_type(button[1],"win",button[2],button[3]);
+	sprites.add_sprite_named_from_type(button[1],"win",button[2]+dx,button[3]+dy);
         sprites[button[1]].n=n
 
         sprites[button[1]].states.set_state ("fadin",{});

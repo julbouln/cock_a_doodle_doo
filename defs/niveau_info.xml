@@ -11,28 +11,28 @@
 	p=sprites.types.win_level_pattern;
 	drf=self.create_from_vault(p.graphics.main.get_drawing_id());
 
-	local titre=self.create("create_text",{{r=0,g=0,b=0},"Level objectives",24,"medias/fonts/samos.ttf"})
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"Level objectives",20,"medias/fonts/samos.ttf"})
 	self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,60,12)
 
-	local titre=self.create("create_text",{{r=0,g=0,b=0},"To win this level, you need : ",14,"medias/fonts/Vera.ttf"})
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"To win this level, you need : ",12,"medias/fonts/Vera.ttf"})
 
 
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,20,80)
 
-	local titre=self.create("create_text",{{r=0,g=0,b=0},"- $ 100",14,"medias/fonts/Vera.ttf"})
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"- $ 100",12,"medias/fonts/Vera.ttf"})
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,30,100)
 
 
-	local titre=self.create("create_text",{{r=0,g=0,b=0},"- 10 poultry.",14,"medias/fonts/Vera.ttf"})
+	local titre=self.create("create_text",{{r=0,g=0,b=0},"- 10 poultry.",12,"medias/fonts/Vera.ttf"})
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
    self.compose(titre,0,drf,0,30,120)
 
 	local titre=self.create("create_text",{{r=0,g=0,b=0},"OK",18,"medias/fonts/samos.ttf"})
    self.write(titre,0,"set_alpha",{255,{r=255,g=255,b=255}});   
-   self.compose(titre,0,drf,0,330,288)
+   self.compose(titre,0,drf,0,230,148)
 
 
 
@@ -43,6 +43,6 @@
   </graphics>
 
   <args>
-    <val_size name="pixel_size" w="400" h="320"/>
+    <val_size name="pixel_size" w="320" h="200"/>
   </args>
 </sprite_type>

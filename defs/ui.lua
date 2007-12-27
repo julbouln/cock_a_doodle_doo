@@ -98,15 +98,17 @@ function self.on_load()
    print("* load ui")
    local sprites=self.sprites;
    local scr=screen_size()
+   local dx=(scr.w - 320)/2
+   local dy=(scr.h - 240)/2
    
    sprites.add_sprite_named_from_type("main_cursor","main",16,12);
    sprites.main_cursor.graphics.main.hide();
    
    sprites.add_sprite_named_from_type("menu_icon","menu_icon",10,4);
-   sprites.add_sprite_named_from_type("build_icon","build_icon",100,4);
-   sprites.add_sprite_named_from_type("feed_icon","feed_icon",124,4);
-   sprites.add_sprite_named_from_type("decoration_icon","decoration_icon",148,4);
-   sprites.add_sprite_named_from_type("stats_icon","stats_icon",400,4);
+   sprites.add_sprite_named_from_type("build_icon","build_icon",80,4);
+   sprites.add_sprite_named_from_type("feed_icon","feed_icon",104,4);
+   sprites.add_sprite_named_from_type("decoration_icon","decoration_icon",128,4);
+   sprites.add_sprite_named_from_type("stats_icon","stats_icon",152,4);
    
    sprites.add_sprite_named_from_type("argent","argent",scr.w-60,4);
    sprites.argent.graphics.main.set_text("$ 50")
@@ -118,16 +120,16 @@ function self.on_load()
    sprites.add_sprite_named_from_type("population","population",scr.w-100,4);
    sprites.population.graphics.main.set_text("0")
 
-   sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-118,296);
+   sprites.add_sprite_named_from_type("vente_icon","vente_icon",scr.w-108,206);
    sprites.vente_icon.graphics.main.hide()
    
-   sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-118,266);
+   sprites.add_sprite_named_from_type("achat_icon","achat_icon",scr.w-108,166);
    sprites.achat_icon.graphics.main.hide()
 
-   sprites.add_sprite_named_from_type("suivant_icon","suivant_icon",scr.w-60,314);
+   sprites.add_sprite_named_from_type("suivant_icon","suivant_icon",scr.w-60,214);
    sprites.suivant_icon.graphics.main.hide()
 
-   sprites.add_sprite_named_from_type("precedent_icon","precedent_icon",scr.w-160,314);
+   sprites.add_sprite_named_from_type("precedent_icon","precedent_icon",scr.w-160,214);
    sprites.precedent_icon.graphics.main.hide()
    
    sprites.add_sprite_named_from_type("bulle","bulle",0,0);
@@ -136,15 +138,15 @@ function self.on_load()
    
    sprites.add_sprite_named_from_type("menu","win_menu",-4,-4);
    
-   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-208,24);
+   sprites.add_sprite_named_from_type("vente_info","vente_info",scr.w-200,24);
    sprites.vente_info.graphics.main.hide();
    
-   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-208,24);
+   sprites.add_sprite_named_from_type("achat_info","achat_info",scr.w-200,24);
    sprites.achat_info.graphics.main.hide();
    
-   sprites.add_sprite_named_from_type("niveau_info","niveau_info",100,100);
+   sprites.add_sprite_named_from_type("niveau_info","niveau_info",dx,dy+32);
    sprites.niveau_info.graphics.main.hide();
-   sprites.add_sprite_named_from_type("valider_niveau","valider_icon",450,390);
+   sprites.add_sprite_named_from_type("valider_niveau","valider_icon",dx+250,dy+148+32);
    sprites.valider_niveau.graphics.main.hide();
    sprites.valider_niveau.visible=nil
    
